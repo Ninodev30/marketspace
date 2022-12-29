@@ -1,6 +1,9 @@
 import { Dimensions, StyleSheet } from "react-native";
 import theme from "@theme/index";
 
+const width: number = Dimensions.get('window').width;
+const height: number = Dimensions.get('window').height;
+
 export default StyleSheet.create({
     container: {
         flex: 1,
@@ -8,12 +11,22 @@ export default StyleSheet.create({
         backgroundColor: theme.COLORS.BASE.GRAY_700
     },
     content: {
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height * 0.7,
+        width: width,
+        height: height * 0.7,
         alignItems: 'center',
         padding: 48,
         borderRadius: 15,
         backgroundColor: theme.COLORS.BASE.GRAY_600
+    },
+    headerBox: {
+        width: width * 0.55,
+        height: height * 0.22,
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    highLightBox: {
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
     title: {
         fontFamily: theme.FONTS.FAMILY.BOLD,
