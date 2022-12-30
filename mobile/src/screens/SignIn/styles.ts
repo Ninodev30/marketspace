@@ -25,12 +25,11 @@ export default StyleSheet.create({
         justifyContent: 'space-between'
     },
     highLightBox: {
-        alignItems: 'center',
-        justifyContent: 'space-between'
+        alignItems: 'center'
     },
     inputBox: {
-        alignSelf: 'stretch',
         height: HEIGHT * 0.25,
+        alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'space-evenly'
     },
@@ -49,11 +48,13 @@ export default StyleSheet.create({
     subtitle: {
         fontFamily: FONTS.FAMILY.REGULAR,
         fontSize: FONTS.SIZES.SM,
-        color: COLORS.BASE.GRAY_300
+        color: COLORS.BASE.GRAY_300,
+        textAlign: 'center'
     },
     titleAccount: {
         fontFamily: FONTS.FAMILY.REGULAR,
         fontSize: FONTS.SIZES.SM,
-        color: COLORS.BASE.GRAY_200
+        color: COLORS.BASE.GRAY_200,
+        textAlign: 'center'
     }
 });

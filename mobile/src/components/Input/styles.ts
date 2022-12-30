@@ -7,6 +7,7 @@ export default StyleSheet.create({
     input: {
         alignSelf: 'stretch',
         padding: 10,
+        borderRadius: 5,
         height: HEIGHT * 0.06,
         backgroundColor: COLORS.BASE.GRAY_700,
         color: COLORS.BASE.GRAY_400,
