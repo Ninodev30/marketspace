@@ -1,26 +1,26 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import theme from "@theme/index";
 
-const width: number = Dimensions.get('window').width;
-const height: number = Dimensions.get('window').height;
+const { COLORS, FONTS, HEIGHT, PADDING } = theme;
 
 export default StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: theme.COLORS.BASE.GRAY_700
+        backgroundColor: COLORS.BASE.GRAY_700
     },
     content: {
-        width: width,
-        height: height * 0.7,
+        height: HEIGHT * 0.8,
+        alignSelf: 'stretch',
         alignItems: 'center',
-        padding: 48,
+        padding: PADDING.LG,
         borderRadius: 15,
-        backgroundColor: theme.COLORS.BASE.GRAY_600
+        backgroundColor: COLORS.BASE.GRAY_600
     },
     headerBox: {
-        width: width * 0.55,
-        height: height * 0.22,
+        height: HEIGHT * 0.16,
+        marginTop: HEIGHT * 0.06,
+        marginBottom: HEIGHT * 0.1,
         alignItems: 'center',
         justifyContent: 'space-between'
     },
@@ -28,19 +28,32 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between'
     },
+    inputBox: {
+        alignSelf: 'stretch',
+        height: HEIGHT * 0.25,
+        alignItems: 'center',
+        justifyContent: 'space-evenly'
+    },
+    newAccountBox: {
+        alignSelf: 'stretch',
+        height: HEIGHT * 0.25,
+        marginHorizontal: PADDING.LG,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     title: {
-        fontFamily: theme.FONTS.FAMILY.BOLD,
-        fontSize: theme.FONTS.SIZES.XL,
-        color: theme.COLORS.BASE.GRAY_100
+        fontFamily: FONTS.FAMILY.BOLD,
+        fontSize: FONTS.SIZES.XL,
+        color: COLORS.BASE.GRAY_100
     },
     subtitle: {
-        fontFamily: theme.FONTS.FAMILY.REGULAR,
-        fontSize: theme.FONTS.SIZES.SM,
-        color: theme.COLORS.BASE.GRAY_300
+        fontFamily: FONTS.FAMILY.REGULAR,
+        fontSize: FONTS.SIZES.SM,
+        color: COLORS.BASE.GRAY_300
     },
     titleAccount: {
-        fontFamily: theme.FONTS.FAMILY.REGULAR,
-        fontSize: theme.FONTS.SIZES.SM,
-        color: theme.COLORS.BASE.GRAY_200
+        fontFamily: FONTS.FAMILY.REGULAR,
+        fontSize: FONTS.SIZES.SM,
+        color: COLORS.BASE.GRAY_200
     }
 });

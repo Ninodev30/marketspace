@@ -1,11 +1,17 @@
-import { Text } from "react-native"
+import { TextInput, TextInputProps } from "react-native"
 import styles from "./styles";
 
-const Input: React.FC = () => {
+type Props = TextInputProps & {
+    title: string;
+}
+
+const Input: React.FC<Props> = ({ title, style, ...rest }) => {
     return (
-        <Text style={styles.title}>
-            Input
-        </Text>
+        <TextInput
+            style={[styles.input, style]}
+            placeholder={title}
+            {...rest}
+        />
     )
 }
 

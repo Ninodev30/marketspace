@@ -23,7 +23,7 @@ const Button: React.FC<Props> = ({ title, bgColor, type, style, ...rest }) => {
             <Text style={[styles.title, { color: type === "LIGHT" ? GRAY_700 : GRAY_200 }]}>
                 {title}
             </Text>
-        </TouchableOpacity >
+        </TouchableOpacity>
     )
 }
 

@@ -1,3 +1,5 @@
+import { Dimensions } from "react-native";
+
 export default {
     COLORS: {
         BASE: {
@@ -9,17 +11,20 @@ export default {
             GRAY_600: '#EDECEE',
             GRAY_700: '#F7F7F8',
         },
+
         PRODUCT: {
             RED: '#EE7979',
             BLUE: '#364D9D',
             BLUE_LIGHT: '#647AC7'
         }
     },
+
     FONTS: {
         FAMILY: {
             REGULAR: 'Karla-Regular',
             BOLD: 'Karla-Bold'
         },
+
         SIZES: {
             XS: 12,
             SM: 14,
@@ -27,5 +32,14 @@ export default {
             LG: 20,
             XL: 24
         }
+    },
+
+    WIDTH: Dimensions.get("window").width,
+
+    HEIGHT: Dimensions.get("window").height,
+
+    PADDING: {
+        SM: 24,
+        LG: 48
     }
 };
