@@ -12,8 +12,7 @@ export default StyleSheet.create({
     },
     headerBox: {
         height: HEIGHT * 0.16,
-        marginTop: HEIGHT * 0.03,
-        marginBottom: HEIGHT * 0.1,
+        marginBottom: HEIGHT * 0.05,
         alignItems: 'center',
         justifyContent: 'space-between'
     },
@@ -24,13 +23,36 @@ export default StyleSheet.create({
         height: HEIGHT * 0.57,
         alignSelf: 'stretch',
         alignItems: 'center',
-        justifyContent: 'space-evenly'
+        justifyContent: 'space-between'
+    },
+    userBox: {
+        width: HEIGHT * 0.11,
+        height: HEIGHT * 0.11,
+        borderRadius: HEIGHT,
+        backgroundColor: COLORS.BASE.GRAY_500,
+        borderColor: COLORS.PRODUCT.BLUE_LIGHT,
+        borderWidth: 3,
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative'
+    },
+    pencilBox: {
+        padding: 10,
+        position: 'absolute',
+        bottom: -7,
+        right: -7,
+        borderRadius: HEIGHT,
+        backgroundColor: COLORS.PRODUCT.BLUE_LIGHT,
     },
     formBox: {
         height: HEIGHT * 0.48,
         alignSelf: 'stretch',
         alignItems: 'center',
-        justifyContent: 'space-evenly'
+        justifyContent: 'space-between'
+    },
+    loginBox: {
+        marginTop: HEIGHT * 0.05,
+        alignSelf: 'stretch',
     },
     title: {
         fontFamily: FONTS.FAMILY.BOLD,
