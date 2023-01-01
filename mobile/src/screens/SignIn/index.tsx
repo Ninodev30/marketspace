@@ -25,10 +25,10 @@ const SignIn: React.FC = () => {
                         Acesse sua conta
                     </Text>
                     <Input
-                        title='E-mail'
+                        placeholder='E-mail'
                     />
                     <Input
-                        title='Senha'
+                        placeholder='Senha'
                     />
                 </View>
                 <Button

@@ -1,17 +1,28 @@
-import { TextInput, TextInputProps } from "react-native"
+import { Text, TextInput, TextInputProps, View } from "react-native"
 import styles from "./styles";
 
 type Props = TextInputProps & {
-    title: string;
+    errorMessage?: string;
 }
 
-const Input: React.FC<Props> = ({ title, style, ...rest }) => {
+const Input: React.FC<Props> = ({ errorMessage, ...rest }) => {
+    const isInvalid: boolean = !!errorMessage;
+
     return (
-        <TextInput
-            style={[styles.input, style]}
-            placeholder={title}
-            {...rest}
-        />
+        <View style={styles.container}>
+            <TextInput
+                style={[
+                    styles.input,
+                    !isInvalid && { marginBottom: 10 }
+                ]}
+                {...rest}
+            />
+            {isInvalid &&
+                <Text style={styles.errorMessage}>
+                    {errorMessage}
+                </Text>
+            }
+        </View>
     )
 }
 

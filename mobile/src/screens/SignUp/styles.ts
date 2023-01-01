@@ -12,47 +12,45 @@ export default StyleSheet.create({
     },
     headerBox: {
         height: HEIGHT * 0.16,
-        marginBottom: HEIGHT * 0.05,
+        marginBottom: HEIGHT * 0.04,
         alignItems: 'center',
         justifyContent: 'space-between'
     },
     highlightBox: {
         alignItems: 'center',
     },
-    inputBox: {
-        height: HEIGHT * 0.57,
-        alignSelf: 'stretch',
-        alignItems: 'center',
-        justifyContent: 'space-between'
+    scrollBox: {
+        alignSelf: 'stretch'
     },
     userBox: {
         width: HEIGHT * 0.11,
         height: HEIGHT * 0.11,
         borderRadius: HEIGHT,
+        marginBottom: 10,
         backgroundColor: COLORS.BASE.GRAY_500,
         borderColor: COLORS.PRODUCT.BLUE_LIGHT,
         borderWidth: 3,
         alignItems: 'center',
         justifyContent: 'center',
-        position: 'relative'
     },
     pencilBox: {
-        padding: 10,
         position: 'absolute',
         bottom: -7,
         right: -7,
+        padding: 10,
         borderRadius: HEIGHT,
         backgroundColor: COLORS.PRODUCT.BLUE_LIGHT,
     },
+    inputBox: {
+        alignSelf: 'stretch'
+    },
     formBox: {
-        height: HEIGHT * 0.48,
         alignSelf: 'stretch',
-        alignItems: 'center',
-        justifyContent: 'space-between'
+        alignItems: 'center'
     },
     loginBox: {
         marginTop: HEIGHT * 0.05,
-        alignSelf: 'stretch',
+        alignSelf: 'stretch'
     },
     title: {
         fontFamily: FONTS.FAMILY.BOLD,
