@@ -82,12 +82,13 @@ const SignUp: React.FC = () => {
                             )}
                         />
                         <Controller
+                        
                             control={control}
                             name='phone'
                             render={({ field: { onChange, value } }) => (
                                 <Input
-                                    removeClippedSubviews={true}
                                     contextMenuHidden={true}
+                                    caretHidden={true}
                                     placeholder="Telefone"
                                     keyboardType="number-pad"
                                     onChangeText={onChange}
