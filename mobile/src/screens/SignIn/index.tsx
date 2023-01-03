@@ -1,11 +1,32 @@
 import { Image, Text, View } from "react-native"
-import Button from "@components/Button";
-import theme from "@theme/index";
+import { useNavigation } from "@react-navigation/native";
+import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from "@hookform/resolvers/yup";
+import { AuthNavigatorRoutesProps } from "src/routes/Auth.routes";
+import SignInTypeProps from "src/@types/SignIn";
 import Icon from '@assets/images/Frame.png';
-import styles from "./styles";
+import Button from "@components/Button";
 import Input from "@components/Input";
+import theme from "@theme/index";
+import styles from "./styles";
+import schema from "./schema";
 
 const SignIn: React.FC = () => {
+    const { navigate }: AuthNavigatorRoutesProps = useNavigation();
+
+    const { control, handleSubmit, formState: { errors } } = useForm<SignInTypeProps>({
+        resolver: yupResolver(schema)
+    });
+
+    const handleSignIn: (data: SignInTypeProps) => Promise<void> = async (data) => {
+        try {
+            console.log(data);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.content}>
@@ -24,11 +45,34 @@ const SignIn: React.FC = () => {
                     <Text style={styles.titleAccount}>
                         Acesse sua conta
                     </Text>
-                    <Input
-                        placeholder='E-mail'
+                    <Controller
+                        control={control}
+                        name='email'
+                        render={({ field: { onChange, value } }) => (
+                            <Input
+                                placeholder='E-mail'
+                                keyboardType="email-address"
+                                autoCapitalize='none'
+                                onChangeText={onChange}
+                                value={value}
+                                errorMessage={errors.email?.message}
+                            />
+                        )}
                     />
-                    <Input
-                        placeholder='Senha'
+                    <Controller
+                        control={control}
+                        name='password'
+                        render={({ field: { onChange, value } }) => (
+                            <Input
+                                placeholder='Senha'
+                                secureTextEntry
+                                onChangeText={onChange}
+                                value={value}
+                                onSubmitEditing={handleSubmit(handleSignIn)}
+                                returnKeyType='send'
+                                errorMessage={errors.password?.message}
+                            />
+                        )}
                     />
                 </View>
                 <Button
@@ -36,6 +80,7 @@ const SignIn: React.FC = () => {
                     type='LIGHT'
                     bgColor={theme.COLORS.PRODUCT.BLUE_LIGHT}
                     style={{ marginTop: theme.HEIGHT * 0.03 }}
+                    onPress={handleSubmit(handleSignIn)}
                 />
             </View>
             <View style={styles.newAccountBox}>
@@ -46,7 +91,7 @@ const SignIn: React.FC = () => {
                     title='Criar uma conta'
                     type='DARK'
                     bgColor={theme.COLORS.BASE.GRAY_500}
-                    style={{ marginTop: 15 }}
+                    onPress={() => navigate('signUp')}
                 />
             </View>
         </View>

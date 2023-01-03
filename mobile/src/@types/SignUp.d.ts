@@ -1,4 +1,4 @@
-type LoginTypeProps = {
+type SignUpTypeProps = {
     name: string;
     email: string;
     phone: string;
@@ -6,4 +6,4 @@ type LoginTypeProps = {
     confirm_password: string;
 }
 
-export default LoginTypeProps;
+export default SignUpTypeProps;

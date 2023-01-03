@@ -18,27 +18,21 @@ export default StyleSheet.create({
         backgroundColor: COLORS.BASE.GRAY_600
     },
     headerBox: {
-        height: HEIGHT * 0.16,
-        marginTop: HEIGHT * 0.06,
-        marginBottom: HEIGHT * 0.1,
         alignItems: 'center',
-        justifyContent: 'space-between'
+        marginTop: HEIGHT * 0.06,
+        marginBottom: HEIGHT * 0.13,
     },
     highLightBox: {
         alignItems: 'center'
     },
     inputBox: {
-        height: HEIGHT * 0.25,
         alignSelf: 'stretch',
-        alignItems: 'center',
-        justifyContent: 'space-evenly'
     },
     newAccountBox: {
         alignSelf: 'stretch',
-        height: HEIGHT * 0.25,
-        marginHorizontal: PADDING.LG,
         alignItems: 'center',
-        justifyContent: 'center'
+        marginTop: HEIGHT * 0.07,
+        marginHorizontal: PADDING.LG,
     },
     title: {
         fontFamily: FONTS.FAMILY.BOLD,
@@ -55,6 +49,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.FAMILY.REGULAR,
         fontSize: FONTS.SIZES.SM,
         color: COLORS.BASE.GRAY_200,
-        textAlign: 'center'
+        textAlign: 'center',
+        marginBottom: 15,
     }
 });

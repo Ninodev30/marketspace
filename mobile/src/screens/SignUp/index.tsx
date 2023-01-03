@@ -1,8 +1,10 @@
 import { Image, ScrollView, Text, View } from "react-native"
-import { User as UserIcon, PencilSimpleLine } from 'phosphor-react-native';
+import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import LoginTypeProps from "src/@types/login";
+import { User as UserIcon, PencilSimpleLine } from 'phosphor-react-native';
+import { AuthNavigatorRoutesProps } from "src/routes/Auth.routes";
+import SignUpTypeProps from "src/@types/SignUp";
 import Icon from '@assets/images/Frame.png';
 import Button from "@components/Button";
 import Input from "@components/Input";
@@ -12,12 +14,13 @@ import schema from "./schema";
 
 const SignUp: React.FC = () => {
     const { COLORS } = theme;
+    const { navigate }: AuthNavigatorRoutesProps = useNavigation();
 
-    const { control, handleSubmit, formState: { errors } } = useForm<LoginTypeProps>(({
+    const { control, handleSubmit, formState: { errors } } = useForm<SignUpTypeProps>(({
         resolver: yupResolver(schema)
     }))
 
-    const handleSignUp: (data: LoginTypeProps) => Promise<void> = async ({ name, email, phone, password }) => {
+    const handleSignUp: (data: SignUpTypeProps) => Promise<void> = async ({ name, email, phone, password }) => {
         try {
             console.log(name, email, phone, password);
         }
@@ -82,7 +85,7 @@ const SignUp: React.FC = () => {
                             )}
                         />
                         <Controller
-                        
+
                             control={control}
                             name='phone'
                             render={({ field: { onChange, value } }) => (
@@ -143,6 +146,7 @@ const SignUp: React.FC = () => {
                         type="DARK"
                         bgColor={COLORS.BASE.GRAY_500}
                         style={{ marginTop: 10 }}
+                        onPress={() => navigate("signIn")}
                     />
                 </View>
             </ScrollView>
