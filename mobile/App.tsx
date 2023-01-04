@@ -1,5 +1,5 @@
 import { StatusBar, View } from "react-native";
-import SignIn from "@screens/SignIn"
+import SignIn from "@screens/auth/SignIn"
 import SignUp from "@screens/SignUp";
 import Routes from "./src/routes";
 
