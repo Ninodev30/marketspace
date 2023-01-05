@@ -79,7 +79,7 @@ const SignIn: React.FC = () => {
                     title='Entrar'
                     type='LIGHT'
                     bgColor={theme.COLORS.PRODUCT.BLUE_LIGHT}
-                    style={{ marginTop: theme.HEIGHT * 0.03 }}
+                    style={{ marginTop: theme.SCALE.HEIGHT(3) }}
                     onPress={handleSubmit(handleSignIn)}
                 />
             </View>

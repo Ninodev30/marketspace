@@ -37,14 +37,11 @@ export default {
         }
     },
 
-    // SCALE: {
-    //     WIDTH: (size: number) => size,
-    //     HEIGHT: (size: number) => size,
-    //     AVERAGE: (size: number) => size
-    //     // WIDTH: (size: number) => (width * (size * 0.01)),
-    //     // HEIGHT: (size: number) => (height * (size * 0.01)),
-    //     // AVERAGE: (size: number) => ((height * (size * 0.005)) + (width * (size * 0.005)))
-    // },
+    SCALE: {
+        WIDTH: (size: number) => (width * (size * 0.01)),
+        HEIGHT: (size: number) => (height * (size * 0.01)),
+        AVERAGE: (size: number) => ((height * (size * 0.005)) + (width * (size * 0.005)))
+    },
 
     PADDING: {
         SM: 24,

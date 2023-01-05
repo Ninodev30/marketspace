@@ -1,3 +1,4 @@
+import { Platform, TouchableOpacity } from "react-native";
 import { createBottomTabNavigator, BottomTabNavigationProp } from "@react-navigation/bottom-tabs"
 import { House, Tag, SignOut } from 'phosphor-react-native';
 import Home from "@screens/app/Home";
@@ -8,7 +9,6 @@ import AdDetails from "@screens/app/AdDetails";
 import MyAdDetails from "@screens/app/MyAdDetails";
 import MyAdPreview from "@screens/app/MyAdPreview";
 import theme from "@theme/index";
-import { Platform, TouchableOpacity } from "react-native";
 
 type AppRoutes = {
     home: undefined;
@@ -26,8 +26,8 @@ export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>;
 const { Navigator, Screen } = createBottomTabNavigator<AppRoutes>();
 
 const AppRoutes: React.FC = () => {
-    const { COLORS, HEIGHT } = theme;
-    const iconSize: number = HEIGHT * 0.03;
+    const { COLORS, SCALE } = theme;
+    const iconSize: number = SCALE.AVERAGE(4);
     const Logout: React.FC = () => null;
 
     return (
@@ -41,8 +41,10 @@ const AppRoutes: React.FC = () => {
                     backgroundColor: COLORS.BASE.GRAY_700,
                     borderTopWidth: 0,
                     height: Platform.OS === 'android' ? 'auto' : 72,
-                    paddingTop: HEIGHT * 0.04,
-                    paddingBottom: HEIGHT * 0.05
+                    paddingTop: SCALE.HEIGHT(4),
+                    paddingBottom: SCALE.HEIGHT(5),
+                    alignItems: 'center',
+                    justifyContent: 'center'
                 }
             }}
         >
@@ -76,14 +78,14 @@ const AppRoutes: React.FC = () => {
                 name='logout'
                 component={Logout}
                 options={{
-                    tabBarIcon: ({ color }) => (
+                    tabBarIcon: () => (
                         <TouchableOpacity
-                            style={{ marginBottom: HEIGHT * 0.03 }}
+                            style={{ marginBottom: SCALE.HEIGHT(3) }}
                             onPress={() => console.log('testing')}
                         >
                             <SignOut
                                 weight="bold"
-                                color={color}
+                                color={COLORS.PRODUCT.RED}
                                 size={iconSize}
                             />
                         </TouchableOpacity>

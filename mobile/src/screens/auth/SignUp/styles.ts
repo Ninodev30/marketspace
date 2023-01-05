@@ -1,7 +1,7 @@
 import theme from "@theme/index";
 import { StyleSheet } from "react-native";
 
-const { COLORS, FONTS, /*SCALE,*/ PADDING } = theme;
+const { COLORS, FONTS, SCALE, PADDING } = theme;
 
 export default StyleSheet.create({
     container: {
@@ -11,10 +11,8 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     headerBox: {
-        // height: SCALE.HEIGHT(16),
-        // marginBottom: SCALE.HEIGHT(4),
-        height: 180,
-        marginBottom: 45,
+        height: SCALE.HEIGHT(16),
+        marginBottom: SCALE.HEIGHT(4),
         alignItems: 'center',
         justifyContent: 'space-between'
     },
@@ -25,14 +23,9 @@ export default StyleSheet.create({
         alignSelf: 'stretch'
     },
     userBox: {
-        // width: HEIGHT * 0.11,
-        // height: HEIGHT * 0.11,
-        // width: SCALE.AVERAGE(17),
-        // height: SCALE.AVERAGE(17),
-        // borderRadius: SCALE.HEIGHT(100),
-        width: 180,
-        height: 180,
-        borderRadius: 90,
+        width: SCALE.AVERAGE(17),
+        height: SCALE.AVERAGE(17),
+        borderRadius: SCALE.HEIGHT(100),
         marginBottom: 10,
         backgroundColor: COLORS.BASE.GRAY_500,
         borderColor: COLORS.PRODUCT.BLUE_LIGHT,
@@ -45,8 +38,7 @@ export default StyleSheet.create({
         bottom: -7,
         right: -7,
         padding: 10,
-        // borderRadius: SCALE.HEIGHT(100),
-        borderRadius: 800,
+        borderRadius: SCALE.HEIGHT(100),
         backgroundColor: COLORS.PRODUCT.BLUE_LIGHT,
     },
     inputBox: {
@@ -57,16 +49,14 @@ export default StyleSheet.create({
         alignItems: 'center'
     },
     loginBox: {
-        // marginTop: SCALE.HEIGHT(5),
-        marginTop: 200,
+        marginTop: SCALE.HEIGHT(5),
         alignSelf: 'stretch'
     },
     title: {
         fontFamily: FONTS.FAMILY.BOLD,
         fontSize: FONTS.SIZES.LG,
         color: COLORS.BASE.GRAY_100,
-        // marginBottom: SCALE.HEIGHT(1),
-        marginBottom: 8,
+        marginBottom: SCALE.HEIGHT(1),
     },
     subtitle: {
         fontFamily: FONTS.FAMILY.REGULAR,

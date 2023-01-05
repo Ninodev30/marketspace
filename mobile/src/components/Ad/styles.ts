@@ -1,9 +1,8 @@
 import { StyleSheet } from "react-native";
 import theme from "@theme/index";
 
-const { COLORS, FONTS, /*SCALE*/ } = theme;
-//const userPhotoSize: number = SCALE.HEIGHT(3.5);
-const userPhotoSize: number = 25;
+const { COLORS, FONTS, SCALE } = theme;
+const userPhotoSize: number = SCALE.HEIGHT(3.5);
 
 export default StyleSheet.create({
     container: {
@@ -15,10 +14,8 @@ export default StyleSheet.create({
         justifyContent: 'space-between'
     },
     photo: {
-        // width: SCALE.WIDTH(40),
-        // height: SCALE.HEIGHT(12),
-        width: 153,
-        height: 100,
+        width: SCALE.WIDTH(40),
+        height: SCALE.HEIGHT(12),
         borderRadius: 6
     },
     userPhoto: {
