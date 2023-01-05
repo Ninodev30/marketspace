@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import theme from "@theme/index";
 
-const { COLORS, FONTS, HEIGHT, PADDING } = theme;
+const { COLORS, FONTS, /*SCALE,*/ PADDING } = theme;
 
 export default StyleSheet.create({
     container: {
@@ -10,7 +10,8 @@ export default StyleSheet.create({
         backgroundColor: COLORS.BASE.GRAY_700
     },
     content: {
-        height: HEIGHT * 0.8,
+        // height: SCALE.HEIGHT(8),
+        height: 70,
         alignSelf: 'stretch',
         alignItems: 'center',
         padding: PADDING.LG,
@@ -19,8 +20,10 @@ export default StyleSheet.create({
     },
     headerBox: {
         alignItems: 'center',
-        marginTop: HEIGHT * 0.06,
-        marginBottom: HEIGHT * 0.13,
+        // marginTop: SCALE.HEIGHT(6),
+        // marginBottom: SCALE.HEIGHT(13),
+        marginTop: 70,
+        marginBottom: 150,
     },
     highLightBox: {
         alignItems: 'center'
@@ -31,7 +34,8 @@ export default StyleSheet.create({
     newAccountBox: {
         alignSelf: 'stretch',
         alignItems: 'center',
-        marginTop: HEIGHT * 0.07,
+        // marginTop: SCALE.HEIGHT(7),
+        marginTop: 85,
         marginHorizontal: PADDING.LG,
     },
     title: {

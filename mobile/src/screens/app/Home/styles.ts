@@ -1,11 +1,13 @@
 import { StyleSheet } from "react-native";
 import theme from "@theme/index";
 
-const { COLORS, FONTS, HEIGHT, PADDING } = theme;
+const { COLORS, FONTS, /*SCALE,*/ PADDING } = theme;
 
 export default StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
         padding: PADDING.SM,
         backgroundColor: COLORS.BASE.GRAY_700
     },

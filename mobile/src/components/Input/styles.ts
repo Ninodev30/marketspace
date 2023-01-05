@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import theme from "@theme/index";
 
-const { COLORS, FONTS, HEIGHT } = theme;
+const { COLORS, FONTS, /*SCALE*/ } = theme;
 
 export default StyleSheet.create({
     container: {
@@ -11,7 +11,8 @@ export default StyleSheet.create({
         alignSelf: 'stretch',
         padding: 10,
         borderRadius: 5,
-        height: HEIGHT * 0.06,
+        // height: SCALE.HEIGHT(6),
+        height: 60,
         backgroundColor: COLORS.BASE.GRAY_700,
         color: COLORS.BASE.GRAY_400,
         fontFamily: FONTS.FAMILY.REGULAR,

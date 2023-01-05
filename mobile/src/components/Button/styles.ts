@@ -4,7 +4,7 @@ import theme from "@theme/index";
 export default StyleSheet.create({
     container: {
         alignSelf: 'stretch',
-        height: theme.HEIGHT * 0.06,
+        // height: theme.SCALE.HEIGHT(6),
         borderRadius: 5,
         alignItems: 'center',
         justifyContent: 'center',

@@ -1,5 +1,7 @@
 import { Dimensions } from "react-native";
 
+const { height, width } = Dimensions.get('window');
+
 export default {
     COLORS: {
         BASE: {
@@ -10,6 +12,7 @@ export default {
             GRAY_500: '#D9D8DA',
             GRAY_600: '#EDECEE',
             GRAY_700: '#F7F7F8',
+            WHITE: '#FFFFFF'
         },
 
         PRODUCT: {
@@ -34,9 +37,14 @@ export default {
         }
     },
 
-    WIDTH: Dimensions.get("window").width,
-
-    HEIGHT: Dimensions.get("window").height,
+    // SCALE: {
+    //     WIDTH: (size: number) => size,
+    //     HEIGHT: (size: number) => size,
+    //     AVERAGE: (size: number) => size
+    //     // WIDTH: (size: number) => (width * (size * 0.01)),
+    //     // HEIGHT: (size: number) => (height * (size * 0.01)),
+    //     // AVERAGE: (size: number) => ((height * (size * 0.005)) + (width * (size * 0.005)))
+    // },
 
     PADDING: {
         SM: 24,
