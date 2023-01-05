@@ -1,4 +1,5 @@
 import { Dimensions } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const { height, width } = Dimensions.get('window');
 
@@ -29,11 +30,12 @@ export default {
         },
 
         SIZES: {
-            XS: 12,
-            SM: 14,
-            MD: 16,
-            LG: 20,
-            XL: 24
+            XXS: RFValue(10, 812),
+            XS: RFValue(12, 812),
+            SM: RFValue(14, 812),
+            MD: RFValue(16, 812),
+            LG: RFValue(20, 812),
+            XL: RFValue(24, 812)
         }
     },
 

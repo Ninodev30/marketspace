@@ -2,20 +2,24 @@ import { StyleSheet } from "react-native";
 import theme from "@theme/index";
 
 const { COLORS, FONTS, SCALE } = theme;
-const userPhotoSize: number = SCALE.HEIGHT(3.5);
+const userPhotoSize: number = SCALE.HEIGHT(3);
 
 export default StyleSheet.create({
     container: {
-
+        width: SCALE.WIDTH(40),
+        height: SCALE.HEIGHT(18),
     },
     topBox: {
         flexDirection: 'row',
+        width: '100%',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        position: 'absolute',
+        padding: 2
     },
     photo: {
-        width: SCALE.WIDTH(40),
-        height: SCALE.HEIGHT(12),
+        // alignSelf: 'stretch',
+        flex: 1,
         borderRadius: 6
     },
     userPhoto: {
@@ -26,18 +30,31 @@ export default StyleSheet.create({
         borderWidth: 1
     },
     title: {
-
+        fontFamily: FONTS.FAMILY.REGULAR,
+        fontSize: FONTS.SIZES.SM,
+        color: COLORS.BASE.GRAY_200,
+    },
+    moneyBox: {
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     price: {
-
+        fontFamily: FONTS.FAMILY.BOLD,
+        fontSize: FONTS.SIZES.MD,
+        color: COLORS.BASE.GRAY_100,
+    },
+    coin: {
+        fontFamily: FONTS.FAMILY.BOLD,
+        fontSize: FONTS.SIZES.SM,
+        color: COLORS.BASE.GRAY_100,
+        marginRight: 3
     },
     used: {
         fontFamily: FONTS.FAMILY.BOLD,
-        fontSize: FONTS.SIZES.XS,
+        fontSize: FONTS.SIZES.XXS,
         color: COLORS.BASE.WHITE,
-        backgroundColor: COLORS.BASE.GRAY_200,
-        paddingHorizontal: 8,
-        paddingVertical: 4,
+        paddingHorizontal: 6,
+        paddingVertical: 3,
         borderRadius: 10
     },
     usedBox: {
