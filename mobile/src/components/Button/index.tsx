@@ -1,14 +1,17 @@
-import { ColorValue, Text, TouchableOpacity, TouchableOpacityProps } from "react-native"
+import { ColorValue, Text, TouchableOpacity, TouchableOpacityProps, Image } from "react-native"
 import theme from "@theme/index";
 import styles from "./styles"
+import { AddressBook } from 'phosphor-react-native';
+import { ReactNode } from "react";
 
 type Props = TouchableOpacityProps & {
     title: string;
     bgColor: ColorValue;
     type: 'LIGHT' | 'DARK';
+    children?: ReactNode;
 }
 
-const Button: React.FC<Props> = ({ title, bgColor, type, style, ...rest }) => {
+const Button: React.FC<Props> = ({ title, bgColor, type, children, style, ...rest }) => {
     const { COLORS: { BASE: { GRAY_200, GRAY_700 } } } = theme;
 
     return (
@@ -20,7 +23,14 @@ const Button: React.FC<Props> = ({ title, bgColor, type, style, ...rest }) => {
             ]}
             {...rest}
         >
-            <Text style={[styles.title, { color: type === "LIGHT" ? GRAY_700 : GRAY_200 }]}>
+            {children}
+            <Text style={[
+                styles.title,
+                {
+                    color: type === "LIGHT" ? GRAY_700 : GRAY_200,
+                    paddingLeft: children ? 6 : 0
+                }
+            ]}>
                 {title}
             </Text>
         </TouchableOpacity>

@@ -1,10 +1,22 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import styles from './styles';
 import Ad from '@components/Ad';
+import theme from '@theme/index';
+import Header from '@components/Header';
+import Sell from '@components/Sell';
 
 const Home: React.FC = () => {
     return (
         <View style={styles.container}>
+            <Header
+                userName='Enzo'
+                userPhoto='https://github.com/Ninodev30.png'
+                adFunctionButton={() => { }}
+            />
+            <Sell
+                ads={4}
+                myAdsFunctionButton={() => { }}
+            />
             <Ad
                 title='Tênis vermelho'
                 price={59.9}

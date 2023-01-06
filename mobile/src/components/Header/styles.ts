@@ -1,22 +1,18 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from "react-native"
 import theme from "@theme/index";
 
-const { COLORS, FONTS, SCALE, PADDING } = theme;
+const { COLORS, FONTS, SCALE } = theme;
 const userPhotoSize: number = SCALE.AVERAGE(8);
 
 export default StyleSheet.create({
     container: {
-        flex: 1,
-        padding: PADDING.SM,
-        backgroundColor: COLORS.BASE.GRAY_600
-    },
-    header: {
-        paddingTop: 40,
+        paddingTop: SCALE.HEIGHT(5),
+        paddingBottom: SCALE.HEIGHT(1.2),
         flexDirection: 'row',
         alignSelf: 'stretch',
         justifyContent: 'space-between'
     },
-    userBox: {
+    content: {
         flexDirection: 'row',
     },
     userPhoto: {
