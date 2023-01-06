@@ -5,13 +5,14 @@ type Props = TextInputProps & {
     errorMessage?: string;
 }
 
-const Input: React.FC<Props> = ({ errorMessage, ...rest }) => {
+const Input: React.FC<Props> = ({ errorMessage, style, ...rest }) => {
     const isInvalid: boolean = !!errorMessage;
 
     return (
         <View style={styles.container}>
             <TextInput
                 style={[
+                    style,
                     styles.input,
                     !isInvalid && { marginBottom: 10 }
                 ]}

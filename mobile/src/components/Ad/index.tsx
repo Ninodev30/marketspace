@@ -10,7 +10,7 @@ type Props = TouchableOpacityProps & {
     userPhoto: string;
 }
 
-const Ad: React.FC<Props> = ({ title, price, used, photo, userPhoto, ...rest }) => {
+const Ad: React.FC<Props> = ({ title, price, used, photo, userPhoto, style, ...rest }) => {
     const { COLORS, SCALE } = theme;
 
     const priceFormatted: string = price.toLocaleString('pt-BR', {
@@ -19,7 +19,7 @@ const Ad: React.FC<Props> = ({ title, price, used, photo, userPhoto, ...rest }) 
     });
 
     return (
-        <TouchableOpacity style={styles.container} {...rest}>
+        <TouchableOpacity style={[styles.container, style]} {...rest}>
             <Image
                 source={{ uri: photo }}
                 style={styles.photo}
