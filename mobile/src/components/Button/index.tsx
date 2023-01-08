@@ -1,8 +1,7 @@
+import { ReactNode } from "react";
 import { ColorValue, Text, TouchableOpacity, TouchableOpacityProps, Image } from "react-native"
 import theme from "@theme/index";
 import styles from "./styles"
-import { AddressBook } from 'phosphor-react-native';
-import { ReactNode } from "react";
 
 type Props = TouchableOpacityProps & {
     title: string;
@@ -18,8 +17,8 @@ const Button: React.FC<Props> = ({ title, bgColor, type, children, style, ...res
         <TouchableOpacity
             style={[
                 styles.container,
-                { backgroundColor: bgColor },
                 style,
+                { backgroundColor: bgColor }
             ]}
             {...rest}
         >

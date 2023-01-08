@@ -1,12 +1,14 @@
-import theme from "@theme/index";
 import { StyleSheet } from "react-native";
+import theme from "@theme/index";
 
-const { COLORS } = theme;
+const { COLORS, FONTS, SCALE, PADDING } = theme;
 
 export default StyleSheet.create({
     container: {
         flex: 1,
-        color: COLORS.BASE.GRAY_600
+        padding: PADDING.SM,
+        borderRadius: SCALE.AVERAGE(2),
+        backgroundColor: COLORS.BASE.GRAY_700
     },
     title: {
 
@@ -21,6 +23,17 @@ export default StyleSheet.create({
 
     },
     exchangeTitle: {
-        
+
+    },
+    paymentBox: {
+
+    },
+    paymentTitle: {
+
+    },
+    actions: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignSelf: 'stretch'
     }
 });

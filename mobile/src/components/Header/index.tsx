@@ -31,6 +31,7 @@ const Header: React.FC<Props> = ({ userName, userPhoto, adFunctionButton }) => {
                 title='Criar anúncio'
                 type='LIGHT'
                 bgColor={theme.COLORS.BASE.GRAY_100}
+                style={{ width: theme.SCALE.WIDTH(35) }}
                 onPress={adFunctionButton}
             >
                 <Plus
