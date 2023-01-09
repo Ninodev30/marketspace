@@ -5,12 +5,11 @@ import AuthRoutes from './Auth.routes';
 import AppRoutes from './App.routes';
 
 const Routes: React.FC = () => {
-    const { COLORS: { BASE: { GRAY_600 } } } = theme;
-
-    DefaultTheme.colors.background = GRAY_600;
+    const bgColor: string = theme.COLORS.BASE.GRAY_600;
+    DefaultTheme.colors.background = bgColor;
 
     return (
-        <View style={{ flex: 1, backgroundColor: GRAY_600 }}>
+        <View style={{ flex: 1, backgroundColor: bgColor }}>
             <NavigationContainer theme={DefaultTheme}>
                 <AppRoutes />
             </NavigationContainer>
