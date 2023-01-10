@@ -29,6 +29,24 @@ export default StyleSheet.create({
     conditionBox: {
 
     },
+    conditionButtonsBox: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    conditionButton: {
+        paddingHorizontal: SCALE.AVERAGE(2),
+        paddingVertical: SCALE.AVERAGE(0.7),
+        borderRadius: SCALE.AVERAGE(3)
+    },
+    conditionButtonTitle: {
+
+    },
+    conditionButtonSelected: {
+        backgroundColor: COLORS.PRODUCT.BLUE_LIGHT
+    },
+    conditionButtonUnselected: {
+        backgroundColor: COLORS.BASE.GRAY_500
+    },
     exchangeBox: {
 
     },
@@ -53,10 +71,10 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    selected: {
+    paymentButtonSelected: {
         backgroundColor: COLORS.PRODUCT.BLUE_LIGHT
     },
-    unselected: {
+    paymentButtonUnselected: {
         borderWidth: 1,
         borderColor: COLORS.BASE.GRAY_400
     },

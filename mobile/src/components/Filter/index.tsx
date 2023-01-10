@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Text, View, Pressable, FlatList } from "react-native"
+import { Text, View, Pressable } from "react-native"
 import { X, Check } from "phosphor-react-native";
 import FilterDataTypeProps from "src/@types/filter";
 import Button from "@components/Button";
@@ -19,9 +19,17 @@ const Filter: React.FC = () => {
         }
     } as FilterDataTypeProps);
 
+    const handleConditionFilter: (select: boolean) => void = (select) => {
+        setFilterOptions(prevState => ({
+            ...prevState,
+            used: select
+        }));
+        console.log(filterOptions)
+    };
+
     const handleApplyFilter: () => void = () => {
         console.log(filterOptions);
-    }
+    };
 
     return (
         <View style={styles.container}>
@@ -38,6 +46,24 @@ const Filter: React.FC = () => {
                 <Text style={styles.subtitle}>
                     Condição
                 </Text>
+                <View style={styles.conditionButtonsBox}>
+                    <Pressable
+                        style={[styles.conditionButton, filterOptions.used ? styles.conditionButtonSelected : styles.conditionButtonUnselected]}
+                        onPress={() => handleConditionFilter(true)}
+                    >
+                        <Text style={styles.conditionButtonTitle}>
+                            novo
+                        </Text>
+                    </Pressable>
+                    <Pressable
+                        style={[styles.conditionButton, !filterOptions.used ? styles.conditionButtonSelected : styles.conditionButtonUnselected]}
+                        onPress={() => handleConditionFilter(false)}
+                    >
+                        <Text style={styles.conditionButtonTitle}>
+                            usado
+                        </Text>
+                    </Pressable>
+                </View>
             </View>
             <View style={styles.exchangeBox}>
                 <Text style={styles.subtitle}>
@@ -51,7 +77,7 @@ const Filter: React.FC = () => {
                 </Text>
                 <View key='ticket' style={styles.paymentMethodBox}>
                     <Pressable
-                        style={[styles.paymentButton, filterOptions.payment.ticket ? styles.selected : styles.unselected]}
+                        style={[styles.paymentButton, filterOptions.payment.ticket ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
                         onPress={() => {
                             setFilterOptions(prevState => ({
                                 ...prevState,
@@ -75,7 +101,7 @@ const Filter: React.FC = () => {
                 </View>
                 <View key='pix' style={styles.paymentMethodBox}>
                     <Pressable
-                        style={[styles.paymentButton, filterOptions.payment.pix ? styles.selected : styles.unselected]}
+                        style={[styles.paymentButton, filterOptions.payment.pix ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
                         onPress={() => {
                             setFilterOptions(prevState => ({
                                 ...prevState,
@@ -99,7 +125,7 @@ const Filter: React.FC = () => {
                 </View>
                 <View key='money' style={styles.paymentMethodBox}>
                     <Pressable
-                        style={[styles.paymentButton, filterOptions.payment.money ? styles.selected : styles.unselected]}
+                        style={[styles.paymentButton, filterOptions.payment.money ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
                         onPress={() => {
                             setFilterOptions(prevState => ({
                                 ...prevState,
@@ -123,7 +149,7 @@ const Filter: React.FC = () => {
                 </View>
                 <View key='creditCard' style={styles.paymentMethodBox}>
                     <Pressable
-                        style={[styles.paymentButton, filterOptions.payment.creditCard ? styles.selected : styles.unselected]}
+                        style={[styles.paymentButton, filterOptions.payment.creditCard ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
                         onPress={() => {
                             setFilterOptions(prevState => ({
                                 ...prevState,
@@ -147,7 +173,7 @@ const Filter: React.FC = () => {
                 </View>
                 <View key='bankDeposit' style={styles.paymentMethodBox}>
                     <Pressable
-                        style={[styles.paymentButton, filterOptions.payment.bankDeposit ? styles.selected : styles.unselected]}
+                        style={[styles.paymentButton, filterOptions.payment.bankDeposit ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
                         onPress={() => {
                             setFilterOptions(prevState => ({
                                 ...prevState,
