@@ -1,16 +1,26 @@
-import { Text, View, Pressable } from "react-native"
-import { useForm, Controller } from "react-hook-form";
-import { X } from "phosphor-react-native";
+import { useState } from "react";
+import { Text, View, Pressable, FlatList } from "react-native"
+import { X, Check } from "phosphor-react-native";
 import FilterDataTypeProps from "src/@types/filter";
 import Button from "@components/Button";
 import theme from "@theme/index";
 import styles from "./styles";
 
 const Filter: React.FC = () => {
-    const { control, handleSubmit } = useForm<FilterDataTypeProps>();
+    const [filterOptions, setFilterOptions] = useState<FilterDataTypeProps>({
+        used: true,
+        exchange: true,
+        payment: {
+            ticket: true,
+            pix: false,
+            money: true,
+            creditCard: true,
+            bankDeposit: false
+        }
+    } as FilterDataTypeProps);
 
-    const handleApplyFilter: (data: FilterDataTypeProps) => void = (data) => {
-        console.log(data);
+    const handleApplyFilter: () => void = () => {
+        console.log(filterOptions);
     }
 
     return (
@@ -33,25 +43,132 @@ const Filter: React.FC = () => {
                 <Text style={styles.subtitle}>
                     Aceita troca?
                 </Text>
-                <Controller
-                    control={control}
-                    name='exchange'
-                    render={({ field: { value } }) => (
-                        <View>
-                            <Pressable onPress={() => { value = true; }}>
-                                <Text>
-                                    novo
-                                </Text>
-                            </Pressable>
-                        </View>
-                    )}
-                />
 
             </View>
             <View style={styles.paymentBox}>
                 <Text style={styles.subtitle}>
                     Meios de pagamento aceitos
                 </Text>
+                <View key='ticket' style={styles.paymentMethodBox}>
+                    <Pressable
+                        style={[styles.paymentButton, filterOptions.payment.ticket ? styles.selected : styles.unselected]}
+                        onPress={() => {
+                            setFilterOptions(prevState => ({
+                                ...prevState,
+                                payment: {
+                                    ...prevState.payment,
+                                    ticket: !prevState.payment.ticket
+                                }
+                            }))
+                        }}
+                    >
+                        {filterOptions.payment.ticket &&
+                            <Check
+                                color={theme.COLORS.BASE.WHITE}
+                                size={16}
+                            />
+                        }
+                    </Pressable>
+                    <Text style={styles.paymentMethodTitle}>
+                        Boleto
+                    </Text>
+                </View>
+                <View key='pix' style={styles.paymentMethodBox}>
+                    <Pressable
+                        style={[styles.paymentButton, filterOptions.payment.pix ? styles.selected : styles.unselected]}
+                        onPress={() => {
+                            setFilterOptions(prevState => ({
+                                ...prevState,
+                                payment: {
+                                    ...prevState.payment,
+                                    pix: !prevState.payment.pix
+                                }
+                            }))
+                        }}
+                    >
+                        {filterOptions.payment.pix &&
+                            <Check
+                                color={theme.COLORS.BASE.WHITE}
+                                size={16}
+                            />
+                        }
+                    </Pressable>
+                    <Text style={styles.paymentMethodTitle}>
+                        Pix
+                    </Text>
+                </View>
+                <View key='money' style={styles.paymentMethodBox}>
+                    <Pressable
+                        style={[styles.paymentButton, filterOptions.payment.money ? styles.selected : styles.unselected]}
+                        onPress={() => {
+                            setFilterOptions(prevState => ({
+                                ...prevState,
+                                payment: {
+                                    ...prevState.payment,
+                                    money: !prevState.payment.money
+                                }
+                            }))
+                        }}
+                    >
+                        {filterOptions.payment.money &&
+                            <Check
+                                color={theme.COLORS.BASE.WHITE}
+                                size={16}
+                            />
+                        }
+                    </Pressable>
+                    <Text style={styles.paymentMethodTitle}>
+                        Dinheiro
+                    </Text>
+                </View>
+                <View key='creditCard' style={styles.paymentMethodBox}>
+                    <Pressable
+                        style={[styles.paymentButton, filterOptions.payment.creditCard ? styles.selected : styles.unselected]}
+                        onPress={() => {
+                            setFilterOptions(prevState => ({
+                                ...prevState,
+                                payment: {
+                                    ...prevState.payment,
+                                    creditCard: !prevState.payment.creditCard
+                                }
+                            }))
+                        }}
+                    >
+                        {filterOptions.payment.creditCard &&
+                            <Check
+                                color={theme.COLORS.BASE.WHITE}
+                                size={16}
+                            />
+                        }
+                    </Pressable>
+                    <Text style={styles.paymentMethodTitle}>
+                        Cartão de Crédito
+                    </Text>
+                </View>
+                <View key='bankDeposit' style={styles.paymentMethodBox}>
+                    <Pressable
+                        style={[styles.paymentButton, filterOptions.payment.bankDeposit ? styles.selected : styles.unselected]}
+                        onPress={() => {
+                            setFilterOptions(prevState => ({
+                                ...prevState,
+                                payment: {
+                                    ...prevState.payment,
+                                    bankDeposit: !prevState.payment.bankDeposit
+                                }
+                            }))
+                        }}
+                    >
+                        {filterOptions.payment.bankDeposit &&
+                            <Check
+                                color={theme.COLORS.BASE.WHITE}
+                                size={16}
+                            />
+                        }
+                    </Pressable>
+                    <Text style={styles.paymentMethodTitle}>
+                        Depósito Bancário
+                    </Text>
+                </View>
             </View>
             <View style={styles.actions}>
                 <Button
@@ -65,7 +182,7 @@ const Filter: React.FC = () => {
                     style={{ width: theme.SCALE.WIDTH(36) }}
                     title='Aplicar filtros'
                     type='LIGHT'
-                    onPress={handleSubmit(handleApplyFilter)}
+                    onPress={handleApplyFilter}
                 />
             </View>
         </View>
