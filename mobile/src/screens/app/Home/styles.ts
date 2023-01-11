@@ -19,7 +19,7 @@ export default StyleSheet.create({
     findBox: {
         marginBottom: SCALE.HEIGHT(1),
     },
-    searchIconBox: {
+    searchIcon: {
         position: 'absolute',
         right: SCALE.WIDTH(10),
         top: SCALE.HEIGHT(2),
@@ -35,6 +35,8 @@ export default StyleSheet.create({
     },
     list: {
         alignSelf: 'stretch',
-        // justifyContent: 'space-between'
+    },
+    filterBox: {
+        flex: 1,
     }
 });

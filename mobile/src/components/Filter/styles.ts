@@ -6,14 +6,18 @@ const paymentButtonSize: number = SCALE.AVERAGE(3.2);
 
 export default StyleSheet.create({
     container: {
-        flex: 1,
+        position: 'absolute',
+        bottom: 0,
+        height: 582,
+        width: '100%',
         padding: PADDING.SM,
         borderRadius: SCALE.AVERAGE(2),
         backgroundColor: COLORS.BASE.GRAY_600
     },
     header: {
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginTop: SCALE.HEIGHT(2)
     },
     title: {
         fontFamily: FONTS.FAMILY.BOLD,
@@ -24,34 +28,22 @@ export default StyleSheet.create({
         fontFamily: FONTS.FAMILY.BOLD,
         fontSize: FONTS.SIZES.SM,
         color: COLORS.BASE.GRAY_200,
-        marginBottom: SCALE.HEIGHT(1)
+        marginBottom: SCALE.HEIGHT(1.5)
     },
     conditionBox: {
-
+        marginVertical: SCALE.HEIGHT(3)
     },
     conditionButtonsBox: {
         flexDirection: 'row',
         alignItems: 'center',
     },
-    conditionButton: {
-        paddingHorizontal: SCALE.AVERAGE(2),
-        paddingVertical: SCALE.AVERAGE(0.7),
-        borderRadius: SCALE.AVERAGE(3)
-    },
-    conditionButtonTitle: {
-
-    },
-    conditionButtonSelected: {
-        backgroundColor: COLORS.PRODUCT.BLUE_LIGHT
-    },
-    conditionButtonUnselected: {
-        backgroundColor: COLORS.BASE.GRAY_500
-    },
     exchangeBox: {
-
+        alignItems: 'flex-start',
+        marginVertical: SCALE.HEIGHT(1)
     },
     paymentBox: {
-        marginVertical: SCALE.HEIGHT(5)
+        marginTop: SCALE.HEIGHT(3),
+        marginBottom: SCALE.HEIGHT(8),
     },
     paymentMethodBox: {
         flexDirection: 'row',
@@ -66,8 +58,8 @@ export default StyleSheet.create({
     paymentButton: {
         width: paymentButtonSize,
         height: paymentButtonSize,
-        borderRadius: 5,
         marginRight: SCALE.WIDTH(2),
+        borderRadius: 5,
         alignItems: 'center',
         justifyContent: 'center'
     },
