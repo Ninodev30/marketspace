@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Text, View, Pressable, Switch } from "react-native"
 import { X, Check } from "phosphor-react-native";
-import FilterDataTypeProps from "src/@types/filter";
+import AdDataTypeProps from "src/@types/ad";
 import Button from "@components/Button";
 import theme from "@theme/index";
 import styles from "./styles";
 import ConditionButton from "@components/ConditionButton";
 
 const Filter: React.FC = () => {
-    const [filterOptions, setFilterOptions] = useState<FilterDataTypeProps>({
+    const [filterOptions, setFilterOptions] = useState<AdDataTypeProps>({
         used: false,
         exchange: false,
         payment: {
@@ -18,7 +18,7 @@ const Filter: React.FC = () => {
             creditCard: false,
             bankDeposit: false
         }
-    } as FilterDataTypeProps);
+    });
 
     const handleFilter = {
         condition: (select: boolean) => setFilterOptions(prevState => ({
