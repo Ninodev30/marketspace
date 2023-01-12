@@ -11,7 +11,14 @@ export default StyleSheet.create({
     },
     header: {
         flexDirection: 'row',
-        paddingTop: SCALE.HEIGHT(4),
+        paddingTop: SCALE.HEIGHT(6),
         paddingHorizontal: PADDING.SM
+    },
+    adPhoto: {
+        height: SCALE.HEIGHT(37),
+        marginVertical: SCALE.HEIGHT(2)
+    },
+    content: {
+        padding: PADDING.SM,
     },
 });
