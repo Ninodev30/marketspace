@@ -8,7 +8,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         height: theme.SCALE.HEIGHT(5),
-        paddingHorizontal: theme.SCALE.WIDTH(3),
+        paddingHorizontal: theme.SCALE.WIDTH(4),
         borderRadius: 5,
     },
     title: {

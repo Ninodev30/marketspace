@@ -11,7 +11,7 @@ type Props = TouchableOpacityProps & {
 }
 
 const Button: React.FC<Props> = ({ title, bgColor, type, children, style, ...rest }) => {
-    const { COLORS: { BASE: { GRAY_200, GRAY_700 } } } = theme;
+    const { COLORS: { BASE: { GRAY_200, GRAY_700 } }, SCALE } = theme;
 
     return (
         <TouchableOpacity
@@ -27,7 +27,7 @@ const Button: React.FC<Props> = ({ title, bgColor, type, children, style, ...res
                 styles.title,
                 {
                     color: type === "LIGHT" ? GRAY_700 : GRAY_200,
-                    paddingLeft: children ? 6 : 0
+                    paddingLeft: children ? SCALE.WIDTH(2) : 0
                 }
             ]}>
                 {title}

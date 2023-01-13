@@ -1,8 +1,9 @@
 import { View } from "react-native"
+import styles from "./styles";
 
 const MyAds: React.FC = () => {
     return (
-        <View>
+        <View style={styles.container}>
 
         </View>
     );
