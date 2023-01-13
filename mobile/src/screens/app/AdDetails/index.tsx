@@ -17,8 +17,8 @@ const AdDetails: React.FC = () => {
                 />
                 <AdInfo
                     user={{
-                        name: 'Makenna Baptista',
-                        photo: 'https://github.com/Ninodev30.git'
+                        name: 'Enzo Damascena',
+                        photo: 'https://github.com/Ninodev30.png'
                     }}
                     ad={{
                         used: true,

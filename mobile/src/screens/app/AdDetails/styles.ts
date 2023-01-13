@@ -12,13 +12,10 @@ export default StyleSheet.create({
     header: {
         flexDirection: 'row',
         paddingTop: SCALE.HEIGHT(6),
+        paddingBottom: SCALE.HEIGHT(2),
         paddingHorizontal: PADDING.SM
     },
     adPhoto: {
         height: SCALE.HEIGHT(37),
-        marginVertical: SCALE.HEIGHT(2)
-    },
-    content: {
-        padding: PADDING.SM,
     },
 });

@@ -7,6 +7,8 @@ import theme from "@theme/index";
 import styles from "./styles";
 import ConditionButton from "@components/ConditionButton";
 
+type PaymentMethodsTypes = 'ticket' | 'pix' | 'money' | 'creditCard' | 'bankDeposit';
+
 const Filter: React.FC = () => {
     const [filterOptions, setFilterOptions] = useState<AdDataTypeProps>({
         used: false,
@@ -24,54 +26,18 @@ const Filter: React.FC = () => {
         condition: (select: boolean) => setFilterOptions(prevState => ({
             ...prevState,
             used: select
-        }))
-        ,
+        })),
         exchange: () => setFilterOptions(prevState => ({
             ...prevState,
             exchange: !prevState.exchange
+        })),
+        payment: (paymentMethod: PaymentMethodsTypes) => setFilterOptions(prevState => ({
+            ...prevState,
+            payment: {
+                ...prevState.payment,
+                [paymentMethod]: !prevState.payment[paymentMethod]
+            }
         }))
-        ,
-        payment: {
-            ticket: () => setFilterOptions(prevState => ({
-                ...prevState,
-                payment: {
-                    ...prevState.payment,
-                    ticket: !prevState.payment.ticket
-                }
-            }))
-            ,
-            pix: () => setFilterOptions(prevState => ({
-                ...prevState,
-                payment: {
-                    ...prevState.payment,
-                    pix: !prevState.payment.pix
-                }
-            }))
-            ,
-            money: () => setFilterOptions(prevState => ({
-                ...prevState,
-                payment: {
-                    ...prevState.payment,
-                    money: !prevState.payment.money
-                }
-            }))
-            ,
-            creditCard: () => setFilterOptions(prevState => ({
-                ...prevState,
-                payment: {
-                    ...prevState.payment,
-                    creditCard: !prevState.payment.creditCard
-                }
-            }))
-            ,
-            bankDeposit: () => setFilterOptions(prevState => ({
-                ...prevState,
-                payment: {
-                    ...prevState.payment,
-                    bankDeposit: !prevState.payment.bankDeposit
-                }
-            }))
-        }
     };
 
     const handleApplyFilter: () => void = () => {
@@ -123,7 +89,7 @@ const Filter: React.FC = () => {
                 <View key='ticket' style={styles.paymentMethodBox}>
                     <Pressable
                         style={[styles.paymentButton, filterOptions.payment.ticket ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
-                        onPress={handleFilter.payment.ticket}
+                        onPress={() => handleFilter.payment('ticket')}
                     >
                         {filterOptions.payment.ticket &&
                             <Check
@@ -139,7 +105,7 @@ const Filter: React.FC = () => {
                 <View key='pix' style={styles.paymentMethodBox}>
                     <Pressable
                         style={[styles.paymentButton, filterOptions.payment.pix ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
-                        onPress={handleFilter.payment.pix}
+                        onPress={() => handleFilter.payment('pix')}
                     >
                         {filterOptions.payment.pix &&
                             <Check
@@ -155,7 +121,7 @@ const Filter: React.FC = () => {
                 <View key='money' style={styles.paymentMethodBox}>
                     <Pressable
                         style={[styles.paymentButton, filterOptions.payment.money ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
-                        onPress={handleFilter.payment.money}
+                        onPress={() => handleFilter.payment('money')}
                     >
                         {filterOptions.payment.money &&
                             <Check
@@ -171,7 +137,7 @@ const Filter: React.FC = () => {
                 <View key='creditCard' style={styles.paymentMethodBox}>
                     <Pressable
                         style={[styles.paymentButton, filterOptions.payment.creditCard ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
-                        onPress={handleFilter.payment.creditCard}
+                        onPress={() => handleFilter.payment('creditCard')}
                     >
                         {filterOptions.payment.creditCard &&
                             <Check
@@ -187,7 +153,7 @@ const Filter: React.FC = () => {
                 <View key='bankDeposit' style={styles.paymentMethodBox}>
                     <Pressable
                         style={[styles.paymentButton, filterOptions.payment.bankDeposit ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
-                        onPress={handleFilter.payment.bankDeposit}
+                        onPress={() => handleFilter.payment('bankDeposit')}
                     >
                         {filterOptions.payment.bankDeposit &&
                             <Check

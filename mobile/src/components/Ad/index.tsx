@@ -1,4 +1,5 @@
 import { Image, Text, TouchableOpacity, TouchableOpacityProps, View } from "react-native";
+import formattNumberToPrice from "@functions/formattNumberToPrice";
 import theme from "@theme/index";
 import styles from "./styles";
 
@@ -11,12 +12,8 @@ type Props = TouchableOpacityProps & {
 }
 
 const Ad: React.FC<Props> = ({ title, price, used, photo, userPhoto, style, ...rest }) => {
-    const { COLORS, SCALE } = theme;
-
-    const priceFormatted: string = price.toLocaleString('pt-BR', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    });
+    const { COLORS } = theme;
+    const priceFormatted: string = formattNumberToPrice(price);
 
     return (
         <TouchableOpacity style={[styles.container, style]} {...rest}>

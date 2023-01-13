@@ -23,6 +23,7 @@ module.exports = {
           '@storage': './src/storage',
           '@theme': './src/theme',
           '@context': './src/context',
+          '@functions': './src/functions',
           '@utils': './src/utils'
         },
       },

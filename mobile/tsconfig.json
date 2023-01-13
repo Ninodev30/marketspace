@@ -23,6 +23,9 @@
       "@context/*": [
         "./src/context/*"
       ],
+      "@functions/*": [
+        "./src/functions/*"
+      ],
       "@utils/*": [
         "./src/utils/*"
       ]
