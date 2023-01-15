@@ -3,13 +3,13 @@ import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { MagnifyingGlass, Sliders } from 'phosphor-react-native';
 import { AppNavigatorRoutesProps } from 'src/routes/App.routes';
-import styles from './styles';
 import Ad from '@components/Ad';
-import Header from '@components/Header';
+import HomeHeader from '@components/HomeHeader';
 import Sell from '@components/Sell';
 import Input from '@components/Input';
-import theme from '@theme/index';
 import Filter from '@components/Filter';
+import theme from '@theme/index';
+import styles from './styles';
 
 const Home: React.FC = () => {
     const [findAd, setFindAd] = useState<string>('');
@@ -29,7 +29,7 @@ const Home: React.FC = () => {
 
     return (
         <View style={styles.container}>
-            <Header
+            <HomeHeader
                 userName='Enzo'
                 userPhoto='https://github.com/Ninodev30.png'
                 adFunctionButton={() => { }}
@@ -74,7 +74,6 @@ const Home: React.FC = () => {
                         </View>
                         <FlatList
                             data={adList}
-                            key={'#'}
                             keyExtractor={(item, index) => item + index}
                             renderItem={({ item }) => (
                                 <Ad

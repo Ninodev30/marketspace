@@ -1,46 +1,24 @@
-import { Image, Text, View } from 'react-native';
-import { Plus } from 'phosphor-react-native';
+import { ReactNode } from 'react';
+import { Text, View, ViewProps } from 'react-native'
+import BackIcon from '@components/BackIcon';
 import styles from './styles';
-import Button from '@components/Button';
-import theme from '@theme/index';
 
-type Props = {
-    userName: string;
-    userPhoto: string;
-    adFunctionButton: () => void;
+type Props = ViewProps & {
+    title: string;
+    backIcon?: boolean;
+    children?: ReactNode;
 }
 
-const Header: React.FC<Props> = ({ userName, userPhoto, adFunctionButton }) => {
+const Header: React.FC<Props> = ({ title, backIcon = false, children, style, ...rest }) => {
     return (
-        <View style={styles.container}>
-            <View style={styles.content}>
-                <Image
-                    source={{ uri: userPhoto }}
-                    style={styles.userPhoto}
-                />
-                <View style={styles.titleBox}>
-                    <Text style={styles.subtitle}>
-                        Boas vindas,
-                    </Text>
-                    <Text style={styles.title}>
-                        {userName}
-                    </Text>
-                </View>
-            </View>
-            <Button
-                title='Criar anúncio'
-                type='LIGHT'
-                bgColor={theme.COLORS.BASE.GRAY_100}
-                style={{ width: theme.SCALE.WIDTH(35) }}
-                onPress={adFunctionButton}
-            >
-                <Plus
-                    size={16}
-                    color={theme.COLORS.BASE.GRAY_600}
-                />
-            </Button>
+        <View style={[styles.container, style]} {...rest}>
+            {backIcon && <BackIcon style={styles.backIcon} />}
+            <Text style={styles.title}>
+                Meus anúncios
+            </Text>
+            {children}
         </View>
-    )
-}
+    );
+};
 
 export default Header;
