@@ -1,4 +1,4 @@
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
+import { Image, ScrollView, Text, View } from "react-native"
 import { WhatsappLogo } from "phosphor-react-native";
 import BackIcon from "@components/BackIcon";
 import AdInfo from "@components/AdInfo";

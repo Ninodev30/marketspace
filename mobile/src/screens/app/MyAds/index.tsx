@@ -11,7 +11,7 @@ import Ad from "@components/Ad";
 type activedFilter = 'all' | 'actived' | 'inactived';
 
 const MyAds: React.FC = () => {
-    const [adList, setAdList] = useState<string[]>(['Tênis vermelho', 'Bicicleta', 'Sofá', 'Bunda', 'Dinheiro', 'Gaveta', 'Tênis vermelho, Bicicleta', 'Sofá', 'Bunda', 'Dinheiro', 'Gaveta', 'Tênis vermelho', 'Bicicleta', 'Sofá', 'Bunda', 'Dinheiro', 'Gaveta', 'Gaveta'])
+    const [adList, setAdList] = useState<string[]>([ 'Bicicleta','Sofá', 'Sofá', 'Bunda', 'Dinheiro', 'Gaveta', 'Tênis vermelho, Bicicleta', 'Sofá', 'Bunda', 'Dinheiro', 'Gaveta', 'Tênis vermelho', 'Bicicleta', 'Sofá', 'Bunda', 'Dinheiro', 'Gaveta', 'Gaveta'])
     const [isShowFilterOptions, setIsShowFilterOptions] = useState<boolean>(false);
     const [filterOption, setFilterOption] = useState<activedFilter>('all');
 
@@ -122,7 +122,7 @@ const MyAds: React.FC = () => {
                     style={{ marginTop: isShowFilterOptions ? -theme.SCALE.HEIGHT(10.2) : theme.SCALE.HEIGHT(3) }}
                     contentContainerStyle={{
                         gap: theme.SCALE.HEIGHT(2),
-                        paddingBottom: theme.SCALE.HEIGHT(32),
+                        paddingBottom: theme.SCALE.HEIGHT(20),
                     }}
                 />
             </View>
