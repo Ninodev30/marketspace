@@ -41,7 +41,7 @@ const Home: React.FC = () => {
                 <View style={{ flex: 1 }}>
                     <Sell
                         ads={4}
-                        myAdsFunctionButton={() => { }}
+                        myAdsFunctionButton={() => navigate('myAds')}
                     />
                     <View>
                         <View style={styles.findBox}>

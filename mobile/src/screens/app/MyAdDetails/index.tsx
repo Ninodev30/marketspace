@@ -58,7 +58,7 @@ const MyAdDetails: React.FC = () => {
                         }
                     }}
                     title='Bicicleta'
-                    subtitle='Cras congue cursus in tortor sagittis placerat nunc, tellus arcu. Vitae ante leo eget maecenas urna mattis cursus. Mauris metus amet nibh mauris mauris accumsan, euismod. Aenean leo nunc, purus iaculis in aliquam.'
+                    description='Cras congue cursus in tortor sagittis placerat nunc, tellus arcu. Vitae ante leo eget maecenas urna mattis cursus. Mauris metus amet nibh mauris mauris accumsan, euismod. Aenean leo nunc, purus iaculis in aliquam.'
                     price={price}
                 />
                 <View style={styles.footer}>

@@ -1,15 +1,15 @@
-export type PaymentDataTypeProps = {
-    ticket: boolean;
-    pix: boolean;
-    money: boolean;
-    creditCard: boolean;
-    bankDeposit: boolean;
+import AdTradeTypeProps from "./adTrade";
+
+type AdTypeProps = {
+    ad: AdTradeTypeProps;
+    title: string;
+    description: string;
+    price: number;
+    adPhoto?: string;
+    user?: {
+        name: string;
+        photo: string;
+    };
 };
 
-type AdDataTypeProps = {
-    used: boolean;
-    exchange: boolean;
-    payment: PaymentDataTypeProps;
-};
-
-export default AdDataTypeProps;
+export default AdTypeProps;

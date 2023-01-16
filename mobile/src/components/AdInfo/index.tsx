@@ -1,21 +1,12 @@
 import { Image, Text, View, ViewProps } from "react-native";
 import PaymentMethods from "@components/paymentMethods";
-import AdDataTypeProps from "src/@types/ad";
+import AdTypeProps from "src/@types/ad";
 import styles from "./styles";
 import formattNumberToPrice from "@functions/formattNumberToPrice";
 
-type Props = ViewProps & {
-    user: {
-        name: string;
-        photo: string;
-    }
-    ad: AdDataTypeProps;
-    title: string;
-    subtitle: string;
-    price: number;
-};
+type Props = ViewProps & AdTypeProps;
 
-const AdInfo: React.FC<Props> = ({ user, ad, title, subtitle, price, style, ...rest }) => {
+const AdInfo: React.FC<Props> = ({ user, ad, title, description, price, style, ...rest }) => {
     const priceFormatted: string = formattNumberToPrice(price);
 
     return (
@@ -23,10 +14,10 @@ const AdInfo: React.FC<Props> = ({ user, ad, title, subtitle, price, style, ...r
             <View style={styles.header}>
                 <Image
                     style={styles.userPhoto}
-                    source={{ uri: user.photo }}
+                    source={{ uri: user?.photo }}
                 />
                 <Text style={styles.userName}>
-                    {user.name}
+                    {user?.name}
                 </Text>
             </View>
             <View style={styles.infoBox}>
@@ -47,7 +38,7 @@ const AdInfo: React.FC<Props> = ({ user, ad, title, subtitle, price, style, ...r
                     </View>
                 </View>
                 <Text style={styles.subtitle}>
-                    {subtitle}
+                    {description}
                 </Text>
             </View>
             <View>

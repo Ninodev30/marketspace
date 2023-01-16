@@ -1,12 +1,12 @@
 import { Image, ScrollView, Text, View } from "react-native"
 import { WhatsappLogo } from "phosphor-react-native";
+import formattNumberToPrice from "@functions/formattNumberToPrice";
 import BackIcon from "@components/BackIcon";
 import AdInfo from "@components/AdInfo";
 import Footer from "@components/Footer";
-import styles from "./styles";
 import Button from "@components/Button";
 import theme from "@theme/index";
-import formattNumberToPrice from "@functions/formattNumberToPrice";
+import styles from "./styles";
 
 const AdDetails: React.FC = () => {
     const adPhoto: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlVh6Nwt0h_u8O-PydwbJNfAy868gDtcycKw&usqp=CAU';
@@ -39,7 +39,7 @@ const AdDetails: React.FC = () => {
                         }
                     }}
                     title='Bicicleta'
-                    subtitle='Cras congue cursus in tortor sagittis placerat nunc, tellus arcu. Vitae ante leo eget maecenas urna mattis cursus. Mauris metus amet nibh mauris mauris accumsan, euismod. Aenean leo nunc, purus iaculis in aliquam.'
+                    description='Cras congue cursus in tortor sagittis placerat nunc, tellus arcu. Vitae ante leo eget maecenas urna mattis cursus. Mauris metus amet nibh mauris mauris accumsan, euismod. Aenean leo nunc, purus iaculis in aliquam.'
                     price={price}
                 />
             </ScrollView>

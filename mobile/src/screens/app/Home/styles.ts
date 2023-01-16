@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 import theme from "@theme/index";
 
 const { COLORS, FONTS, SCALE, PADDING } = theme;
-const iconSize: number = SCALE.AVERAGE(40);
 
 export default StyleSheet.create({
     container: {

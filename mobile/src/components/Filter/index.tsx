@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Text, View, Pressable, Switch } from "react-native"
 import { X, Check } from "phosphor-react-native";
-import AdDataTypeProps from "src/@types/ad";
+import AdTradeTypeProps from "src/@types/adTrade";
 import Button from "@components/Button";
 import theme from "@theme/index";
 import styles from "./styles";
@@ -10,7 +10,7 @@ import ConditionButton from "@components/ConditionButton";
 type PaymentMethodsTypes = 'ticket' | 'pix' | 'money' | 'creditCard' | 'bankDeposit';
 
 const Filter: React.FC = () => {
-    const [filterOptions, setFilterOptions] = useState<AdDataTypeProps>({
+    const [filterOptions, setFilterOptions] = useState<AdTradeTypeProps>({
         used: false,
         exchange: false,
         payment: {

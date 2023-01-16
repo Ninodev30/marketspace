@@ -1,11 +1,11 @@
 import { Text, TextProps, View } from "react-native";
 import { Barcode, QrCode, Money, CreditCard, Bank } from 'phosphor-react-native';
-import { PaymentDataTypeProps } from "src/@types/ad";
+import AdTradePaymentTypeProps from "src/@types/adTradePayment";
 import theme from "@theme/index";
 import styles from "./styles";
 
 type Props = TextProps & {
-    data: PaymentDataTypeProps;
+    data: AdTradePaymentTypeProps;
 };
 
 const PaymentMethods: React.FC<Props> = ({ data: { ticket, pix, money, creditCard, bankDeposit }, ...rest }) => {
