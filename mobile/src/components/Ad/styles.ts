@@ -6,19 +6,18 @@ const userPhotoSize: number = SCALE.HEIGHT(3);
 
 export default StyleSheet.create({
     container: {
-        width: SCALE.WIDTH(40),
+        width: SCALE.WIDTH(41),
         height: SCALE.HEIGHT(18),
     },
     topBox: {
-        flexDirection: 'row',
         width: '100%',
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         position: 'absolute',
         padding: 2
     },
     photo: {
-        // alignSelf: 'stretch',
         flex: 1,
         borderRadius: 6
     },
@@ -57,7 +56,4 @@ export default StyleSheet.create({
         paddingVertical: 3,
         borderRadius: 10
     },
-    usedBox: {
-
-    }
 });

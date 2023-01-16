@@ -6,7 +6,7 @@ const userPhotoSize: number = SCALE.AVERAGE(8);
 
 export default StyleSheet.create({
     container: {
-        paddingTop: SCALE.HEIGHT(5),
+        paddingTop: SCALE.HEIGHT(6),
         paddingBottom: SCALE.HEIGHT(1.2),
         flexDirection: 'row',
         alignSelf: 'stretch',

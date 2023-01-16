@@ -33,9 +33,6 @@ export default StyleSheet.create({
         right: SCALE.WIDTH(3),
         top: SCALE.HEIGHT(2)
     },
-    list: {
-        alignSelf: 'stretch',
-    },
     filterBox: {
         flex: 1,
     }

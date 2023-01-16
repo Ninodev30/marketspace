@@ -36,20 +36,20 @@ export default StyleSheet.create({
         borderRadius: SCALE.AVERAGE(1),
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between'
-    },
-    adListHeaderFilterContentSelected: {
+        justifyContent: 'space-between',
         borderWidth: 1,
         borderColor: COLORS.BASE.GRAY_400
+    },
+    adListHeaderFilterContentSelected: {
+        borderColor: COLORS.BASE.GRAY_200
     },
     adListHeaderFilterBox: {
         borderRadius: SCALE.AVERAGE(1.2),
         gap: SCALE.HEIGHT(2),
         padding: SCALE.AVERAGE(2),
         backgroundColor: COLORS.BASE.GRAY_700,
-        zIndex: 1
     },
     adListHeaderFilterTitleSelected: {
         fontFamily: FONTS.FAMILY.BOLD,
-    },
+    }
 });

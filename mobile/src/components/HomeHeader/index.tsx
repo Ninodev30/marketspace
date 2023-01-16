@@ -1,16 +1,19 @@
 import { Image, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Plus } from 'phosphor-react-native';
-import styles from './styles';
+import { AppNavigatorRoutesProps } from 'src/routes/App.routes';
 import Button from '@components/Button';
 import theme from '@theme/index';
+import styles from './styles';
 
 type Props = {
     userName: string;
     userPhoto: string;
-    adFunctionButton: () => void;
 }
 
-const HomeHeader: React.FC<Props> = ({ userName, userPhoto, adFunctionButton }) => {
+const HomeHeader: React.FC<Props> = ({ userName, userPhoto }) => {
+    const { navigate } = useNavigation<AppNavigatorRoutesProps>();
+
     return (
         <View style={styles.container}>
             <View style={styles.content}>
@@ -32,7 +35,7 @@ const HomeHeader: React.FC<Props> = ({ userName, userPhoto, adFunctionButton }) 
                 type='LIGHT'
                 bgColor={theme.COLORS.BASE.GRAY_100}
                 style={{ width: theme.SCALE.WIDTH(35) }}
-                onPress={adFunctionButton}
+                onPress={() => navigate('createAd')}
             >
                 <Plus
                     size={16}

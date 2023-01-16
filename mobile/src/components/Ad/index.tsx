@@ -12,8 +12,8 @@ type Props = TouchableOpacityProps & {
 }
 
 const Ad: React.FC<Props> = ({ title, price, used, photo, userPhoto, style, ...rest }) => {
-    const { COLORS } = theme;
     const priceFormatted: string = formattNumberToPrice(price);
+    const { COLORS } = theme;
 
     return (
         <TouchableOpacity style={[styles.container, style]} {...rest}>
