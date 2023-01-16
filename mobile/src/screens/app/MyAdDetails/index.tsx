@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { Image, ScrollView, View } from "react-native"
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
+import { useNavigation } from "@react-navigation/native";
 import { PencilSimpleLine, Power, TrashSimple } from "phosphor-react-native";
+import { AppNavigatorRoutesProps } from "src/routes/App.routes";
 import BackIcon from "@components/BackIcon";
 import AdInfo from "@components/AdInfo";
 import Button from "@components/Button";
-import styles from "./styles";
 import theme from "@theme/index";
+import styles from "./styles";
 
 const MyAdDetails: React.FC = () => {
     const [isAdActivated, setIsAdActivated] = useState<boolean>(true);
+    const { navigate } = useNavigation<AppNavigatorRoutesProps>();
 
     const adPhoto: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlVh6Nwt0h_u8O-PydwbJNfAy868gDtcycKw&usqp=CAU';
     const price: number = 120;
@@ -18,17 +21,24 @@ const MyAdDetails: React.FC = () => {
         <ScrollView style={styles.container}>
             <View style={styles.header}>
                 <BackIcon />
-                <PencilSimpleLine
-                    size={theme.SCALE.AVERAGE(4.3)}
-                    color={theme.COLORS.BASE.GRAY_100}
-                />
+                <TouchableOpacity onPress={() => navigate('editAd')}>
+                    <PencilSimpleLine
+                        size={theme.SCALE.AVERAGE(4.3)}
+                        color={theme.COLORS.BASE.GRAY_100}
+                    />
+                </TouchableOpacity>
             </View>
-            <View style={!isAdActivated && styles.opacityAdPhoto}>
+            <View style={!isAdActivated && styles.opacityAdPhotoBox}>
                 <Image
                     source={{ uri: adPhoto }}
                     resizeMode='cover'
-                    style={styles.adPhoto}
+                    style={[styles.adPhoto, !isAdActivated && styles.opacityAdPhoto]}
                 />
+                {!isAdActivated &&
+                    <Text style={styles.inactivatedText}>
+                        anúncio desativado
+                    </Text>
+                }
             </View>
             <View style={styles.content}>
                 <AdInfo

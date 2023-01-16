@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import theme from "@theme/index";
 
-const { COLORS, SCALE, PADDING } = theme;
+const { COLORS, FONTS, SCALE, PADDING } = theme;
 
 export default StyleSheet.create({
     container: {
@@ -23,8 +23,19 @@ export default StyleSheet.create({
         height: SCALE.HEIGHT(37),
     },
     opacityAdPhoto: {
-        opacity: 0.1,
+        opacity: 0.4
+    },
+    opacityAdPhotoBox: {
+        justifyContent: 'center',
         backgroundColor: theme.COLORS.BASE.GRAY_100
+    },
+    inactivatedText: {
+        alignSelf: 'center',
+        position: 'absolute',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.FAMILY.BOLD,
+        fontSize: FONTS.SIZES.SM,
+        color: COLORS.BASE.GRAY_700
     },
     footer: {
         paddingHorizontal: PADDING.SM,
