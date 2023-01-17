@@ -5,7 +5,7 @@ type AdTypeProps = {
     title: string;
     description: string;
     price: number;
-    adPhoto?: string;
+    adPhotos?: string[];
     user?: {
         name: string;
         photo: string;

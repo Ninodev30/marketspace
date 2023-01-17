@@ -1,17 +1,17 @@
-import { StatusBar, View } from "react-native";
+import { StatusBar } from "react-native";
 import Routes from "./src/routes";
-import theme from "@theme/index";
+import AuthContextProvider from "@context/AuthContext";
 
 const App: React.FC = () => {
   return (
-    <View style={{ flex: 1, backgroundColor: theme.COLORS.BASE.GRAY_600 }}>
+    <AuthContextProvider>
       <StatusBar
         translucent
         barStyle="dark-content"
         backgroundColor='transparent'
       />
       <Routes />
-    </View>
+    </AuthContextProvider>
   )
 }
 

@@ -21,7 +21,7 @@
         "./src/theme/*"
       ],
       "@context/*": [
-        "./src/context/*"
+        "./src/contexts/*"
       ],
       "@functions/*": [
         "./src/functions/*"
