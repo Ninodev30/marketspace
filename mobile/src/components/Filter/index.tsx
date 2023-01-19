@@ -6,10 +6,11 @@ import Button from "@components/Button";
 import theme from "@theme/index";
 import styles from "./styles";
 import ConditionButton from "@components/ConditionButton";
-
-type PaymentMethodsTypes = 'ticket' | 'pix' | 'money' | 'creditCard' | 'bankDeposit';
+import useAuth from "@hooks/useAuth";
 
 const Filter: React.FC = () => {
+    const { methods: { handleTrade } } = useAuth();
+
     const [filterOptions, setFilterOptions] = useState<AdTradeTypeProps>({
         used: false,
         exchange: false,
@@ -21,24 +22,6 @@ const Filter: React.FC = () => {
             bankDeposit: false
         }
     });
-
-    const handleFilter = {
-        condition: (select: boolean) => setFilterOptions(prevState => ({
-            ...prevState,
-            used: select
-        })),
-        exchange: () => setFilterOptions(prevState => ({
-            ...prevState,
-            exchange: !prevState.exchange
-        })),
-        payment: (paymentMethod: PaymentMethodsTypes) => setFilterOptions(prevState => ({
-            ...prevState,
-            payment: {
-                ...prevState.payment,
-                [paymentMethod]: !prevState.payment[paymentMethod]
-            }
-        }))
-    };
 
     const handleApplyFilter: () => void = () => {
         console.log(filterOptions);
@@ -63,11 +46,11 @@ const Filter: React.FC = () => {
                 <View style={styles.conditionButtonsBox}>
                     <ConditionButton
                         title='NOVO' isSelected={!filterOptions.used}
-                        onPress={() => handleFilter.condition(false)}
+                        onPress={() => handleTrade.condition(false)}
                     />
                     <ConditionButton
                         title='USADO' isSelected={filterOptions.used}
-                        onPress={() => handleFilter.condition(true)}
+                        onPress={() => handleTrade.condition(true)}
                     />
                 </View>
             </View>
@@ -78,7 +61,7 @@ const Filter: React.FC = () => {
                 <Switch
                     thumbColor={theme.COLORS.BASE.GRAY_700}
                     trackColor={{ true: theme.COLORS.PRODUCT.BLUE_LIGHT, false: theme.COLORS.BASE.GRAY_500 }}
-                    onValueChange={handleFilter.exchange}
+                    onValueChange={handleTrade.exchange}
                     value={filterOptions.exchange}
                 />
             </View>
@@ -89,7 +72,7 @@ const Filter: React.FC = () => {
                 <View key='ticket' style={styles.paymentMethodBox}>
                     <Pressable
                         style={[styles.paymentButton, filterOptions.payment.ticket ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
-                        onPress={() => handleFilter.payment('ticket')}
+                        onPress={() => handleTrade.payment('ticket')}
                     >
                         {filterOptions.payment.ticket &&
                             <Check
@@ -105,7 +88,7 @@ const Filter: React.FC = () => {
                 <View key='pix' style={styles.paymentMethodBox}>
                     <Pressable
                         style={[styles.paymentButton, filterOptions.payment.pix ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
-                        onPress={() => handleFilter.payment('pix')}
+                        onPress={() => handleTrade.payment('pix')}
                     >
                         {filterOptions.payment.pix &&
                             <Check
@@ -121,7 +104,7 @@ const Filter: React.FC = () => {
                 <View key='money' style={styles.paymentMethodBox}>
                     <Pressable
                         style={[styles.paymentButton, filterOptions.payment.money ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
-                        onPress={() => handleFilter.payment('money')}
+                        onPress={() => handleTrade.payment('money')}
                     >
                         {filterOptions.payment.money &&
                             <Check
@@ -137,7 +120,7 @@ const Filter: React.FC = () => {
                 <View key='creditCard' style={styles.paymentMethodBox}>
                     <Pressable
                         style={[styles.paymentButton, filterOptions.payment.creditCard ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
-                        onPress={() => handleFilter.payment('creditCard')}
+                        onPress={() => handleTrade.payment('creditCard')}
                     >
                         {filterOptions.payment.creditCard &&
                             <Check
@@ -153,7 +136,7 @@ const Filter: React.FC = () => {
                 <View key='bankDeposit' style={styles.paymentMethodBox}>
                     <Pressable
                         style={[styles.paymentButton, filterOptions.payment.bankDeposit ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
-                        onPress={() => handleFilter.payment('bankDeposit')}
+                        onPress={() => handleTrade.payment('bankDeposit')}
                     >
                         {filterOptions.payment.bankDeposit &&
                             <Check

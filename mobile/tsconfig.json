@@ -20,11 +20,14 @@
       "@theme/*": [
         "./src/theme/*"
       ],
-      "@context/*": [
+      "@contexts/*": [
         "./src/contexts/*"
       ],
       "@functions/*": [
         "./src/functions/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
       ],
       "@utils/*": [
         "./src/utils/*"

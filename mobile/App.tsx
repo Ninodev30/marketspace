@@ -1,6 +1,6 @@
 import { StatusBar } from "react-native";
 import Routes from "./src/routes";
-import AuthContextProvider from "@context/AuthContext";
+import AuthContextProvider from "@contexts/AuthContext";
 
 const App: React.FC = () => {
   return (
