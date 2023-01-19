@@ -5,8 +5,12 @@ import PaymentMethodsTypes from 'src/@types/paymentMethods';
 
 export type AuthContextDataProps = {
     user: any;
-    adData: AdTypeProps;
+    filter: {
+        isShowFilter: boolean;
+        setIsShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
+    };
     filterOptions: AdTradeTypeProps;
+    adData: AdTypeProps;
     methods: {
         handleTrade: {
             condition: (select: boolean) => void;
@@ -31,6 +35,7 @@ export const AuthContext = createContext<AuthContextDataProps>({} as AuthContext
 
 const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) => {
     const [user, setUser] = useState('test');
+    const [isShowFilter, setIsShowFilter] = useState<boolean>(false);
     const [filterOptions, setFilterOptions] = useState<AdTradeTypeProps>({
         used: false,
         exchange: false,
@@ -54,15 +59,15 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) =
                 bankDeposit: false
             }
         },
-        title: 't',
-        description: 't',
+        title: '',
+        description: '',
         price: 10,
-        adPhotos: ['t', 't'],
+        adPhotos: [''],
         user: {
-            name: 't',
-            photo: 't'
+            name: '',
+            photo: ''
         }
-    } as AdTypeProps);
+    });
 
     const methods = {
         handleTrade: {
@@ -116,6 +121,10 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) =
         <AuthContext.Provider
             value={{
                 user,
+                filter: {
+                    isShowFilter,
+                    setIsShowFilter
+                },
                 adData,
                 filterOptions,
                 methods

@@ -1,30 +1,19 @@
-import { useState } from "react";
-import { Text, View, Pressable, Switch } from "react-native"
-import { X, Check } from "phosphor-react-native";
-import AdTradeTypeProps from "src/@types/adTrade";
+import { Text, View, Switch } from "react-native"
+import { X } from "phosphor-react-native";
 import Button from "@components/Button";
 import theme from "@theme/index";
 import styles from "./styles";
 import ConditionButton from "@components/ConditionButton";
 import useAuth from "@hooks/useAuth";
+import PaymentBox from "@components/PaymentBox";
+import { TouchableOpacity } from "react-native";
 
 const Filter: React.FC = () => {
-    const { methods: { handleTrade } } = useAuth();
-
-    const [filterOptions, setFilterOptions] = useState<AdTradeTypeProps>({
-        used: false,
-        exchange: false,
-        payment: {
-            ticket: false,
-            pix: false,
-            money: false,
-            creditCard: false,
-            bankDeposit: false
-        }
-    });
+    const { filterOptions, filter: { isShowFilter, setIsShowFilter }, methods: { handleTrade } } = useAuth();
 
     const handleApplyFilter: () => void = () => {
         console.log(filterOptions);
+        setIsShowFilter(false);
     };
 
     return (
@@ -33,11 +22,13 @@ const Filter: React.FC = () => {
                 <Text style={styles.title}>
                     Filtrar anúncios
                 </Text>
-                <X
-                    color={theme.COLORS.BASE.GRAY_400}
-                    size={theme.SCALE.AVERAGE(4.3)}
-                    weight='bold'
-                />
+                <TouchableOpacity onPress={() => setIsShowFilter(false)}>
+                    <X
+                        color={theme.COLORS.BASE.GRAY_400}
+                        size={theme.SCALE.AVERAGE(4.3)}
+                        weight='bold'
+                    />
+                </TouchableOpacity>
             </View>
             <View style={styles.conditionBox}>
                 <Text style={styles.subtitle}>
@@ -65,91 +56,10 @@ const Filter: React.FC = () => {
                     value={filterOptions.exchange}
                 />
             </View>
-            <View style={styles.paymentBox}>
-                <Text style={styles.subtitle}>
-                    Meios de pagamento aceitos
-                </Text>
-                <View key='ticket' style={styles.paymentMethodBox}>
-                    <Pressable
-                        style={[styles.paymentButton, filterOptions.payment.ticket ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
-                        onPress={() => handleTrade.payment('ticket')}
-                    >
-                        {filterOptions.payment.ticket &&
-                            <Check
-                                color={theme.COLORS.BASE.WHITE}
-                                size={16}
-                            />
-                        }
-                    </Pressable>
-                    <Text style={styles.paymentMethodTitle}>
-                        Boleto
-                    </Text>
-                </View>
-                <View key='pix' style={styles.paymentMethodBox}>
-                    <Pressable
-                        style={[styles.paymentButton, filterOptions.payment.pix ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
-                        onPress={() => handleTrade.payment('pix')}
-                    >
-                        {filterOptions.payment.pix &&
-                            <Check
-                                color={theme.COLORS.BASE.WHITE}
-                                size={16}
-                            />
-                        }
-                    </Pressable>
-                    <Text style={styles.paymentMethodTitle}>
-                        Pix
-                    </Text>
-                </View>
-                <View key='money' style={styles.paymentMethodBox}>
-                    <Pressable
-                        style={[styles.paymentButton, filterOptions.payment.money ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
-                        onPress={() => handleTrade.payment('money')}
-                    >
-                        {filterOptions.payment.money &&
-                            <Check
-                                color={theme.COLORS.BASE.WHITE}
-                                size={16}
-                            />
-                        }
-                    </Pressable>
-                    <Text style={styles.paymentMethodTitle}>
-                        Dinheiro
-                    </Text>
-                </View>
-                <View key='creditCard' style={styles.paymentMethodBox}>
-                    <Pressable
-                        style={[styles.paymentButton, filterOptions.payment.creditCard ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
-                        onPress={() => handleTrade.payment('creditCard')}
-                    >
-                        {filterOptions.payment.creditCard &&
-                            <Check
-                                color={theme.COLORS.BASE.WHITE}
-                                size={16}
-                            />
-                        }
-                    </Pressable>
-                    <Text style={styles.paymentMethodTitle}>
-                        Cartão de Crédito
-                    </Text>
-                </View>
-                <View key='bankDeposit' style={styles.paymentMethodBox}>
-                    <Pressable
-                        style={[styles.paymentButton, filterOptions.payment.bankDeposit ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
-                        onPress={() => handleTrade.payment('bankDeposit')}
-                    >
-                        {filterOptions.payment.bankDeposit &&
-                            <Check
-                                color={theme.COLORS.BASE.WHITE}
-                                size={16}
-                            />
-                        }
-                    </Pressable>
-                    <Text style={styles.paymentMethodTitle}>
-                        Depósito Bancário
-                    </Text>
-                </View>
-            </View>
+            <PaymentBox
+                data={filterOptions.payment}
+                isToTheFilter={true}
+            />
             <View style={styles.actions}>
                 <Button
                     bgColor={theme.COLORS.BASE.GRAY_500}

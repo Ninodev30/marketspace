@@ -3,6 +3,7 @@ import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { MagnifyingGlass, Sliders } from 'phosphor-react-native';
 import { AppNavigatorRoutesProps } from 'src/routes/App.routes';
+import useAuth from '@hooks/useAuth';
 import Ad from '@components/Ad';
 import HomeHeader from '@components/HomeHeader';
 import Sell from '@components/Sell';
@@ -13,9 +14,9 @@ import styles from './styles';
 
 const Home: React.FC = () => {
     const [findAd, setFindAd] = useState<string>('');
-    const [adList, setAdList] = useState<string[]>(['Tênis vermelho','Tênis vermelho', 'Bicicleta', 'Sofá', 'Bunda', 'Dinheiro', 'Gaveta', 'Tênis vermelho, Bicicleta', 'Sofá', 'Bunda', 'Dinheiro', 'Gaveta', 'Tênis vermelho', 'Bicicleta', 'Sofá', 'Bunda', 'Dinheiro', 'Gaveta'])
-    const [filter, setFilter] = useState<boolean>(false);
+    const [adList, setAdList] = useState<string[]>(['Tênis vermelho', 'Tênis vermelho', 'Bicicleta', 'Sofá', 'Bunda', 'Dinheiro', 'Gaveta', 'Tênis vermelho, Bicicleta', 'Sofá', 'Bunda', 'Dinheiro', 'Gaveta', 'Tênis vermelho', 'Bicicleta', 'Sofá', 'Bunda', 'Dinheiro', 'Gaveta'])
 
+    const { filter: { isShowFilter, setIsShowFilter } } = useAuth();
     const { navigate } = useNavigation<AppNavigatorRoutesProps>();
 
     const iconTheme = {
@@ -24,7 +25,7 @@ const Home: React.FC = () => {
     };
 
     const handleChooseFilters: () => void = () => {
-        setFilter(true);
+        setIsShowFilter(true);
     };
 
     return (
@@ -33,7 +34,7 @@ const Home: React.FC = () => {
                 userName='Enzo'
                 userPhoto='https://github.com/Ninodev30.png'
             />
-            {filter ?
+            {isShowFilter ?
                 <View style={styles.filterBox}>
                     <Filter />
                 </View>
