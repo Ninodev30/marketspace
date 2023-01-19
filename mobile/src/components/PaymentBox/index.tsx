@@ -17,13 +17,13 @@ const PaymentBox: React.FC<Props> = ({ data, isToTheFilter, style, ...rest }) =>
     const functions = isToTheFilter ? context.methods.handleTrade : context.methods.handleAdData.handleTrade;
 
     return (
-        <View style={[style, styles.paymentBox]} {...rest}>
+        <View style={[style, styles.container]} {...rest}>
             <Text style={styles.title}>
                 Meios de pagamento aceitos
             </Text>
-            <View key='ticket' style={styles.paymentMethodBox}>
+            <View key='ticket' style={styles.content}>
                 <Pressable
-                    style={[styles.paymentButton, paymentData.payment.ticket ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
+                    style={[styles.button, paymentData.payment.ticket ? styles.buttonSelected : styles.buttonUnselected]}
                     onPress={() => functions.payment('ticket')}
                 >
                     {paymentData.payment.ticket &&
@@ -33,13 +33,13 @@ const PaymentBox: React.FC<Props> = ({ data, isToTheFilter, style, ...rest }) =>
                         />
                     }
                 </Pressable>
-                <Text style={styles.paymentMethodTitle}>
+                <Text style={styles.subtitle}>
                     Boleto
                 </Text>
             </View>
-            <View key='pix' style={styles.paymentMethodBox}>
+            <View key='pix' style={styles.content}>
                 <Pressable
-                    style={[styles.paymentButton, paymentData.payment.pix ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
+                    style={[styles.button, paymentData.payment.pix ? styles.buttonSelected : styles.buttonUnselected]}
                     onPress={() => functions.payment('pix')}
                 >
                     {paymentData.payment.pix &&
@@ -49,13 +49,13 @@ const PaymentBox: React.FC<Props> = ({ data, isToTheFilter, style, ...rest }) =>
                         />
                     }
                 </Pressable>
-                <Text style={styles.paymentMethodTitle}>
+                <Text style={styles.subtitle}>
                     Pix
                 </Text>
             </View>
-            <View key='money' style={styles.paymentMethodBox}>
+            <View key='money' style={styles.content}>
                 <Pressable
-                    style={[styles.paymentButton, paymentData.payment.money ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
+                    style={[styles.button, paymentData.payment.money ? styles.buttonSelected : styles.buttonUnselected]}
                     onPress={() => functions.payment('money')}
                 >
                     {paymentData.payment.money &&
@@ -65,13 +65,13 @@ const PaymentBox: React.FC<Props> = ({ data, isToTheFilter, style, ...rest }) =>
                         />
                     }
                 </Pressable>
-                <Text style={styles.paymentMethodTitle}>
+                <Text style={styles.subtitle}>
                     Dinheiro
                 </Text>
             </View>
-            <View key='creditCard' style={styles.paymentMethodBox}>
+            <View key='creditCard' style={styles.content}>
                 <Pressable
-                    style={[styles.paymentButton, paymentData.payment.creditCard ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
+                    style={[styles.button, paymentData.payment.creditCard ? styles.buttonSelected : styles.buttonUnselected]}
                     onPress={() => functions.payment('creditCard')}
                 >
                     {paymentData.payment.creditCard &&
@@ -81,13 +81,13 @@ const PaymentBox: React.FC<Props> = ({ data, isToTheFilter, style, ...rest }) =>
                         />
                     }
                 </Pressable>
-                <Text style={styles.paymentMethodTitle}>
+                <Text style={styles.subtitle}>
                     Cartão de Crédito
                 </Text>
             </View>
-            <View key='bankDeposit' style={styles.paymentMethodBox}>
+            <View key='bankDeposit' style={styles.content}>
                 <Pressable
-                    style={[styles.paymentButton, paymentData.payment.bankDeposit ? styles.paymentButtonSelected : styles.paymentButtonUnselected]}
+                    style={[styles.button, paymentData.payment.bankDeposit ? styles.buttonSelected : styles.buttonUnselected]}
                     onPress={() => functions.payment('bankDeposit')}
                 >
                     {paymentData.payment.bankDeposit &&
@@ -97,7 +97,7 @@ const PaymentBox: React.FC<Props> = ({ data, isToTheFilter, style, ...rest }) =>
                         />
                     }
                 </Pressable>
-                <Text style={styles.paymentMethodTitle}>
+                <Text style={styles.subtitle}>
                     Depósito Bancário
                 </Text>
             </View>
