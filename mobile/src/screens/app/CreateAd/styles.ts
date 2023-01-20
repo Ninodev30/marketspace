@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 import theme from "@theme/index";
 
 const { COLORS, FONTS, PADDING, SCALE } = theme;
+const photoSize: number = SCALE.WIDTH(28);
 
 export default StyleSheet.create({
     container: {
@@ -14,26 +15,45 @@ export default StyleSheet.create({
         marginBottom: SCALE.HEIGHT(3),
     },
     title: {
-
+        fontFamily: FONTS.FAMILY.BOLD,
+        fontSize: FONTS.SIZES.MD,
+        color: COLORS.BASE.GRAY_200,
+        marginBottom: SCALE.HEIGHT(1)
     },
     subtitle: {
-
+        fontFamily: FONTS.FAMILY.REGULAR,
+        fontSize: FONTS.SIZES.SM,
+        color: COLORS.BASE.GRAY_300,
     },
     imagesContainer: {
-
+        marginVertical: SCALE.HEIGHT(2)
     },
     imagesBox: {
+        flexDirection: 'row',
+        gap: SCALE.WIDTH(2),
+        height: photoSize,
+        borderRadius: SCALE.AVERAGE(2),
+    },
+    imageBox: {
 
     },
     image: {
-        height: 120,
-        width: 140
+        borderRadius: SCALE.AVERAGE(1),
+        height: photoSize,
+        width: photoSize
     },
     emptyImage: {
-
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: COLORS.BASE.GRAY_500
     },
     closeImageIcon: {
-
+        position: 'absolute',
+        top: SCALE.AVERAGE(1),
+        right: SCALE.AVERAGE(1),
+        padding: SCALE.AVERAGE(0.2),
+        borderRadius: 100,
+        backgroundColor: COLORS.BASE.GRAY_200
     },
     aboutBox: {
 
@@ -42,7 +62,9 @@ export default StyleSheet.create({
 
     },
     input: {
-
+        fontFamily: FONTS.FAMILY.REGULAR,
+        fontSize: FONTS.SIZES.MD,
+        color: COLORS.BASE.GRAY_200
     },
     conditionContainer: {
 
@@ -51,7 +73,9 @@ export default StyleSheet.create({
 
     },
     conditionTitle: {
-
+        fontFamily: FONTS.FAMILY.REGULAR,
+        fontSize: FONTS.SIZES.MD,
+        color: COLORS.BASE.GRAY_200
     },
     conditionButton: {
 
