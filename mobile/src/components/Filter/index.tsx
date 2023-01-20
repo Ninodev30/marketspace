@@ -8,7 +8,7 @@ import theme from "@theme/index";
 import styles from "./styles";
 
 const Filter: React.FC = () => {
-    const { filterOptions, filter: { setIsShowFilter }, methods: { handleTrade } } = useAuth();
+    const { filterOptions, filter: { setIsShowFilter }, methods: { handleFilter } } = useAuth();
 
     const handleApplyFilter: () => void = () => {
         setIsShowFilter(false);
@@ -36,11 +36,11 @@ const Filter: React.FC = () => {
                 <View style={styles.conditionButtonsBox}>
                     <ConditionButton
                         title='NOVO' isSelected={!filterOptions.used}
-                        onPress={() => handleTrade.condition(false)}
+                        onPress={() => handleFilter.condition(false)}
                     />
                     <ConditionButton
                         title='USADO' isSelected={filterOptions.used}
-                        onPress={() => handleTrade.condition(true)}
+                        onPress={() => handleFilter.condition(true)}
                     />
                 </View>
             </View>
@@ -51,7 +51,7 @@ const Filter: React.FC = () => {
                 <Switch
                     thumbColor={theme.COLORS.BASE.GRAY_700}
                     trackColor={{ true: theme.COLORS.PRODUCT.BLUE_LIGHT, false: theme.COLORS.BASE.GRAY_500 }}
-                    onValueChange={handleTrade.switch}
+                    onValueChange={handleFilter.switch}
                     value={filterOptions.switch}
                 />
             </View>

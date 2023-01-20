@@ -39,6 +39,7 @@ const MyAds: React.FC = () => {
                 <Header title='Meus anúncios'>
                     <TouchableOpacity
                         style={styles.addButton}
+                        onPress={() => navigate('createAd')}
                     >
                         <Plus
                             size={iconsTheme.plus.size}

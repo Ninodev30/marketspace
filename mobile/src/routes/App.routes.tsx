@@ -19,7 +19,7 @@ type AppRoutes = {
     editAd: undefined;
     myAdDetails: undefined;
     myAdPreview: undefined;
-}
+};
 
 export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>;
 

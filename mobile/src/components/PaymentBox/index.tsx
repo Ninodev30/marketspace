@@ -14,7 +14,7 @@ const PaymentBox: React.FC<Props> = ({ data, isToTheFilter, style, ...rest }) =>
     const context = useAuth();
 
     const paymentData = isToTheFilter ? context.filterOptions : context.adData.ad;
-    const functions = isToTheFilter ? context.methods.handleTrade : context.methods.handleAdData.handleTrade;
+    const functions = isToTheFilter ? context.methods.handleFilter : context.methods.handleAdData.trade;
 
     return (
         <View style={[style, styles.container]} {...rest}>
