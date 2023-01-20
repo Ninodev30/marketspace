@@ -21,12 +21,12 @@ const PaymentBox: React.FC<Props> = ({ data, isToTheFilter, style, ...rest }) =>
             <Text style={styles.title}>
                 Meios de pagamento aceitos
             </Text>
-            <View key='ticket' style={styles.content}>
+            <View key='bankSlip' style={styles.content}>
                 <Pressable
-                    style={[styles.button, paymentData.payment.ticket ? styles.buttonSelected : styles.buttonUnselected]}
-                    onPress={() => functions.payment('ticket')}
+                    style={[styles.button, paymentData.payment.bankSlip ? styles.buttonSelected : styles.buttonUnselected]}
+                    onPress={() => functions.payment('bankSlip')}
                 >
-                    {paymentData.payment.ticket &&
+                    {paymentData.payment.bankSlip &&
                         <Check
                             color={theme.COLORS.BASE.WHITE}
                             size={16}

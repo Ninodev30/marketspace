@@ -14,7 +14,7 @@ const Header: React.FC<Props> = ({ title, backIcon = false, children, style, ...
         <View style={[styles.container, style]} {...rest}>
             {backIcon && <BackIcon style={styles.backIcon} />}
             <Text style={styles.title}>
-                Meus anúncios
+                {title}
             </Text>
             {children}
         </View>

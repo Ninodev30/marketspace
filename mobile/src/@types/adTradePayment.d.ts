@@ -1,5 +1,5 @@
 type AdTradePaymentTypeProps = {
-    ticket: boolean;
+    bankSlip: boolean;
     pix: boolean;
     money: boolean;
     creditCard: boolean;

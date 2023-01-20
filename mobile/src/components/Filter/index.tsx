@@ -1,19 +1,18 @@
-import { Text, View, Switch } from "react-native"
+import { Text, TouchableOpacity, View, Switch } from "react-native"
 import { X } from "phosphor-react-native";
+import useAuth from "@hooks/useAuth";
 import Button from "@components/Button";
+import ConditionButton from "@components/ConditionButton";
+import PaymentBox from "@components/PaymentBox";
 import theme from "@theme/index";
 import styles from "./styles";
-import ConditionButton from "@components/ConditionButton";
-import useAuth from "@hooks/useAuth";
-import PaymentBox from "@components/PaymentBox";
-import { TouchableOpacity } from "react-native";
 
 const Filter: React.FC = () => {
-    const { filterOptions, filter: { isShowFilter, setIsShowFilter }, methods: { handleTrade } } = useAuth();
+    const { filterOptions, filter: { setIsShowFilter }, methods: { handleTrade } } = useAuth();
 
     const handleApplyFilter: () => void = () => {
-        console.log(filterOptions);
         setIsShowFilter(false);
+        console.log(filterOptions);
     };
 
     return (
@@ -45,15 +44,15 @@ const Filter: React.FC = () => {
                     />
                 </View>
             </View>
-            <View style={styles.exchangeBox}>
+            <View style={styles.switchBox}>
                 <Text style={styles.subtitle}>
                     Aceita troca?
                 </Text>
                 <Switch
                     thumbColor={theme.COLORS.BASE.GRAY_700}
                     trackColor={{ true: theme.COLORS.PRODUCT.BLUE_LIGHT, false: theme.COLORS.BASE.GRAY_500 }}
-                    onValueChange={handleTrade.exchange}
-                    value={filterOptions.exchange}
+                    onValueChange={handleTrade.switch}
+                    value={filterOptions.switch}
                 />
             </View>
             <PaymentBox

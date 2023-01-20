@@ -4,6 +4,7 @@ import theme from "@theme/index";
 export default StyleSheet.create({
     container: {
         flexDirection: 'row',
+        flex: 1,
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',

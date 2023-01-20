@@ -40,7 +40,7 @@ const AppRoutes: React.FC = () => {
                 tabBarStyle: {
                     backgroundColor: COLORS.BASE.GRAY_700,
                     borderTopWidth: 0,
-                    height: Platform.OS === 'android' ? 'auto' : 72,
+                    height: Platform.OS === 'android' ? 'auto' : SCALE.HEIGHT(9),
                     paddingTop: SCALE.HEIGHT(4),
                     paddingBottom: SCALE.HEIGHT(5),
                     alignItems: 'center',
@@ -95,12 +95,18 @@ const AppRoutes: React.FC = () => {
             <Screen
                 name='createAd'
                 component={CreateAd}
-                options={{ tabBarButton: () => null }}
+                options={{
+                    tabBarButton: () => null,
+                    tabBarStyle: { display: 'none' }
+                }}
             />
             <Screen
                 name='editAd'
                 component={EditAd}
-                options={{ tabBarButton: () => null }}
+                options={{
+                    tabBarButton: () => null,
+                    tabBarStyle: { display: 'none' }
+                }}
             />
             <Screen
                 name='adDetails'
@@ -113,12 +119,18 @@ const AppRoutes: React.FC = () => {
             <Screen
                 name='myAdDetails'
                 component={MyAdDetails}
-                options={{ tabBarButton: () => null }}
+                options={{
+                    tabBarButton: () => null,
+                    tabBarStyle: { display: 'none' }
+                }}
             />
             <Screen
                 name='myAdPreview'
                 component={MyAdPreview}
-                options={{ tabBarButton: () => null }}
+                options={{
+                    tabBarButton: () => null,
+                    tabBarStyle: { display: 'none' }
+                }}
             />
         </Navigator>
     );

@@ -8,10 +8,10 @@ type Props = TextProps & {
     data: AdTradePaymentTypeProps;
 };
 
-const PaymentMethods: React.FC<Props> = ({ data: { ticket, pix, money, creditCard, bankDeposit }, ...rest }) => {
+const PaymentMethods: React.FC<Props> = ({ data: { bankSlip, pix, money, creditCard, bankDeposit }, ...rest }) => {
     return (
         <View>
-            {ticket &&
+            {bankSlip &&
                 <View style={styles.content}>
                     <Barcode
                         color={theme.COLORS.BASE.GRAY_100}

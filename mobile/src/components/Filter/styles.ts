@@ -36,13 +36,14 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    exchangeBox: {
+    switchBox: {
         alignItems: 'flex-start',
         marginVertical: SCALE.HEIGHT(1)
     },
     actions: {
         flexDirection: 'row',
+        alignSelf: 'stretch',
         justifyContent: 'space-between',
-        alignSelf: 'stretch'
+        gap: theme.SCALE.WIDTH(3)
     }
 });

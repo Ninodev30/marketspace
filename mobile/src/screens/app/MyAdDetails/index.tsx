@@ -48,9 +48,9 @@ const MyAdDetails: React.FC = () => {
                     }}
                     ad={{
                         used: true,
-                        exchange: true,
+                        switch: true,
                         payment: {
-                            ticket: true,
+                            bankSlip: true,
                             pix: true,
                             money: true,
                             creditCard: true,

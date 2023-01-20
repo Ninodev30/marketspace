@@ -14,13 +14,13 @@ export type AuthContextDataProps = {
     methods: {
         handleTrade: {
             condition: (select: boolean) => void;
-            exchange: () => void;
+            switch: () => void;
             payment: (paymentMethod: PaymentMethodsTypes) => void;
         };
         handleAdData: {
             handleTrade: {
                 condition: (select: boolean) => void;
-                exchange: () => void;
+                switch: () => void;
                 payment: (paymentMethod: PaymentMethodsTypes) => void;
             };
         };
@@ -38,9 +38,9 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) =
     const [isShowFilter, setIsShowFilter] = useState<boolean>(false);
     const [filterOptions, setFilterOptions] = useState<AdTradeTypeProps>({
         used: false,
-        exchange: false,
+        switch: false,
         payment: {
-            ticket: false,
+            bankSlip: false,
             pix: false,
             money: false,
             creditCard: false,
@@ -50,9 +50,9 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) =
     const [adData, setAdData] = useState<AdTypeProps>({
         ad: {
             used: false,
-            exchange: false,
+            switch: false,
             payment: {
-                ticket: false,
+                bankSlip: false,
                 pix: false,
                 money: false,
                 creditCard: false,
@@ -75,9 +75,9 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) =
                 ...prevState,
                 used: select
             })),
-            exchange: () => setFilterOptions(prevState => ({
+            switch: () => setFilterOptions(prevState => ({
                 ...prevState,
-                exchange: !prevState.exchange
+                switch: !prevState.switch
             })),
             payment: (paymentMethod: PaymentMethodsTypes) => setFilterOptions(prevState => ({
                 ...prevState,
@@ -96,11 +96,11 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) =
                         used: select
                     }
                 })),
-                exchange: () => setAdData(prevState => ({
+                switch: () => setAdData(prevState => ({
                     ...prevState,
                     ad: {
                         ...prevState.ad,
-                        exchange: !prevState.ad.exchange
+                        switch: !prevState.ad.switch
                     }
                 })),
                 payment: (paymentMethod: PaymentMethodsTypes) => setAdData(prevState => ({

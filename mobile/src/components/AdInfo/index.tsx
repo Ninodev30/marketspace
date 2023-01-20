@@ -47,7 +47,7 @@ const AdInfo: React.FC<Props> = ({ user, ad, title, description, price, style, .
                         Aceita troca?
                     </Text>
                     <Text style={styles.subtitle}>
-                        {ad.exchange ? 'Sim' : 'Não'}
+                        {ad.switch ? 'Sim' : 'Não'}
                     </Text>
                 </View>
                 <View style={styles.paymentBox}>

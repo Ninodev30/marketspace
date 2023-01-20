@@ -23,7 +23,8 @@ export default StyleSheet.create({
     },
     footerContent: {
         flexDirection: 'row',
-        alignItems: 'baseline'
+        alignItems: 'baseline',
+        marginRight: theme.SCALE.WIDTH(15)
     },
     footerCoin: {
         fontFamily: FONTS.FAMILY.BOLD,

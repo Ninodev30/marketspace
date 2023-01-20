@@ -1,3 +1,3 @@
-type PaymentMethodsTypes = 'ticket' | 'pix' | 'money' | 'creditCard' | 'bankDeposit';
+type PaymentMethodsTypes = 'bankSlip' | 'pix' | 'money' | 'creditCard' | 'bankDeposit';
 
 export default PaymentMethodsTypes;
