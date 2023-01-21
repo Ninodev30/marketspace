@@ -11,8 +11,8 @@ type ContextMethodsTypeProps = {
             payment: (paymentMethod: PaymentMethodsTypes) => void;
         };
         photo: {
-            add: () => void;
-            remove: (photo: number) => void;
+            add: (photo: string, photoNumber: number) => void;
+            remove: (photoNumber: number) => void;
         };
     };
 };

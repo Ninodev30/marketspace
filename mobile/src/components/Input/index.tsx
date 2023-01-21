@@ -1,11 +1,13 @@
 import { Text, TextInput, TextInputProps, View } from "react-native"
+import theme from "@theme/index";
 import styles from "./styles";
 
 type Props = TextInputProps & {
     errorMessage?: string;
+    big?: boolean;
 }
 
-const Input: React.FC<Props> = ({ errorMessage, style, ...rest }) => {
+const Input: React.FC<Props> = ({ errorMessage, big, style, ...rest }) => {
     const isInvalid: boolean = !!errorMessage;
 
     return (
@@ -14,6 +16,7 @@ const Input: React.FC<Props> = ({ errorMessage, style, ...rest }) => {
                 style={[
                     style,
                     styles.input,
+                    { height: big ? theme.SCALE.HEIGHT(15) : theme.SCALE.HEIGHT(6) },
                     !isInvalid && { marginBottom: 10 }
                 ]}
                 {...rest}

@@ -64,7 +64,9 @@ export default StyleSheet.create({
     input: {
         fontFamily: FONTS.FAMILY.REGULAR,
         fontSize: FONTS.SIZES.MD,
-        color: COLORS.BASE.GRAY_200
+        height: SCALE.HEIGHT(10),
+        color: COLORS.BASE.GRAY_200,
+        textAlignVertical: "top"
     },
     conditionContainer: {
 

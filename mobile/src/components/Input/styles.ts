@@ -11,7 +11,6 @@ export default StyleSheet.create({
         alignSelf: 'stretch',
         padding: 10,
         borderRadius: 5,
-        height: SCALE.HEIGHT(6),
         backgroundColor: COLORS.BASE.GRAY_700,
         color: COLORS.BASE.GRAY_400,
         fontFamily: FONTS.FAMILY.REGULAR,
