@@ -7,6 +7,17 @@ const photoSize: number = SCALE.WIDTH(28);
 const conditionButtonSize: number = 20;
 const inputHeight: number = SCALE.HEIGHT(10);
 
+export const iconsTheme = {
+    close: {
+        color: COLORS.BASE.GRAY_700,
+        size: SCALE.AVERAGE(2.1)
+    },
+    plus: {
+        color: COLORS.BASE.GRAY_400,
+        size: SCALE.AVERAGE(4.2)
+    }
+};
+
 export default StyleSheet.create({
     container: {
         flex: 1,
@@ -37,9 +48,6 @@ export default StyleSheet.create({
         height: photoSize,
         borderRadius: SCALE.AVERAGE(2),
     },
-    imageBox: {
-
-    },
     image: {
         borderRadius: SCALE.AVERAGE(1),
         height: photoSize,
@@ -56,7 +64,7 @@ export default StyleSheet.create({
         right: SCALE.AVERAGE(0.5),
         padding: SCALE.AVERAGE(0.4),
         borderRadius: 100,
-        backgroundColor: COLORS.BASE.GRAY_200
+        backgroundColor: COLORS.BASE.GRAY_100
     },
     aboutContainer: {
         marginBottom: SCALE.HEIGHT(3)
