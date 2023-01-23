@@ -80,36 +80,49 @@ const CreateAd: React.FC = () => {
                         </View>
                     </View>
                 </View>
-                <View style={styles.aboutBox}>
+                <View style={styles.aboutContainer}>
                     <Text style={styles.title}>
                         Sobre o produto
                     </Text>
-                    <Input
-                        style={styles.input}
-                        placeholder='Título do anúncio'
-                    />
-                    <Input
-                        style={styles.input}
-                        placeholder='Descrição do anúncio'
-                        big
-                        numberOfLines={6}
-                    />
-                    <View style={styles.conditionContainer}>
-                        <View style={styles.conditionBox}>
-                            <Pressable
-                                style={[styles.conditionButton]}
-                            />
-                            <Text style={styles.conditionTitle}>
-                                Produto novo
-                            </Text>
-                        </View>
-                        <View style={styles.conditionBox}>
-                            <Pressable
-                                style={[styles.conditionButton]}
-                            />
-                            <Text style={styles.conditionTitle}>
-                                Produto usado
-                            </Text>
+                    <View style={styles.aboutBox}>
+                        <Input
+                            style={styles.input}
+                            placeholder='Título do anúncio'
+                            maxLength={40}
+                        />
+                        <Input
+                            style={styles.input}
+                            placeholder='Descrição do anúncio'
+                            big
+                            multiline
+                            numberOfLines={6}
+                            maxLength={400}
+                        />
+                        <View style={styles.conditionContainer}>
+                            <View style={styles.conditionBox}>
+                                <TouchableOpacity
+                                    style={[
+                                        styles.conditionButton,
+                                        !adData.ad.used ? styles.conditionButtonSelected : styles.conditionButtonUnselected
+                                    ]}
+                                    onPress={() => trade.condition(true)}
+                                />
+                                <Text style={styles.conditionTitle}>
+                                    Produto novo
+                                </Text>
+                            </View>
+                            <View style={styles.conditionBox}>
+                                <TouchableOpacity
+                                    style={[
+                                        styles.conditionButton,
+                                        adData.ad.used ? styles.conditionButtonSelected : styles.conditionButtonUnselected
+                                    ]}
+                                    onPress={() => trade.condition(false)}
+                                />
+                                <Text style={styles.conditionTitle}>
+                                    Produto usado
+                                </Text>
+                            </View>
                         </View>
                     </View>
                 </View>
@@ -122,13 +135,13 @@ const CreateAd: React.FC = () => {
                             R$
                         </Text>
                         <Input
-                            style={styles.input}
+                            style={[styles.input, styles.priceInput]}
                             placeholder='Valor do produto'
                         />
                     </View>
                     <View style={styles.switchBox}>
                         <Text style={styles.title}>
-                            Aceita troca
+                            Aceita troca?
                         </Text>
                         <Switch
                             thumbColor={theme.COLORS.BASE.GRAY_700}

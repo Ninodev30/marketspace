@@ -9,8 +9,8 @@ export default StyleSheet.create({
     },
     input: {
         alignSelf: 'stretch',
-        padding: 10,
-        borderRadius: 5,
+        padding: SCALE.AVERAGE(1.8),
+        borderRadius: SCALE.AVERAGE(0.9),
         backgroundColor: COLORS.BASE.GRAY_700,
         color: COLORS.BASE.GRAY_400,
         fontFamily: FONTS.FAMILY.REGULAR,
@@ -20,6 +20,6 @@ export default StyleSheet.create({
         fontFamily: FONTS.FAMILY.REGULAR,
         fontSize: FONTS.SIZES.SM,
         color: COLORS.PRODUCT.RED,
-        marginBottom: 5
+        marginBottom: SCALE.AVERAGE(0.9)
     }
 });

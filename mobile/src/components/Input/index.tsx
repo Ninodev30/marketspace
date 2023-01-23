@@ -17,7 +17,6 @@ const Input: React.FC<Props> = ({ errorMessage, big, style, ...rest }) => {
                     style,
                     styles.input,
                     { height: big ? theme.SCALE.HEIGHT(15) : theme.SCALE.HEIGHT(6) },
-                    !isInvalid && { marginBottom: 10 }
                 ]}
                 {...rest}
             />
