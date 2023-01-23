@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, Switch, Text, TouchableOpacity, View, Image } from "react-native"
+import { ScrollView, Switch, Text, TouchableOpacity, View, Image } from "react-native"
 import { Plus, X } from "phosphor-react-native";
 import useAuth from "@hooks/useAuth";
 import Header from "@components/Header";
@@ -11,6 +11,7 @@ import styles from "./styles";
 
 const CreateAd: React.FC = () => {
     const { adData, methods: { handleAdData: { trade, photo } } } = useAuth();
+    const photoTest: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-sFYCSH51fxxrIJ6xusuCyzrMLSO-4_RRtg&usqp=CAU';
     const closeIconSize: number = 12;
 
     return (
@@ -32,7 +33,7 @@ const CreateAd: React.FC = () => {
                                         source={{ uri: adData.adPhotos![0] }}
                                         style={styles.image}
                                     />
-                                    <TouchableOpacity style={styles.closeImageIcon}>
+                                    <TouchableOpacity style={styles.closeImageIcon} onPress={() => photo.remove(0)}>
                                         <X
                                             color={theme.COLORS.BASE.GRAY_700}
                                             size={closeIconSize}
@@ -62,7 +63,7 @@ const CreateAd: React.FC = () => {
                                         source={{ uri: adData.adPhotos![2] }}
                                         style={styles.image}
                                     />
-                                    <TouchableOpacity style={styles.closeImageIcon}>
+                                    <TouchableOpacity style={styles.closeImageIcon} onPress={() => photo.remove(2)}>
                                         <X
                                             color={theme.COLORS.BASE.GRAY_700}
                                             size={closeIconSize}
@@ -71,7 +72,7 @@ const CreateAd: React.FC = () => {
                                 </View>
                             }
                             {adData.adPhotos?.length !== 3 &&
-                                <TouchableOpacity style={[styles.image, styles.emptyImage]}>
+                                <TouchableOpacity style={[styles.image, styles.emptyImage]} onPress={() => photo.add(photoTest)}>
                                     <Plus
 
                                     />
@@ -152,7 +153,7 @@ const CreateAd: React.FC = () => {
                     </View>
                     <PaymentBox
                         data={adData.ad.payment}
-                        isToTheFilter={true}
+                        isToTheFilter={false}
                     />
                 </View>
             </ScrollView>

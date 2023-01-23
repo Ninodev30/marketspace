@@ -107,23 +107,19 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) =
                 }))
             },
             photo: {
-                add: (photo) => {
-                    setAdData(prevState => ({
-                        ...prevState,
-                        adPhotos: [
-                            ...prevState.adPhotos!,
-                            photo
-                        ]
-                    }))
-                },
-                remove: (photoNumber) => {
-                    setAdData(prevState => ({
-                        ...prevState,
-                        adPhotos: [
-                            ...prevState.adPhotos!.filter((_, index) => index !== photoNumber)
-                        ]
-                    }))
-                }
+                add: (photo) => setAdData(prevState => ({
+                    ...prevState,
+                    adPhotos: [
+                        ...prevState.adPhotos!,
+                        photo
+                    ]
+                })),
+                remove: (photoNumber) => setAdData(prevState => ({
+                    ...prevState,
+                    adPhotos: [
+                        ...prevState.adPhotos!.filter((_, index) => index !== photoNumber)
+                    ]
+                }))
             }
         }
     };
