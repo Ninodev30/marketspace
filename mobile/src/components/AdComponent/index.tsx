@@ -153,7 +153,7 @@ const AdComponent: React.FC<Props> = ({ title }) => {
                     bgColor={theme.COLORS.BASE.GRAY_100}
                     title='Avançar'
                     type='LIGHT'
-                    onPress={() => navigate('myAdPreview')}
+                    onPress={() => navigate('myAdPreview', { ad: adData })}
                 />
             </Footer>
         </View>

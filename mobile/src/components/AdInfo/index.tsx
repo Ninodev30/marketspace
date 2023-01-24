@@ -4,9 +4,11 @@ import AdTypeProps from "src/@types/ad";
 import styles from "./styles";
 import formattNumberToPrice from "@functions/formattNumberToPrice";
 
-type Props = ViewProps & AdTypeProps;
+type Props = ViewProps & {
+    data: AdTypeProps;
+};
 
-const AdInfo: React.FC<Props> = ({ user, ad, title, description, price, style, ...rest }) => {
+const AdInfo: React.FC<Props> = ({ data: { user, ad, title, description, price }, style, ...rest }) => {
     const priceFormatted: string = formattNumberToPrice(price);
 
     return (

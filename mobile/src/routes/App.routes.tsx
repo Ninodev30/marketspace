@@ -9,6 +9,7 @@ import AdDetails from "@screens/app/AdDetails";
 import MyAdDetails from "@screens/app/MyAdDetails";
 import MyAdPreview from "@screens/app/MyAdPreview";
 import theme from "@theme/index";
+import AdTypeProps from "src/@types/ad";
 
 type AppRoutes = {
     home: undefined;
@@ -18,7 +19,9 @@ type AppRoutes = {
     createAd: undefined;
     editAd: undefined;
     myAdDetails: undefined;
-    myAdPreview: undefined;
+    myAdPreview: {
+        ad: AdTypeProps;
+    };
 };
 
 export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>;

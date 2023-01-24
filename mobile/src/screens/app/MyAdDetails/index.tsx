@@ -42,24 +42,26 @@ const MyAdDetails: React.FC = () => {
             </View>
             <View style={styles.content}>
                 <AdInfo
-                    user={{
-                        name: 'Enzo Damascena',
-                        photo: 'https://github.com/Ninodev30.png'
+                    data={{
+                        user: {
+                            name: 'Enzo Damascena',
+                            photo: 'https://github.com/Ninodev30.png'
+                        },
+                        ad: {
+                            used: true,
+                            switch: true,
+                            payment: {
+                                bankSlip: true,
+                                pix: true,
+                                money: true,
+                                creditCard: true,
+                                bankDeposit: true,
+                            }
+                        },
+                        title: 'Bicicleta',
+                        description: 'Cras congue cursus in tortor sagittis placerat nunc, tellus arcu. Vitae ante leo eget maecenas urna mattis cursus. Mauris metus amet nibh mauris mauris accumsan, euismod. Aenean leo nunc, purus iaculis in aliquam.',
+                        price
                     }}
-                    ad={{
-                        used: true,
-                        switch: true,
-                        payment: {
-                            bankSlip: true,
-                            pix: true,
-                            money: true,
-                            creditCard: true,
-                            bankDeposit: true,
-                        }
-                    }}
-                    title='Bicicleta'
-                    description='Cras congue cursus in tortor sagittis placerat nunc, tellus arcu. Vitae ante leo eget maecenas urna mattis cursus. Mauris metus amet nibh mauris mauris accumsan, euismod. Aenean leo nunc, purus iaculis in aliquam.'
-                    price={price}
                 />
                 <View style={styles.footer}>
                     <Button
