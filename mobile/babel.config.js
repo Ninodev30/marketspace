@@ -24,6 +24,8 @@ module.exports = {
           '@theme': './src/theme',
           '@contexts': './src/contexts',
           '@functions': './src/functions',
+          '@features': './src/features',
+          '@store': './src/store',
           '@hooks': './src/hooks',
           '@utils': './src/utils'
         },

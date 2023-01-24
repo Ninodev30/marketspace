@@ -26,6 +26,12 @@
       "@functions/*": [
         "./src/functions/*"
       ],
+      "@features/*": [
+        "./src/features/*"
+      ],
+      "@store/*": [
+        "./src/store/*"
+      ],
       "@hooks/*": [
         "./src/hooks/*"
       ],
