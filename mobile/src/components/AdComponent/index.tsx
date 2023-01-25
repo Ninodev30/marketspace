@@ -1,6 +1,7 @@
 import { ScrollView, Switch, Text, TouchableOpacity, View, Image } from "react-native"
 import { useNavigation } from "@react-navigation/native";
 import { Plus, X } from "phosphor-react-native";
+import { launchImageLibrary } from 'react-native-image-picker';
 import { AppNavigatorRoutesProps } from "src/routes/App.routes";
 import useAuth from "@hooks/useAuth";
 import Header from "@components/Header";
@@ -18,8 +19,23 @@ type Props = {
 const AdComponent: React.FC<Props> = ({ title }) => {
     const { adData, methods: { handleAdData: { trade, photo } } } = useAuth();
     const { navigate, goBack } = useNavigation<AppNavigatorRoutesProps>();
+    const { close, plus } = iconsTheme;
 
     const photoTest: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-sFYCSH51fxxrIJ6xusuCyzrMLSO-4_RRtg&usqp=CAU';
+
+    const handleAddAdPhoto: () => Promise<void> = async () => {
+        try {
+            const photoSelected = await launchImageLibrary({
+                mediaType: 'photo',
+                selectionLimit: 3
+            });
+
+            console.log(photoSelected);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    };
 
     const renderAdPhoto = (index: number) => adData.adPhotos!![index] && (
         <View>
@@ -29,8 +45,8 @@ const AdComponent: React.FC<Props> = ({ title }) => {
             />
             <TouchableOpacity style={styles.closeImageIcon} onPress={() => photo.remove(index)}>
                 <X
-                    color={iconsTheme.close.color}
-                    size={iconsTheme.close.size}
+                    color={close.color}
+                    size={close.size}
                 />
             </TouchableOpacity>
         </View>
@@ -56,10 +72,10 @@ const AdComponent: React.FC<Props> = ({ title }) => {
                             {renderAdPhoto(1)}
                             {renderAdPhoto(2)}
                             {adData.adPhotos?.length !== 3 &&
-                                <TouchableOpacity style={[styles.image, styles.emptyImage]} onPress={() => photo.add(photoTest)}>
+                                <TouchableOpacity style={[styles.image, styles.emptyImage]} onPress={handleAddAdPhoto}>
                                     <Plus
-                                        color={iconsTheme.plus.color}
-                                        size={iconsTheme.plus.size}
+                                        color={plus.color}
+                                        size={plus.size}
                                     />
                                 </TouchableOpacity>
                             }

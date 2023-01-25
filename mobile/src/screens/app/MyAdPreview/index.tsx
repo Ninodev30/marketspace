@@ -7,14 +7,16 @@ import styles from "./styles";
 import AdInfo from "@components/AdInfo";
 import { useRoute } from "@react-navigation/native";
 import AdTypeProps from "src/@types/ad";
+import useAuth from "@hooks/useAuth";
 
 type RouteParams = {
     ad: AdTypeProps;
 }
 
 const MyAdPreview: React.FC = () => {
-    const { params } = useRoute();
-    const { ad } = params as RouteParams;
+    // const { params } = useRoute();
+    // const { ad } = params as RouteParams;
+    const ad = useAuth().adData
 
     const test = useAppSelector(state => state.counter.value);
     const dispatch = useDispatch();
@@ -42,7 +44,9 @@ const MyAdPreview: React.FC = () => {
             <ScrollView style={styles.content}>
                 <View>
                     <Image
-                        source={{ uri: adPhoto }}
+                        source={{ uri: ad.adPhotos!![0] }}
+                        style={styles.image}
+                        resizeMode='cover'
                     />
                 </View>
                 <AdInfo
