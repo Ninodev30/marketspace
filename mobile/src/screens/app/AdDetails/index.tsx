@@ -19,8 +19,8 @@ const AdDetails: React.FC = () => {
                 <BackIcon style={styles.header} />
                 <Image
                     source={{ uri: adPhoto }}
-                    resizeMode='cover'
                     style={styles.adPhoto}
+                    resizeMode='cover'
                 />
                 <AdInfo
                     data={{

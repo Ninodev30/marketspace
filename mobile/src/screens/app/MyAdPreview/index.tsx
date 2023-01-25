@@ -1,22 +1,24 @@
 import { ScrollView, Text, View, Image } from "react-native"
 import { useDispatch } from "react-redux";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { increment, incrementAmount } from "@features/counter";
+import { AppNavigatorRoutesProps } from "src/routes/App.routes";
 import useAppSelector from "@hooks/useAppSelector";
-import Footer from "@components/Footer";
-import styles from "./styles";
-import AdInfo from "@components/AdInfo";
-import { useRoute } from "@react-navigation/native";
 import AdTypeProps from "src/@types/ad";
-import useAuth from "@hooks/useAuth";
+import AdInfo from "@components/AdInfo";
+import Footer from "@components/Footer";
+import Button from "@components/Button";
+import theme from "@theme/index";
+import styles from "./styles";
 
 type RouteParams = {
     ad: AdTypeProps;
 }
 
 const MyAdPreview: React.FC = () => {
-    // const { params } = useRoute();
-    // const { ad } = params as RouteParams;
-    const ad = useAuth().adData
+    const { params } = useRoute();
+    const { ad } = params as RouteParams;
+    const { navigate, goBack } = useNavigation<AppNavigatorRoutesProps>();
 
     const test = useAppSelector(state => state.counter.value);
     const dispatch = useDispatch();
@@ -33,18 +35,18 @@ const MyAdPreview: React.FC = () => {
 
     return (
         <View style={styles.container}>
-            <View>
-                <Text>
+            <View style={styles.header}>
+                <Text style={styles.title}>
                     Pré visualização do anúncio
                 </Text>
-                <Text>
+                <Text style={styles.subtitle}>
                     É assim que seu produto vai aparecer!
                 </Text>
             </View>
             <ScrollView style={styles.content}>
                 <View>
                     <Image
-                        source={{ uri: ad.adPhotos!![0] }}
+                        source={{ uri: adPhoto }}
                         style={styles.image}
                         resizeMode='cover'
                     />
@@ -53,8 +55,23 @@ const MyAdPreview: React.FC = () => {
                     data={ad}
                 />
             </ScrollView>
-            <Footer>
+            <Footer style={styles.footer}>
+                <Button
+                    bgColor={theme.COLORS.BASE.GRAY_500}
+                    title='Voltar e editar'
+                    type='DARK'
+                    onPress={() => navigate('createAd')}
+                >
 
+                </Button>
+                <Button
+                    bgColor={theme.COLORS.PRODUCT.BLUE_LIGHT}
+                    title='Publicar'
+                    type='LIGHT'
+                    onPress={() => navigate('myAds')}
+                >
+
+                </Button>
             </Footer>
         </View>
     );
