@@ -2,6 +2,7 @@ import { ScrollView, Text, View, Image } from "react-native"
 import { useDispatch } from "react-redux";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { increment, incrementAmount } from "@features/counter";
+import { Tag, ArrowLeft } from "phosphor-react-native";
 import { AppNavigatorRoutesProps } from "src/routes/App.routes";
 import useAppSelector from "@hooks/useAppSelector";
 import AdTypeProps from "src/@types/ad";
@@ -9,15 +10,16 @@ import AdInfo from "@components/AdInfo";
 import Footer from "@components/Footer";
 import Button from "@components/Button";
 import theme from "@theme/index";
-import styles from "./styles";
+import styles, { iconsTheme } from "./styles";
 
 type RouteParams = {
     ad: AdTypeProps;
-}
+    state: 'CREATE' | 'EDIT';
+};
 
 const MyAdPreview: React.FC = () => {
     const { params } = useRoute();
-    const { ad } = params as RouteParams;
+    const { ad, state } = params as RouteParams;
     const { navigate, goBack } = useNavigation<AppNavigatorRoutesProps>();
 
     const test = useAppSelector(state => state.counter.value);
@@ -60,9 +62,12 @@ const MyAdPreview: React.FC = () => {
                     bgColor={theme.COLORS.BASE.GRAY_500}
                     title='Voltar e editar'
                     type='DARK'
-                    onPress={() => navigate('createAd')}
+                    onPress={() => state === "CREATE" ? navigate('createAd') : navigate('editAd')}
                 >
-
+                    <ArrowLeft
+                        size={iconsTheme.size}
+                        color={iconsTheme.color.arrow}
+                    />
                 </Button>
                 <Button
                     bgColor={theme.COLORS.PRODUCT.BLUE_LIGHT}
@@ -70,7 +75,10 @@ const MyAdPreview: React.FC = () => {
                     type='LIGHT'
                     onPress={() => navigate('myAds')}
                 >
-
+                    <Tag
+                        size={iconsTheme.size}
+                        color={iconsTheme.color.tag}
+                    />
                 </Button>
             </Footer>
         </View>

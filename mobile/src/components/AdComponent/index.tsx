@@ -14,6 +14,7 @@ import styles, { iconsTheme } from "./styles";
 
 type Props = {
     title: string;
+    state: 'CREATE' | 'EDIT';
 };
 
 type AddAdPhotoTypeProps = {
@@ -21,7 +22,7 @@ type AddAdPhotoTypeProps = {
     analyze: (images: Asset[]) => Promise<void>;
 }
 
-const AdComponent: React.FC<Props> = ({ title }) => {
+const AdComponent: React.FC<Props> = ({ title, state }) => {
     const { adData, methods: { handleAdData: { trade, photo } } } = useAuth();
     const { navigate, goBack } = useNavigation<AppNavigatorRoutesProps>();
     const { close, plus } = iconsTheme;
@@ -185,7 +186,10 @@ const AdComponent: React.FC<Props> = ({ title }) => {
                     bgColor={theme.COLORS.BASE.GRAY_100}
                     title='Avançar'
                     type='LIGHT'
-                    onPress={() => navigate('myAdPreview', { ad: adData })}
+                    onPress={() => navigate('myAdPreview', {
+                        ad: adData,
+                        state
+                    })}
                 />
             </Footer>
         </View>

@@ -3,14 +3,22 @@ import { StyleSheet } from "react-native";
 
 const { COLORS, FONTS, PADDING, SCALE } = theme;
 
+export const iconsTheme = {
+    size: SCALE.AVERAGE(3.2),
+    color: {
+        arrow: COLORS.BASE.GRAY_200,
+        tag: COLORS.BASE.GRAY_600
+    }
+};
+
 export default StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: COLORS.BASE.GRAY_600
     },
     content: {
-        // flex: 1,
-        height: 400
+        paddingBottom: SCALE.HEIGHT(3),
+        marginBottom: SCALE.HEIGHT(3),
     },
     header: {
         alignItems: 'center',
@@ -21,7 +29,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.PRODUCT.BLUE_LIGHT
     },
     image: {
-        height: 280,
+        height: SCALE.HEIGHT(37.2),
     },
     title: {
         fontFamily: FONTS.FAMILY.BOLD,

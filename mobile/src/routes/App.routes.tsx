@@ -21,6 +21,7 @@ type AppRoutes = {
     myAdDetails: undefined;
     myAdPreview: {
         ad: AdTypeProps;
+        state: 'CREATE' | 'EDIT';
     };
 };
 

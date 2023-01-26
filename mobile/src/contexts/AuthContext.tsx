@@ -38,26 +38,26 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) =
     const [adData, setAdData] = useState<AdTypeProps>({
         ad: {
             used: false,
-            switch: false,
+            switch: true,
             payment: {
                 bankSlip: false,
-                pix: false,
-                money: false,
+                pix: true,
+                money: true,
                 creditCard: false,
-                bankDeposit: false
+                bankDeposit: true
             }
         },
-        title: '',
-        description: '',
-        price: 10,
+        title: 'Bicicleta',
+        description: 'Cras congue cursus in tortor sagittis placerat nunc, tellus arcu. Vitae ante leo eget maecenas urna mattis cursus. Mauris metus amet nibh mauris mauris accumsan, euismod. Aenean leo nunc, purus iaculis in aliquam.',
+        price: 120,
         adPhotos: [
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-sFYCSH51fxxrIJ6xusuCyzrMLSO-4_RRtg&usqp=CAU'
             , 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-sFYCSH51fxxrIJ6xusuCyzrMLSO-4_RRtg&usqp=CAU'
             , 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-sFYCSH51fxxrIJ6xusuCyzrMLSO-4_RRtg&usqp=CAU'
         ],
         user: {
-            name: '',
-            photo: ''
+            name: 'Enzo Damascena',
+            photo: 'https://github.com/Ninodev30.png'
         }
     });
 

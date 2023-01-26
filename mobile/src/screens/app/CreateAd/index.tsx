@@ -1,4 +1,3 @@
-// import { } from "react-native"
 import useAuth from "@hooks/useAuth";
 import AdComponent from "@components/AdComponent";
 
@@ -8,6 +7,7 @@ const CreateAd: React.FC = () => {
     return (
         <AdComponent
             title='Criar anúncio'
+            state='CREATE'
         />
     );
 };
