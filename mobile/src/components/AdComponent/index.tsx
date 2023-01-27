@@ -46,7 +46,10 @@ const AdComponent: React.FC<Props> = ({ title, state }) => {
         },
         analyze: async (images) => {
             try {
-                console.log(images);
+                const limitSizeInMB: number = 5 * 1024 * 1024;
+                const imagesSizeUnderLimit: Asset[] = images.filter(item => item.fileSize! < limitSizeInMB);
+
+                console.log(imagesSizeUnderLimit)
             }
             catch (error) {
                 console.log(error);

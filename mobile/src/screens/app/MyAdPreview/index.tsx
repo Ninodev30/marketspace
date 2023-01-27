@@ -20,7 +20,7 @@ type RouteParams = {
 const MyAdPreview: React.FC = () => {
     const { params } = useRoute();
     const { ad, state } = params as RouteParams;
-    const { navigate, goBack } = useNavigation<AppNavigatorRoutesProps>();
+    const { navigate } = useNavigation<AppNavigatorRoutesProps>();
 
     const test = useAppSelector(state => state.counter.value);
     const dispatch = useDispatch();
