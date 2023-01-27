@@ -4,11 +4,11 @@ import theme from "@theme/index";
 export default StyleSheet.create({
     container: {
         flexDirection: 'row',
-        flex: 1,
+        // flex: 1,
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
-        height: theme.SCALE.HEIGHT(5),
+        height: theme.SCALE.HEIGHT(5.5),
         paddingHorizontal: theme.SCALE.WIDTH(4),
         borderRadius: 5,
     },

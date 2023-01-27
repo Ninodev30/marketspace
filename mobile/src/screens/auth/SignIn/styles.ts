@@ -14,13 +14,13 @@ export default StyleSheet.create({
         alignSelf: 'stretch',
         alignItems: 'center',
         padding: PADDING.LG,
-        borderRadius: 15,
+        borderRadius: SCALE.AVERAGE(5),
         backgroundColor: COLORS.BASE.GRAY_600
     },
     headerBox: {
         alignItems: 'center',
         marginTop: SCALE.HEIGHT(6),
-        marginBottom: SCALE.HEIGHT(13),
+        marginBottom: SCALE.HEIGHT(15),
     },
     highLightBox: {
         alignItems: 'center'
@@ -28,9 +28,13 @@ export default StyleSheet.create({
     inputBox: {
         alignSelf: 'stretch',
     },
+    input: {
+        marginBottom: SCALE.HEIGHT(2)
+    },
     newAccountBox: {
         alignSelf: 'stretch',
         alignItems: 'center',
+        flex: 1,
         marginTop: SCALE.HEIGHT(7),
         marginHorizontal: PADDING.LG,
     },
@@ -50,6 +54,6 @@ export default StyleSheet.create({
         fontSize: FONTS.SIZES.SM,
         color: COLORS.BASE.GRAY_200,
         textAlign: 'center',
-        marginBottom: 15,
+        marginBottom: SCALE.HEIGHT(2),
     }
 });

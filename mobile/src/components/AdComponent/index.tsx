@@ -1,4 +1,4 @@
-import { ScrollView, Switch, Text, TouchableOpacity, View, Image } from "react-native"
+import { ScrollView, Switch, Text, TouchableOpacity, View, Image, Alert } from "react-native"
 import { useNavigation } from "@react-navigation/native";
 import { Plus, X } from "phosphor-react-native";
 import { launchCamera, launchImageLibrary, ImagePickerResponse, Asset } from 'react-native-image-picker';
@@ -26,16 +26,7 @@ const AdComponent: React.FC<Props> = ({ title, state }) => {
     const { adData, methods: { handleAdData: { trade, photo } } } = useAuth();
     const { navigate, goBack } = useNavigation<AppNavigatorRoutesProps>();
     const { close, plus } = iconsTheme;
-
-    const handleAddAdPhoto: () => Promise<void> = async () => {
-        try {
-
-        }
-        catch (error) {
-            console.log(error);
-        }
-    };
-
+    
     const AddAdPhoto: AddAdPhotoTypeProps = {
         pick: async (type: 'TAKE' | 'PICK') => {
             try {
@@ -55,7 +46,7 @@ const AdComponent: React.FC<Props> = ({ title, state }) => {
                 AddAdPhoto.analyze(photoSelected.assets!);
             }
             catch (error) {
-                console.log(error);
+                throw error;
             }
         },
         analyze: async (images) => {
@@ -63,11 +54,36 @@ const AdComponent: React.FC<Props> = ({ title, state }) => {
                 const limitSizeInMB: number = 5 * 1024 * 1024;
                 const imagesSizeUnderLimit: Asset[] = images.filter(item => item.fileSize! < limitSizeInMB);
 
-                console.log(imagesSizeUnderLimit)
+                console.log(imagesSizeUnderLimit);
             }
             catch (error) {
-                console.log(error);
+                throw error;
             }
+        }
+    };
+
+    const handleAddAdPhoto: () => Promise<void> = async () => {
+        try {
+            const title: string = state === "CREATE" ? 'Criar anúncio' : 'Editar anúncio';
+            const subtitle: string = 'Adicionar foto';
+
+            Alert.alert(title, subtitle, [
+                {
+                    text: 'Cancelar',
+                    style: 'cancel'
+                },
+                {
+                    text: 'Tirar foto',
+                    onPress: async () => await AddAdPhoto.pick('TAKE')
+                },
+                {
+                    text: 'Acessar galeria',
+                    onPress: async () => await AddAdPhoto.pick('PICK')
+                }
+            ])
+        }
+        catch (error) {
+            console.log(error);
         }
     };
 

@@ -55,6 +55,7 @@ const SignIn: React.FC = () => {
                                 autoCapitalize='none'
                                 onChangeText={onChange}
                                 value={value}
+                                style={styles.input}
                                 errorMessage={errors.email?.message}
                             />
                         )}
@@ -70,6 +71,7 @@ const SignIn: React.FC = () => {
                                 value={value}
                                 onSubmitEditing={handleSubmit(handleSignIn)}
                                 returnKeyType='send'
+                                style={styles.input}
                                 errorMessage={errors.password?.message}
                             />
                         )}
