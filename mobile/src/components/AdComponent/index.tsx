@@ -1,7 +1,7 @@
 import { ScrollView, Switch, Text, TouchableOpacity, View, Image } from "react-native"
 import { useNavigation } from "@react-navigation/native";
 import { Plus, X } from "phosphor-react-native";
-import { launchImageLibrary, ImagePickerResponse, Asset } from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary, ImagePickerResponse, Asset } from 'react-native-image-picker';
 import { AppNavigatorRoutesProps } from "src/routes/App.routes";
 import useAuth from "@hooks/useAuth";
 import Header from "@components/Header";
@@ -18,7 +18,7 @@ type Props = {
 };
 
 type AddAdPhotoTypeProps = {
-    pick: () => Promise<void>;
+    pick: (type: 'TAKE' | 'PICK') => Promise<void>;
     analyze: (images: Asset[]) => Promise<void>;
 }
 
@@ -27,18 +27,32 @@ const AdComponent: React.FC<Props> = ({ title, state }) => {
     const { navigate, goBack } = useNavigation<AppNavigatorRoutesProps>();
     const { close, plus } = iconsTheme;
 
-    const handleAddAdPhoto: AddAdPhotoTypeProps = {
-        pick: async () => {
+    const handleAddAdPhoto: () => Promise<void> = async () => {
+        try {
+
+        }
+        catch (error) {
+            console.log(error);
+        }
+    };
+
+    const AddAdPhoto: AddAdPhotoTypeProps = {
+        pick: async (type: 'TAKE' | 'PICK') => {
             try {
-                const photoSelected: ImagePickerResponse = await launchImageLibrary({
-                    mediaType: 'photo',
-                    selectionLimit: 3
-                });
+                const photoSelected: ImagePickerResponse = type === 'TAKE' ?
+                    await launchCamera({
+                        mediaType: 'photo'
+                    })
+                    :
+                    await launchImageLibrary({
+                        mediaType: 'photo',
+                        selectionLimit: 3
+                    });
 
                 if (photoSelected.didCancel)
                     return;
 
-                handleAddAdPhoto.analyze(photoSelected.assets!);
+                AddAdPhoto.analyze(photoSelected.assets!);
             }
             catch (error) {
                 console.log(error);
@@ -92,7 +106,7 @@ const AdComponent: React.FC<Props> = ({ title, state }) => {
                             {renderAdPhoto(1)}
                             {renderAdPhoto(2)}
                             {adData.adPhotos?.length !== 3 &&
-                                <TouchableOpacity style={[styles.image, styles.emptyImage]} onPress={handleAddAdPhoto.pick}>
+                                <TouchableOpacity style={[styles.image, styles.emptyImage]} onPress={handleAddAdPhoto}>
                                     <Plus
                                         color={plus.color}
                                         size={plus.size}
