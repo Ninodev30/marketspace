@@ -1,5 +1,8 @@
 import { createContext, ReactNode, useState } from 'react';
+import { Alert } from 'react-native';
+import { Asset, ImagePickerResponse, launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import AdTypeProps from 'src/@types/ad';
+import AddAdPhotoTypeProps from 'src/@types/addAdPhoto';
 import AdTradeTypeProps from 'src/@types/adTrade';
 import ContextMethodsTypeProps from 'src/@types/contextMethods';
 import PaymentMethodsTypes from 'src/@types/paymentMethods';
@@ -61,6 +64,51 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) =
         }
     });
 
+    const AddAdPhoto: AddAdPhotoTypeProps = {
+        pick: async () => {
+            try {
+                const photoSelected: ImagePickerResponse = await launchImageLibrary({
+                    mediaType: 'photo',
+                });
+
+                if (photoSelected.didCancel)
+                    return;
+
+                AddAdPhoto.analyze(photoSelected.assets![0]);
+            }
+            catch (error) {
+                throw error;
+            }
+        },
+        take: async () => {
+            try {
+                const photoSelected: ImagePickerResponse = await launchCamera({
+                    mediaType: 'photo'
+                });
+
+                if (photoSelected.didCancel)
+                    return;
+
+                AddAdPhoto.analyze(photoSelected.assets![0]);
+            }
+            catch (error) {
+                throw error;
+            }
+        },
+        analyze: async (image) => {
+            try {
+                const limitSizeInMB: number = 5 * 1024 * 1024;  // 5MB
+                const isImageSizeUnderLimit: boolean = image.fileSize! < limitSizeInMB;
+
+                if (isImageSizeUnderLimit)
+                    console.log(image);
+            }
+            catch (error) {
+                throw error;
+            }
+        }
+    };
+
     const methods: ContextMethodsTypeProps = {
         handleFilter: {
             condition: (select: boolean) => setFilterOptions(prevState => ({
@@ -120,6 +168,27 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) =
                         ...prevState.adPhotos!.filter((_, index) => index !== photoNumber)
                     ]
                 }))
+            }
+        },
+        handleAddPhoto: async (title) => {
+            try {
+                Alert.alert(title, 'Adicionar foto', [
+                    {
+                        text: 'Cancelar',
+                        style: 'cancel'
+                    },
+                    {
+                        text: 'Tirar foto',
+                        onPress: async () => await AddAdPhoto.take()
+                    },
+                    {
+                        text: 'Acessar galeria',
+                        onPress: async () => await AddAdPhoto.pick()
+                    }
+                ])
+            }
+            catch (error) {
+                console.log(error);
             }
         }
     };

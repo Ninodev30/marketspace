@@ -1,4 +1,4 @@
-import { Image, ScrollView, Text, View } from "react-native"
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
 import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,14 +11,17 @@ import Input from "@components/Input";
 import theme from "@theme/index";
 import styles from "./styles"
 import schema from "./schema";
+import useAuth from "@hooks/useAuth";
 
 const SignUp: React.FC = () => {
-    const { COLORS } = theme;
+    const { methods: { handleAddPhoto } } = useAuth();
     const { navigate }: AuthNavigatorRoutesProps = useNavigation();
 
     const { control, handleSubmit, formState: { errors } } = useForm<SignUpTypeProps>(({
         resolver: yupResolver(schema)
-    }))
+    }));
+
+    const { COLORS } = theme;
 
     const handleSignUp: (data: SignUpTypeProps) => Promise<void> = async ({ name, email, phone, password }) => {
         try {
@@ -27,7 +30,7 @@ const SignUp: React.FC = () => {
         catch (error) {
             console.log(error);
         }
-    }
+    };
 
     return (
         <View style={styles.container}>
@@ -51,12 +54,12 @@ const SignUp: React.FC = () => {
                                 weight='bold'
                                 color={COLORS.BASE.GRAY_400}
                             />
-                            <View style={styles.pencilBox}>
+                            <TouchableOpacity style={styles.pencilBox} onPress={() => handleAddPhoto('Criar conta')}>
                                 <PencilSimpleLine
                                     size={18}
                                     color={COLORS.BASE.GRAY_600}
                                 />
-                            </View>
+                            </TouchableOpacity>
                         </View>
                         <Controller
                             control={control}
@@ -66,6 +69,7 @@ const SignUp: React.FC = () => {
                                     placeholder="Nome"
                                     onChangeText={onChange}
                                     value={value}
+                                    style={styles.input}
                                     errorMessage={errors.name?.message}
                                 />
                             )}
@@ -80,12 +84,12 @@ const SignUp: React.FC = () => {
                                     autoCapitalize="none"
                                     onChangeText={onChange}
                                     value={value}
+                                    style={styles.input}
                                     errorMessage={errors.email?.message}
                                 />
                             )}
                         />
                         <Controller
-
                             control={control}
                             name='phone'
                             render={({ field: { onChange, value } }) => (
@@ -96,6 +100,7 @@ const SignUp: React.FC = () => {
                                     keyboardType="number-pad"
                                     onChangeText={onChange}
                                     value={value}
+                                    style={styles.input}
                                     errorMessage={errors.phone?.message}
                                 />
                             )}
@@ -109,6 +114,7 @@ const SignUp: React.FC = () => {
                                     secureTextEntry
                                     onChangeText={onChange}
                                     value={value}
+                                    style={styles.input}
                                     errorMessage={errors.password?.message}
                                 />
                             )}
@@ -122,6 +128,7 @@ const SignUp: React.FC = () => {
                                     secureTextEntry
                                     onChangeText={onChange}
                                     value={value}
+                                    style={styles.input}
                                     errorMessage={errors.confirm_password?.message}
                                     onSubmitEditing={handleSubmit(handleSignUp)}
                                     returnKeyType='send'

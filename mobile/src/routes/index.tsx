@@ -11,10 +11,10 @@ const Routes: React.FC = () => {
     return (
         <View style={{ flex: 1, backgroundColor: bgColor }}>
             <NavigationContainer theme={DefaultTheme}>
-                <AuthRoutes />
+                <AppRoutes />
             </NavigationContainer>
         </View>
-    )
-}
+    );
+};
 
 export default Routes;

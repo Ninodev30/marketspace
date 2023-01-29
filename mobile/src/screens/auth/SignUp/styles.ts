@@ -44,12 +44,15 @@ export default StyleSheet.create({
     inputBox: {
         alignSelf: 'stretch'
     },
+    input: {
+        marginVertical: SCALE.HEIGHT(0.8)
+    },
     formBox: {
         alignSelf: 'stretch',
         alignItems: 'center'
     },
     loginBox: {
-        marginTop: SCALE.HEIGHT(5),
+        marginTop: SCALE.HEIGHT(4),
         alignSelf: 'stretch'
     },
     title: {
