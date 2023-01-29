@@ -1,4 +1,4 @@
-import AdTradePaymentTypeProps from "./adTradePayment";
+import AdTradePaymentTypeProps from "./tradePayment";
 
 type AdTradeTypeProps = {
     used: boolean;

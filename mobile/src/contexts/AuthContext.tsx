@@ -1,9 +1,9 @@
 import { createContext, ReactNode, useState } from 'react';
 import { Alert } from 'react-native';
-import { Asset, ImagePickerResponse, launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import AdTypeProps from 'src/@types/ad';
+import { ImagePickerResponse, launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import AdTypeProps from 'src/@types/ad/index';
 import AddAdPhotoTypeProps from 'src/@types/addAdPhoto';
-import AdTradeTypeProps from 'src/@types/adTrade';
+import AdTradeTypeProps from 'src/@types/ad/trade';
 import ContextMethodsTypeProps from 'src/@types/contextMethods';
 import PaymentMethodsTypes from 'src/@types/paymentMethods';
 

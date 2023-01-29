@@ -1,6 +1,6 @@
 import { Pressable, Text, View, ViewProps } from "react-native";
 import { Check } from "phosphor-react-native";
-import AdTradePaymentTypeProps from "src/@types/adTradePayment";
+import AdTradePaymentTypeProps from "src/@types/ad/tradePayment";
 import useAuth from "@hooks/useAuth";
 import theme from "@theme/index";
 import styles from "./styles";

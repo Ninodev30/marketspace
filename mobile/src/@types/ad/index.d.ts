@@ -1,4 +1,4 @@
-import AdTradeTypeProps from "./adTrade";
+import AdTradeTypeProps from "./trade";
 
 type AdTypeProps = {
     ad: AdTradeTypeProps;

@@ -1,6 +1,6 @@
 import { Text, TextProps, View } from "react-native";
 import { Barcode, QrCode, Money, CreditCard, Bank } from 'phosphor-react-native';
-import AdTradePaymentTypeProps from "src/@types/adTradePayment";
+import AdTradePaymentTypeProps from "src/@types/ad/tradePayment";
 import theme from "@theme/index";
 import styles from "./styles";
 
