@@ -10,7 +10,7 @@ import Sell from '@components/Sell';
 import Input from '@components/Input';
 import Filter from '@components/Filter';
 import theme from '@theme/index';
-import styles from './styles';
+import styles, { iconTheme } from './styles';
 
 const Home: React.FC = () => {
     const [findAd, setFindAd] = useState<string>('');
@@ -18,11 +18,6 @@ const Home: React.FC = () => {
 
     const { filter: { isShowFilter, setIsShowFilter } } = useAuth();
     const { navigate } = useNavigation<AppNavigatorRoutesProps>();
-
-    const iconTheme = {
-        color: theme.COLORS.BASE.GRAY_200,
-        size: theme.SCALE.HEIGHT(2.7)
-    };
 
     const handleChooseFilters: () => void = () => {
         setIsShowFilter(true);

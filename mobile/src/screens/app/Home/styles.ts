@@ -3,6 +3,11 @@ import theme from "@theme/index";
 
 const { COLORS, FONTS, SCALE, PADDING } = theme;
 
+export const iconTheme = {
+    color: COLORS.BASE.GRAY_200,
+    size: SCALE.HEIGHT(2.7)
+};
+
 export default StyleSheet.create({
     container: {
         flex: 1,
@@ -25,7 +30,7 @@ export default StyleSheet.create({
         borderRightWidth: 1,
         borderRightColor: COLORS.BASE.GRAY_400,
         paddingRight: SCALE.WIDTH(3.5),
-        marginRight:SCALE.WIDTH(1)
+        marginRight: SCALE.WIDTH(1)
     },
     slideIcon: {
         position: 'absolute',

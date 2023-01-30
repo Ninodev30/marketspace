@@ -1,7 +1,11 @@
 import { ScrollView, Switch, Text, TouchableOpacity, View, Image } from "react-native"
+import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { Plus, X } from "phosphor-react-native";
 import { AppNavigatorRoutesProps } from "src/routes/App.routes";
+import { condition, handleSwitch, payment } from "@features/filter";
+import PaymentMethodsTypes from "src/@types/paymentMethods";
+import useAppSelector from "@hooks/useAppSelector";
 import useAuth from "@hooks/useAuth";
 import Header from "@components/Header";
 import PaymentBox from "@components/PaymentBox";
@@ -19,7 +23,21 @@ type Props = {
 const AdComponent: React.FC<Props> = ({ title, state }) => {
     const { adData, methods: { handleAddPhoto, handleAdData: { trade, photo } } } = useAuth();
     const { navigate, goBack } = useNavigation<AppNavigatorRoutesProps>();
-    const { close, plus } = iconsTheme;
+    const dispatch = useDispatch();
+
+    const filter = useAppSelector(state => state.filter);
+
+    const handleFilter = {
+        condition: (state: boolean) => {
+            dispatch(condition(state));
+        },
+        payment: (paymentMethod: PaymentMethodsTypes) => {
+            dispatch(payment(paymentMethod));
+        },
+        switch: () => {
+            dispatch(handleSwitch());
+        }
+    };
 
     const renderAdPhoto = (index: number) => adData.adPhotos!![index] && (
         <View>
@@ -29,8 +47,8 @@ const AdComponent: React.FC<Props> = ({ title, state }) => {
             />
             <TouchableOpacity style={styles.closeImageIcon} onPress={() => photo.remove(index)}>
                 <X
-                    color={close.color}
-                    size={close.size}
+                    color={iconsTheme.close.color}
+                    size={iconsTheme.close.size}
                 />
             </TouchableOpacity>
         </View>
@@ -58,8 +76,8 @@ const AdComponent: React.FC<Props> = ({ title, state }) => {
                             {adData.adPhotos?.length !== 3 &&
                                 <TouchableOpacity style={[styles.image, styles.emptyImage]} onPress={() => handleAddPhoto(title)}>
                                     <Plus
-                                        color={plus.color}
-                                        size={plus.size}
+                                        color={iconsTheme.plus.color}
+                                        size={iconsTheme.plus.size}
                                     />
                                 </TouchableOpacity>
                             }
@@ -91,7 +109,7 @@ const AdComponent: React.FC<Props> = ({ title, state }) => {
                                         styles.conditionButton,
                                         !adData.ad.used ? styles.conditionButtonSelected : styles.conditionButtonUnselected
                                     ]}
-                                    onPress={() => trade.condition(true)}
+                                    onPress={() => handleFilter.condition(true)}
                                 />
                                 <Text style={styles.conditionTitle}>
                                     Produto novo
@@ -103,7 +121,7 @@ const AdComponent: React.FC<Props> = ({ title, state }) => {
                                         styles.conditionButton,
                                         adData.ad.used ? styles.conditionButtonSelected : styles.conditionButtonUnselected
                                     ]}
-                                    onPress={() => trade.condition(false)}
+                                    onPress={() => handleFilter.condition(false)}
                                 />
                                 <Text style={styles.conditionTitle}>
                                     Produto usado
@@ -132,7 +150,7 @@ const AdComponent: React.FC<Props> = ({ title, state }) => {
                         <Switch
                             thumbColor={theme.COLORS.BASE.GRAY_700}
                             trackColor={{ true: theme.COLORS.PRODUCT.BLUE_LIGHT, false: theme.COLORS.BASE.GRAY_500 }}
-                            onValueChange={trade.switch}
+                            onValueChange={() => handleFilter.switch()}
                             value={adData.ad.switch}
                         />
                     </View>

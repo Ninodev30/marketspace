@@ -1,8 +1,8 @@
 import { Image, Text, View, ViewProps } from "react-native";
 import PaymentMethods from "@components/paymentMethods";
+import formattNumberToPrice from "@functions/formattNumberToPrice";
 import AdTypeProps from "src/@types/ad";
 import styles from "./styles";
-import formattNumberToPrice from "@functions/formattNumberToPrice";
 
 type Props = ViewProps & {
     data: AdTypeProps;
