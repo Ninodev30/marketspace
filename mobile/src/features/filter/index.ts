@@ -18,7 +18,7 @@ export const filterSlice = createSlice({
     name: 'filter',
     initialState,
     reducers: {
-        condition(state, action: PayloadAction<boolean>) {
+        condition: (state, action: PayloadAction<boolean>) => {
             return {
                 ...state,
                 used: action.payload

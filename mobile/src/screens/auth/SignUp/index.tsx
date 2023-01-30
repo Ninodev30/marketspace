@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { User as UserIcon, PencilSimpleLine } from 'phosphor-react-native';
 import { AuthNavigatorRoutesProps } from "src/routes/Auth.routes";
-import SignUpTypeProps from "src/@types/SignUp";
+import SignUpTypeProps from "src/@types/auth/SignUp";
 import Icon from '@assets/images/Frame.png';
 import Button from "@components/Button";
 import Input from "@components/Input";
@@ -12,9 +12,10 @@ import theme from "@theme/index";
 import styles from "./styles"
 import schema from "./schema";
 import useAuth from "@hooks/useAuth";
+import handleAddPhoto from "@functions/handleAddPhoto";
 
 const SignUp: React.FC = () => {
-    const { methods: { handleAddPhoto } } = useAuth();
+    // const { methods: { handleAddPhoto } } = useAuth();
     const { navigate }: AuthNavigatorRoutesProps = useNavigation();
 
     const { control, handleSubmit, formState: { errors } } = useForm<SignUpTypeProps>(({

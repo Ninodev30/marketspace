@@ -15,7 +15,6 @@ type ContextMethodsTypeProps = {
             remove: (photoNumber: number) => void;
         };
     };
-    handleAddPhoto: (title: string) => Promise<void>;
 };
 
 export default ContextMethodsTypeProps;

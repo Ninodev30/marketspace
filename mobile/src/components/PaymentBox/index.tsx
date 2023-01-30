@@ -1,6 +1,10 @@
 import { Pressable, Text, View, ViewProps } from "react-native";
+import { useDispatch } from "react-redux";
 import { Check } from "phosphor-react-native";
+import { payment } from "@features/filter";
 import AdTradePaymentTypeProps from "src/@types/ad/tradePayment";
+import PaymentMethodsTypes from "src/@types/paymentMethods";
+import useAppSelector from "@hooks/useAppSelector";
 import useAuth from "@hooks/useAuth";
 import theme from "@theme/index";
 import styles from "./styles";
@@ -12,9 +16,15 @@ type Props = ViewProps & {
 
 const PaymentBox: React.FC<Props> = ({ data, isToTheFilter, style, ...rest }) => {
     const context = useAuth();
+    const dispatch = useDispatch();
+    const paymentMethods = useAppSelector(state => state.filter.payment);
 
     const paymentData = isToTheFilter ? context.filterOptions : context.adData.ad;
     const functions = isToTheFilter ? context.methods.handleFilter : context.methods.handleAdData.trade;
+
+    const handlePaymentMethods = (paymentMethod: PaymentMethodsTypes) => {
+        dispatch(payment(paymentMethod));
+    };
 
     return (
         <View style={[style, styles.container]} {...rest}>

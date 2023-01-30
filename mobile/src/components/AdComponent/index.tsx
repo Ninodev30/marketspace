@@ -5,6 +5,7 @@ import { Plus, X } from "phosphor-react-native";
 import { AppNavigatorRoutesProps } from "src/routes/App.routes";
 import { condition, handleSwitch, payment } from "@features/filter";
 import PaymentMethodsTypes from "src/@types/paymentMethods";
+import handleAddPhoto from "@functions/handleAddPhoto";
 import useAppSelector from "@hooks/useAppSelector";
 import useAuth from "@hooks/useAuth";
 import Header from "@components/Header";
@@ -21,7 +22,7 @@ type Props = {
 };
 
 const AdComponent: React.FC<Props> = ({ title, state }) => {
-    const { adData, methods: { handleAddPhoto, handleAdData: { trade, photo } } } = useAuth();
+    const { adData, methods: { handleAdData: { trade, photo } } } = useAuth();
     const { navigate, goBack } = useNavigation<AppNavigatorRoutesProps>();
     const dispatch = useDispatch();
 

@@ -11,7 +11,7 @@ const Routes: React.FC = () => {
     return (
         <View style={{ flex: 1, backgroundColor: bgColor }}>
             <NavigationContainer theme={DefaultTheme}>
-                <AppRoutes />
+                <AuthRoutes />
             </NavigationContainer>
         </View>
     );

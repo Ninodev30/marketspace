@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AuthNavigatorRoutesProps } from "src/routes/Auth.routes";
-import SignInTypeProps from "src/@types/SignIn";
+import SignInTypeProps from "src/@types/auth/SignIn";
 import Icon from '@assets/images/Frame.png';
 import Button from "@components/Button";
 import Input from "@components/Input";
