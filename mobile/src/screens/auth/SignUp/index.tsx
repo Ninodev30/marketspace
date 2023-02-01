@@ -1,32 +1,59 @@
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
+import { useState } from "react";
+import { Alert, Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
 import { useNavigation } from "@react-navigation/native";
+import { Asset } from "react-native-image-picker";
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { User as UserIcon, PencilSimpleLine } from 'phosphor-react-native';
+import { signUp } from "@features/user";
 import { AuthNavigatorRoutesProps } from "src/routes/Auth.routes";
-import SignUpTypeProps from "src/@types/auth/SignUp";
+import { SignUpFormTypeProps, SignUpUserTypeProps } from "src/@types/auth/SignUp";
+import UserDTO from "src/dtos/UserDTO";
+import handleAddPhoto from "@functions/handleAddPhoto";
+import useAppDispatch from "@hooks/useAppDispatch";
+import useAuth from "@hooks/useAuth";
 import Icon from '@assets/images/Frame.png';
 import Button from "@components/Button";
 import Input from "@components/Input";
 import theme from "@theme/index";
-import styles from "./styles"
 import schema from "./schema";
-import useAuth from "@hooks/useAuth";
-import handleAddPhoto from "@functions/handleAddPhoto";
+import styles from "./styles"
 
 const SignUp: React.FC = () => {
     // const { methods: { handleAddPhoto } } = useAuth();
+    const dispatch = useAppDispatch();
+    const [avatar, setAvatar] = useState<string>('');
     const { navigate }: AuthNavigatorRoutesProps = useNavigation();
 
-    const { control, handleSubmit, formState: { errors } } = useForm<SignUpTypeProps>(({
+    const { control, handleSubmit, formState: { errors } } = useForm<SignUpFormTypeProps>(({
         resolver: yupResolver(schema)
     }));
 
-    const { COLORS } = theme;
-
-    const handleSignUp: (data: SignUpTypeProps) => Promise<void> = async ({ name, email, phone, password }) => {
+    const handleUpdateAvatar: () => Promise<void> = async () => {
         try {
-            console.log(name, email, phone, password);
+            const photo: Asset | undefined = await handleAddPhoto('Criar conta');
+
+            if (photo)
+                setAvatar(photo.uri!);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleSignUp: (data: SignUpFormTypeProps) => Promise<void> = async ({ confirm_password, ...signUpData }) => {
+        try {
+            if (avatar === '')
+                return Alert.alert('Criar usuário', 'Selecione sua foto de perfil')
+
+            const data: SignUpUserTypeProps = {
+                ...signUpData,
+                avatar
+            };
+
+            console.log(data);
+
+            const testing = await dispatch(signUp(data));
         }
         catch (error) {
             console.log(error);
@@ -53,12 +80,12 @@ const SignUp: React.FC = () => {
                             <UserIcon
                                 size={40}
                                 weight='bold'
-                                color={COLORS.BASE.GRAY_400}
+                                color={theme.COLORS.BASE.GRAY_400}
                             />
-                            <TouchableOpacity style={styles.pencilBox} onPress={() => handleAddPhoto('Criar conta')}>
+                            <TouchableOpacity style={styles.pencilBox} onPress={handleUpdateAvatar}>
                                 <PencilSimpleLine
                                     size={18}
-                                    color={COLORS.BASE.GRAY_600}
+                                    color={theme.COLORS.BASE.GRAY_600}
                                 />
                             </TouchableOpacity>
                         </View>
@@ -140,7 +167,7 @@ const SignUp: React.FC = () => {
                     <Button
                         title='Criar'
                         type="LIGHT"
-                        bgColor={COLORS.BASE.GRAY_100}
+                        bgColor={theme.COLORS.BASE.GRAY_100}
                         style={{ marginTop: 15 }}
                         onPress={handleSubmit(handleSignUp)}
                     />
@@ -152,7 +179,7 @@ const SignUp: React.FC = () => {
                     <Button
                         title='Ir para o login'
                         type="DARK"
-                        bgColor={COLORS.BASE.GRAY_500}
+                        bgColor={theme.COLORS.BASE.GRAY_500}
                         style={{ marginTop: 10 }}
                         onPress={() => navigate("signIn")}
                     />
