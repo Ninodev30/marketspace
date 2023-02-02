@@ -10,6 +10,7 @@ import { AuthNavigatorRoutesProps } from "src/routes/Auth.routes";
 import { SignUpFormTypeProps, SignUpUserTypeProps } from "src/@types/auth/SignUp";
 import { handlePickPhoto, handleTakePhoto } from "@functions/handlePhoto";
 import { setIsLoading } from "@features/loading";
+import PhotoFileProps from "src/@types/photoFile";
 import UserDTO from "src/dtos/UserDTO";
 import useAppDispatch from "@hooks/useAppDispatch";
 import Icon from '@assets/images/Frame.png';
@@ -18,17 +19,11 @@ import Input from "@components/Input";
 import theme from "@theme/index";
 import schema from "./schema";
 import styles from "./styles"
-
-type PhotoFileTypeProps = {
-    name: string;
-    uri: string;
-    type: string;
-};
+import AssetToPhotoFile from "@functions/AssetToPhotoFile.";
 
 const SignUp: React.FC = () => {
     const dispatch = useAppDispatch();
-    const [avatar, setAvatar] = useState<string>('');
-    const [aavatar, setAavatar] = useState<PhotoFileTypeProps>({} as PhotoFileTypeProps);
+    const [avatar, setAvatar] = useState<Asset>({} as Asset);
     const { navigate }: AuthNavigatorRoutesProps = useNavigation();
 
     const { control, handleSubmit, formState: { errors } } = useForm<SignUpFormTypeProps>(({
@@ -49,7 +44,7 @@ const SignUp: React.FC = () => {
                             const photoSelected: Asset | undefined = await handleTakePhoto();
 
                             if (photoSelected)
-                                setAvatar(photoSelected.uri!);
+                                setAvatar(photoSelected);
                         }
                         catch (error) {
                             throw error;
@@ -63,7 +58,7 @@ const SignUp: React.FC = () => {
                             const photoSelected: Asset | undefined = await handlePickPhoto();
 
                             if (photoSelected)
-                                setAvatar(photoSelected.uri!);
+                                setAvatar(photoSelected);
                         }
                         catch (error) {
                             throw error;
@@ -77,26 +72,18 @@ const SignUp: React.FC = () => {
         }
     };
 
-    // const AssetToAvatar: (image: Asset) => void = (image) => {
-    //     const fileExtension = image.uri!.split('.').pop();
-
-    //     const photoFile: PhotoFileTypeProps = {
-    //         name: `${user.name}.${fileExtension}`.toLowerCase(),
-    //         uri: image.uri!,
-    //         type: `${image.type}/${fileExtension}`
-    //     };
-    // };
-
     const handleSignUp: (data: SignUpFormTypeProps) => Promise<void> = async ({ confirm_password, ...signUpData }) => {
         try {
-            if (!avatar)
+            if (!!avatar.id)
                 return Alert.alert('Criar usuário', 'Selecione sua foto de perfil');
 
             dispatch(setIsLoading(true));
 
+            const photoFile: PhotoFileProps = AssetToPhotoFile(avatar, signUpData.name);
+
             const data: SignUpUserTypeProps = {
                 ...signUpData,
-                avatar
+                avatar: photoFile
             };
 
             await dispatch(signUp(data)).unwrap();
@@ -126,9 +113,9 @@ const SignUp: React.FC = () => {
                 <View style={styles.inputBox}>
                     <View style={styles.formBox}>
                         <View style={styles.userBox}>
-                            {avatar ?
+                            {avatar.uri!! ?
                                 <Image
-                                    source={{ uri: avatar }}
+                                    source={{ uri: avatar.uri }}
                                     style={styles.userImage}
                                 />
                                 :

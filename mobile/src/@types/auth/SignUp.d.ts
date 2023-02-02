@@ -1,3 +1,5 @@
+import PhotoFileProps from "../photoFile";
+
 type SignUpBaseTypeProps = {
     name: string;
     email: string;
@@ -10,5 +12,5 @@ export type SignUpFormTypeProps = SignUpBaseTypeProps & {
 };
 
 export type SignUpUserTypeProps = SignUpBaseTypeProps & {
-    avatar: string;
+    avatar: PhotoFileProps;
 };

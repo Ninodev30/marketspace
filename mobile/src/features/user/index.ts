@@ -4,24 +4,8 @@ import { SignUpUserTypeProps } from "src/@types/auth/SignUp";
 import SignInTypeProps from "src/@types/auth/SignIn";
 import UserDTO from "src/dtos/UserDTO";
 import api from "@services/api.";
-import { AxiosHeaders } from "axios";
 
 const initialState: UserDTO = {} as UserDTO;
-
-const stringToBinary: (stringData: string) => string = (stringData) => {
-    const binary: string = stringData
-        .split('')
-        .map(char => {
-            const binChar: string = char
-                .charCodeAt(0)
-                .toString(2);
-
-            return binChar;
-        })
-        .join(' ');
-
-    return binary;
-};
 
 const auth = {
     signIn: createAsyncThunk(
@@ -42,16 +26,15 @@ const auth = {
         'user/signUp',
         async (signUpData: SignUpUserTypeProps, { dispatch, getState }) => {
             try {
-                const { avatar, ...rest } = signUpData;
-                const newAvatar = stringToBinary(avatar)
+                const avatarForm: FormData = new FormData();
+                avatarForm.append('avatar', signUpData.avatar);
 
-                const newSignUpData = {
-                    ...rest,
-                    avatar: newAvatar
+                const signUpFormData = {
+                    ...signUpData,
+                    avatar: avatarForm
                 };
-                // console.log(newSignUpData)
 
-                await api.post('/users', signUpData, {
+                await api.post('/users', signUpFormData, {
                     headers: {
                         'Content-Type': 'multipart/formdata'
                     }
