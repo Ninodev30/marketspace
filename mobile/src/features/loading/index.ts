@@ -1,13 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState: boolean = false;
+type IsLoadingState = {
+    value: boolean;
+};
+
+const initialState: IsLoadingState = {
+    value: false
+};
 
 export const isLoadingSlice = createSlice({
     name: 'isLoading',
     initialState,
     reducers: {
         setIsLoading: (state, isLoading: PayloadAction<boolean>) => {
-            state = isLoading.payload;
+            state.value = isLoading.payload;
         }
     }
 });

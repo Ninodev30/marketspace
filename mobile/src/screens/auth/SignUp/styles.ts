@@ -33,6 +33,12 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    userImage: {
+        width: SCALE.AVERAGE(16),
+        height: SCALE.AVERAGE(16),  
+        borderRadius: SCALE.HEIGHT(100),
+
+    },
     pencilBox: {
         position: 'absolute',
         bottom: -7,

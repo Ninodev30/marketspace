@@ -1,11 +1,12 @@
-import { ScrollView, Switch, Text, TouchableOpacity, View, Image } from "react-native"
-import { useDispatch } from "react-redux";
+import { ScrollView, Switch, Text, TouchableOpacity, View, Image, Alert } from "react-native"
 import { useNavigation } from "@react-navigation/native";
+import { Asset } from "react-native-image-picker";
 import { Plus, X } from "phosphor-react-native";
 import { AppNavigatorRoutesProps } from "src/routes/App.routes";
 import { condition, handleSwitch, payment } from "@features/filter";
+import { handlePickPhoto, handleTakePhoto } from "@functions/handlePhoto";
+import useAppDispatch from "@hooks/useAppDispatch";
 import PaymentMethodsTypes from "src/@types/paymentMethods";
-import handleAddPhoto from "@functions/handleAddPhoto";
 import useAppSelector from "@hooks/useAppSelector";
 import useAuth from "@hooks/useAuth";
 import Header from "@components/Header";
@@ -23,10 +24,10 @@ type Props = {
 
 const AdComponent: React.FC<Props> = ({ title, state }) => {
     const { adData, methods: { handleAdData: { trade, photo } } } = useAuth();
-    const { navigate, goBack } = useNavigation<AppNavigatorRoutesProps>();
-    const dispatch = useDispatch();
-
     const filter = useAppSelector(state => state.filter);
+    const dispatch = useAppDispatch();
+    const { navigate, goBack } = useNavigation<AppNavigatorRoutesProps>();
+
 
     const handleFilter = {
         condition: (state: boolean) => {
@@ -37,6 +38,42 @@ const AdComponent: React.FC<Props> = ({ title, state }) => {
         },
         switch: () => {
             dispatch(handleSwitch());
+        }
+    };
+
+    const handleAddAdPhoto: () => Promise<void> = async () => {
+        try {
+            Alert.alert('Criar usuário', 'adicionar foto', [
+                {
+                    text: 'Cancelar',
+                    style: 'cancel'
+                },
+                {
+                    text: 'Acessar galeria',
+                    onPress: async () => {
+                        try {
+                            const photoSelected: Asset | undefined = await handlePickPhoto();
+                        }
+                        catch (error) {
+                            throw error;
+                        }
+                    }
+                },
+                {
+                    text: 'Tirar foto',
+                    onPress: async () => {
+                        try {
+                            const photoSelected: Asset | undefined = await handleTakePhoto();
+                        }
+                        catch (error) {
+                            throw error;
+                        }
+                    }
+                }
+            ]);
+        }
+        catch (error) {
+            console.log(error);
         }
     };
 
@@ -75,7 +112,7 @@ const AdComponent: React.FC<Props> = ({ title, state }) => {
                             {renderAdPhoto(1)}
                             {renderAdPhoto(2)}
                             {adData.adPhotos?.length !== 3 &&
-                                <TouchableOpacity style={[styles.image, styles.emptyImage]} onPress={() => handleAddPhoto(title)}>
+                                <TouchableOpacity style={[styles.image, styles.emptyImage]} onPress={handleAddAdPhoto}>
                                     <Plus
                                         color={iconsTheme.plus.color}
                                         size={iconsTheme.plus.size}

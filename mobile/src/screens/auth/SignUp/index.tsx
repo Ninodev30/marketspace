@@ -8,10 +8,10 @@ import { User as UserIcon, PencilSimpleLine } from 'phosphor-react-native';
 import { signUp } from "@features/user";
 import { AuthNavigatorRoutesProps } from "src/routes/Auth.routes";
 import { SignUpFormTypeProps, SignUpUserTypeProps } from "src/@types/auth/SignUp";
+import { handlePickPhoto, handleTakePhoto } from "@functions/handlePhoto";
+import { setIsLoading } from "@features/loading";
 import UserDTO from "src/dtos/UserDTO";
-import handleAddPhoto from "@functions/handleAddPhoto";
 import useAppDispatch from "@hooks/useAppDispatch";
-import useAuth from "@hooks/useAuth";
 import Icon from '@assets/images/Frame.png';
 import Button from "@components/Button";
 import Input from "@components/Input";
@@ -19,10 +19,16 @@ import theme from "@theme/index";
 import schema from "./schema";
 import styles from "./styles"
 
+type PhotoFileTypeProps = {
+    name: string;
+    uri: string;
+    type: string;
+};
+
 const SignUp: React.FC = () => {
-    // const { methods: { handleAddPhoto } } = useAuth();
     const dispatch = useAppDispatch();
     const [avatar, setAvatar] = useState<string>('');
+    const [aavatar, setAavatar] = useState<PhotoFileTypeProps>({} as PhotoFileTypeProps);
     const { navigate }: AuthNavigatorRoutesProps = useNavigation();
 
     const { control, handleSubmit, formState: { errors } } = useForm<SignUpFormTypeProps>(({
@@ -31,32 +37,75 @@ const SignUp: React.FC = () => {
 
     const handleUpdateAvatar: () => Promise<void> = async () => {
         try {
-            const photo: Asset | undefined = await handleAddPhoto('Criar conta');
+            Alert.alert('Criar usuário', 'adicionar foto', [
+                {
+                    text: 'Cancelar',
+                    style: 'cancel'
+                },
+                {
+                    text: 'Tirar foto',
+                    onPress: async () => {
+                        try {
+                            const photoSelected: Asset | undefined = await handleTakePhoto();
 
-            if (photo)
-                setAvatar(photo.uri!);
+                            if (photoSelected)
+                                setAvatar(photoSelected.uri!);
+                        }
+                        catch (error) {
+                            throw error;
+                        }
+                    }
+                },
+                {
+                    text: 'Acessar galeria',
+                    onPress: async () => {
+                        try {
+                            const photoSelected: Asset | undefined = await handlePickPhoto();
+
+                            if (photoSelected)
+                                setAvatar(photoSelected.uri!);
+                        }
+                        catch (error) {
+                            throw error;
+                        }
+                    }
+                }
+            ]);
         }
         catch (error) {
             console.log(error);
         }
     };
 
+    // const AssetToAvatar: (image: Asset) => void = (image) => {
+    //     const fileExtension = image.uri!.split('.').pop();
+
+    //     const photoFile: PhotoFileTypeProps = {
+    //         name: `${user.name}.${fileExtension}`.toLowerCase(),
+    //         uri: image.uri!,
+    //         type: `${image.type}/${fileExtension}`
+    //     };
+    // };
+
     const handleSignUp: (data: SignUpFormTypeProps) => Promise<void> = async ({ confirm_password, ...signUpData }) => {
         try {
-            if (avatar === '')
-                return Alert.alert('Criar usuário', 'Selecione sua foto de perfil')
+            if (!avatar)
+                return Alert.alert('Criar usuário', 'Selecione sua foto de perfil');
+
+            dispatch(setIsLoading(true));
 
             const data: SignUpUserTypeProps = {
                 ...signUpData,
                 avatar
             };
 
-            console.log(data);
-
-            const testing = await dispatch(signUp(data));
+            await dispatch(signUp(data)).unwrap();
         }
         catch (error) {
             console.log(error);
+        }
+        finally {
+            dispatch(setIsLoading(false));
         }
     };
 
@@ -77,11 +126,18 @@ const SignUp: React.FC = () => {
                 <View style={styles.inputBox}>
                     <View style={styles.formBox}>
                         <View style={styles.userBox}>
-                            <UserIcon
-                                size={40}
-                                weight='bold'
-                                color={theme.COLORS.BASE.GRAY_400}
-                            />
+                            {avatar ?
+                                <Image
+                                    source={{ uri: avatar }}
+                                    style={styles.userImage}
+                                />
+                                :
+                                <UserIcon
+                                    size={40}
+                                    weight='bold'
+                                    color={theme.COLORS.BASE.GRAY_400}
+                                />
+                            }
                             <TouchableOpacity style={styles.pencilBox} onPress={handleUpdateAvatar}>
                                 <PencilSimpleLine
                                     size={18}

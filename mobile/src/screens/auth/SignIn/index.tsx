@@ -10,8 +10,13 @@ import Input from "@components/Input";
 import theme from "@theme/index";
 import styles from "./styles";
 import schema from "./schema";
+import useAppDispatch from "@hooks/useAppDispatch";
+import { setIsLoading } from "@features/loading";
+import { signIn } from "@features/user";
+import api from "@services/api.";
 
 const SignIn: React.FC = () => {
+    const dispatch = useAppDispatch();
     const { navigate }: AuthNavigatorRoutesProps = useNavigation();
 
     const { control, handleSubmit, formState: { errors } } = useForm<SignInTypeProps>({
@@ -20,12 +25,19 @@ const SignIn: React.FC = () => {
 
     const handleSignIn: (data: SignInTypeProps) => Promise<void> = async (data) => {
         try {
-            console.log(data);
+            dispatch(setIsLoading(true));
+
+            await dispatch(signIn(data)).unwrap();
+            // const { data: { user } } = await api.post('/sessions', data);
+            // console.log(user);
         }
         catch (error) {
             console.log(error);
         }
-    }
+        finally {
+            dispatch(setIsLoading(false));
+        }
+    };
 
     return (
         <View style={styles.container}>
