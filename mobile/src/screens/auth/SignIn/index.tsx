@@ -13,7 +13,6 @@ import schema from "./schema";
 import useAppDispatch from "@hooks/useAppDispatch";
 import { setIsLoading } from "@features/loading";
 import { signIn } from "@features/user";
-import api from "@services/api.";
 
 const SignIn: React.FC = () => {
     const dispatch = useAppDispatch();

@@ -7,6 +7,8 @@ import api from "@services/api.";
 
 const initialState: UserDTO = {} as UserDTO;
 
+
+
 const auth = {
     signIn: createAsyncThunk(
         'user/signIn',
@@ -14,7 +16,7 @@ const auth = {
             try {
                 const response = await api.post('/sessions', signInData);
                 const user: UserDTO = response.data.user;
-
+                console.log(user)
                 return user;
             }
             catch (error) {
@@ -26,7 +28,7 @@ const auth = {
         'user/signUp',
         async (signUpData: SignUpUserTypeProps, { dispatch, getState }) => {
             try {
-                const avatarForm: FormData = new FormData();
+                const avatarForm = new FormData();
                 avatarForm.append('avatar', signUpData.avatar);
 
                 const signUpFormData = {
@@ -34,11 +36,14 @@ const auth = {
                     avatar: avatarForm
                 };
 
-                await api.post('/users', signUpFormData, {
+                console.log(avatarForm.getParts()[0])
+
+                const { data } = await api.post('/users', signUpFormData, {
                     headers: {
-                        'Content-Type': 'multipart/formdata'
+                        'Content-Type': 'multipart/form-data'
                     }
                 });
+                console.log(data)
 
                 const signInData: SignInTypeProps = {
                     email: signUpData.email,
@@ -48,7 +53,7 @@ const auth = {
                 await dispatch(signIn(signInData));
 
                 const { user } = getState() as RootState;
-
+                console.log(user)
                 return user;
             }
             catch (error) {

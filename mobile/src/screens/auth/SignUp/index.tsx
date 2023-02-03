@@ -74,7 +74,7 @@ const SignUp: React.FC = () => {
 
     const handleSignUp: (data: SignUpFormTypeProps) => Promise<void> = async ({ confirm_password, ...signUpData }) => {
         try {
-            if (!!avatar.id)
+            if (avatar.id !== undefined)
                 return Alert.alert('Criar usuário', 'Selecione sua foto de perfil');
 
             dispatch(setIsLoading(true));
