@@ -10,6 +10,8 @@ import MyAdDetails from "@screens/app/MyAdDetails";
 import MyAdPreview from "@screens/app/MyAdPreview";
 import theme from "@theme/index";
 import AdTypeProps from "src/@types/ad";
+import useAppDispatch from "@hooks/useAppDispatch";
+import { signOut } from "@features/user";
 
 type AppRoutes = {
     home: undefined;
@@ -30,9 +32,15 @@ export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>;
 const { Navigator, Screen } = createBottomTabNavigator<AppRoutes>();
 
 const AppRoutes: React.FC = () => {
+    const dispatch = useAppDispatch();
+    const Logout: React.FC = () => null;
+
+    const handleLogout = () => {
+        dispatch(signOut());
+    }
+
     const { COLORS, SCALE } = theme;
     const iconSize: number = SCALE.AVERAGE(4);
-    const Logout: React.FC = () => null;
 
     return (
         <Navigator
@@ -85,7 +93,7 @@ const AppRoutes: React.FC = () => {
                     tabBarIcon: () => (
                         <TouchableOpacity
                             style={{ marginBottom: SCALE.HEIGHT(3) }}
-                            onPress={() => console.log('testing')}
+                            onPress={handleLogout}
                         >
                             <SignOut
                                 weight="bold"

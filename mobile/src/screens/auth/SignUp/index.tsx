@@ -20,6 +20,7 @@ import theme from "@theme/index";
 import schema from "./schema";
 import styles from "./styles"
 import AssetToPhotoFile from "@functions/AssetToPhotoFile.";
+import api from "@services/api.";
 
 const SignUp: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -74,7 +75,8 @@ const SignUp: React.FC = () => {
 
     const handleSignUp: (data: SignUpFormTypeProps) => Promise<void> = async ({ confirm_password, ...signUpData }) => {
         try {
-            if (avatar.id !== undefined)
+            console.log(avatar.uri)
+            if (avatar.uri == undefined)
                 return Alert.alert('Criar usuário', 'Selecione sua foto de perfil');
 
             dispatch(setIsLoading(true));
@@ -85,6 +87,20 @@ const SignUp: React.FC = () => {
                 ...signUpData,
                 avatar: photoFile
             };
+
+            // const avatarForm = new FormData();
+            // avatarForm.append('avatar', photoFile);
+
+            // const signUpFormData = {
+            //     ...signUpData,
+            //     avatar: avatarForm
+            // };
+
+            // await api.post('/users', signUpFormData, {
+            //     headers: {
+            //         'Content-Type': 'multipart/form-data'
+            //     }
+            // });
 
             await dispatch(signUp(data)).unwrap();
         }

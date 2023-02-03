@@ -2,6 +2,8 @@ import { Image, Text, View } from "react-native"
 import { useNavigation } from "@react-navigation/native";
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup";
+import { signIn } from "@features/user";
+import { setIsLoading } from "@features/loading";
 import { AuthNavigatorRoutesProps } from "src/routes/Auth.routes";
 import SignInTypeProps from "src/@types/auth/SignIn";
 import Icon from '@assets/images/Frame.png';
@@ -11,8 +13,7 @@ import theme from "@theme/index";
 import styles from "./styles";
 import schema from "./schema";
 import useAppDispatch from "@hooks/useAppDispatch";
-import { setIsLoading } from "@features/loading";
-import { signIn } from "@features/user";
+import api from "@services/api.";
 
 const SignIn: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -27,8 +28,6 @@ const SignIn: React.FC = () => {
             dispatch(setIsLoading(true));
 
             await dispatch(signIn(data)).unwrap();
-            // const { data: { user } } = await api.post('/sessions', data);
-            // console.log(user);
         }
         catch (error) {
             console.log(error);
