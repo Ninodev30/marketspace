@@ -27,7 +27,7 @@ const auth = {
         async (signUpData: SignUpUserTypeProps, { dispatch, getState }) => {
             try {
                 const avatarForm = new FormData();
-                avatarForm.append('avatar', signUpData.avatar.uri);
+                avatarForm.append('avatar', signUpData.avatar);
 
                 const signUpFormData = {
                     ...signUpData,
