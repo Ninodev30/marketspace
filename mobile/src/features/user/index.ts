@@ -14,6 +14,7 @@ const auth = {
             try {
                 const response = await api.post('/sessions', signInData);
                 const user: UserDTO = response.data.user;
+
                 console.log(user)
                 return user;
             }
@@ -31,14 +32,17 @@ const auth = {
 
                 const signUpFormData = {
                     ...signUpData,
-                    avatar: avatarForm
+                    avatar: signUpData.avatar
                 };
+                console.log(signUpData)
 
-                await api.post('/users', signUpFormData, {
+                const testing = await api.post('/users', signUpFormData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 });
+
+                console.log(testing)
 
                 const signInData: SignInTypeProps = {
                     email: signUpData.email,

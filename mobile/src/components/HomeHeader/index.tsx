@@ -5,20 +5,27 @@ import { AppNavigatorRoutesProps } from 'src/routes/App.routes';
 import Button from '@components/Button';
 import theme from '@theme/index';
 import styles from './styles';
+import useAppSelector from '@hooks/useAppSelector';
+import api from '@services/api.';
 
 type Props = {
     userName: string;
     userPhoto: string;
 }
 
-const HomeHeader: React.FC<Props> = ({ userName, userPhoto }) => {
+const HomeHeader: React.FC<Props> = () => {
+    const { name, avatar } = useAppSelector(state => state.user);
     const { navigate } = useNavigation<AppNavigatorRoutesProps>();
+
+    const photo: string = `${api.defaults.baseURL}/avatar/${avatar}`
+    console.log(avatar)
+    const photoo: string = 'https://github.com/Ninodev30.png'
 
     return (
         <View style={styles.container}>
             <View style={styles.content}>
                 <Image
-                    source={{ uri: userPhoto }}
+                    source={{ uri: avatar }}
                     style={styles.userPhoto}
                 />
                 <View style={styles.titleBox}>
@@ -26,7 +33,7 @@ const HomeHeader: React.FC<Props> = ({ userName, userPhoto }) => {
                         Boas vindas,
                     </Text>
                     <Text style={styles.title}>
-                        {userName}
+                        {name}
                     </Text>
                 </View>
             </View>

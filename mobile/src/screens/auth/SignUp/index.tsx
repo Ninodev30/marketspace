@@ -82,13 +82,13 @@ const SignUp: React.FC = () => {
 
             const photoFile: PhotoFileProps = AssetToPhotoFile(avatar, signUpData.name);
 
-            const data: SignUpUserTypeProps = {
+            const data = {
                 ...signUpData,
                 avatar: photoFile
-            };
+            }
 
             const avatarForm = new FormData();
-            avatarForm.append('avatar', photoFile);
+            avatarForm.append('avatar', photoFile.uri);
 
             const signUpFormData = {
                 ...signUpData,
