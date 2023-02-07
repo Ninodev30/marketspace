@@ -73,36 +73,21 @@ const SignUp: React.FC = () => {
         }
     };
 
-    const handleSignUp: (data: SignUpFormTypeProps) => Promise<void> = async ({ confirm_password, ...signUpData }) => {
+    const handleSignUp: (data: SignUpFormTypeProps) => Promise<void> = async ({ confirm_password, ...data }) => {
         try {
             if (!avatar.uri)
                 return Alert.alert('Criar usuário', 'Selecione sua foto de perfil');
 
             dispatch(setIsLoading(true));
 
-            const photoFile: PhotoFileProps = AssetToPhotoFile(avatar, signUpData.name);
+            const photoFile = AssetToPhotoFile(avatar, data.name);
 
-            const data = {
-                ...signUpData,
-                avatar: photoFile
-            }
-
-            const avatarForm = new FormData();
-            avatarForm.append('avatar', photoFile.uri);
-
-            const signUpFormData = {
-                ...signUpData,
-                avatar: avatarForm
+            const signUpData: SignUpUserTypeProps = {
+                avatar: photoFile,
+                ...data
             };
 
-            const testing = await api.post('/users', signUpFormData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            console.log(testing)
-
-            // await dispatch(signUp(data)).unwrap();
+            await dispatch(signUp(signUpData)).unwrap();
         }
         catch (error) {
             console.log(error);

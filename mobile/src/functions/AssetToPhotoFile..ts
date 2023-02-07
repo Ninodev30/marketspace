@@ -9,7 +9,7 @@ const AssetToPhotoFile: Props = (photo, userName) => {
     const photoFile: PhotoFileProps = {
         name: `${userName}.${fileExtension}`.toLowerCase(),
         uri: photo.uri!,
-        type: `${photo.type}/${fileExtension}`!
+        type: `${photo.type}/${fileExtension}`
     };
 
     return photoFile;

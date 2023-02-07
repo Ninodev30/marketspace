@@ -25,28 +25,28 @@ const auth = {
     ),
     signUp: createAsyncThunk(
         'user/signUp',
-        async (signUpData: SignUpUserTypeProps, { dispatch, getState }) => {
+        async (data: SignUpUserTypeProps, { dispatch, getState }) => {
             try {
-                const avatarForm = new FormData();
-                avatarForm.append('avatar', signUpData.avatar);
+                const { avatar, name, email, phone, password } = data;
 
-                const signUpFormData = {
-                    ...signUpData,
-                    avatar: signUpData.avatar
-                };
-                console.log(signUpData)
+                const form = new FormData();
+                form.append('avatar', avatar);
+                form.append('name', name);
+                form.append('email', email);
+                form.append('tel', phone);
+                form.append('password', password);
 
-                const testing = await api.post('/users', signUpFormData, {
+                console.log('testing');
+
+                await api.post('/users', form, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
-                    }
+                    },
                 });
 
-                console.log(testing)
-
                 const signInData: SignInTypeProps = {
-                    email: signUpData.email,
-                    password: signUpData.password
+                    email,
+                    password
                 };
 
                 await dispatch(signIn(signInData));

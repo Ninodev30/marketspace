@@ -17,6 +17,8 @@ const HomeHeader: React.FC<Props> = () => {
     const { name, avatar } = useAppSelector(state => state.user);
     const { navigate } = useNavigation<AppNavigatorRoutesProps>();
 
+    const avataar: string = 'file:///data/user/0/com.mobile/cache/rn_image_picker_lib_temp_1edc1f4f-74b4-4719-86a7-e900e9ffb234.jpg'
+
     const photo: string = `${api.defaults.baseURL}/avatar/${avatar}`
     console.log(avatar)
     const photoo: string = 'https://github.com/Ninodev30.png'
@@ -25,7 +27,7 @@ const HomeHeader: React.FC<Props> = () => {
         <View style={styles.container}>
             <View style={styles.content}>
                 <Image
-                    source={{ uri: avatar }}
+                    source={{ uri: avataar }}
                     style={styles.userPhoto}
                 />
                 <View style={styles.titleBox}>
