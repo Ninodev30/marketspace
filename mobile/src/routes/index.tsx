@@ -1,15 +1,22 @@
 import { View } from 'react-native';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import useAppSelector from '@hooks/useAppSelector';
+import Loading from '@components/Loading';
 import theme from '@theme/index';
 import AuthRoutes from './Auth.routes';
 import AppRoutes from './App.routes';
-import useAppSelector from '@hooks/useAppSelector';
 
 const Routes: React.FC = () => {
-    const isLoggedUser: boolean = useAppSelector(state => !!state.user.id);
+    const app = useAppSelector(state => state);
+
+    const isLoading: boolean = app.appIsLoading.value;
+    const isLoggedUser: boolean = !!app.user.id;
 
     const bgColor: string = theme.COLORS.BASE.GRAY_600;
     DefaultTheme.colors.background = bgColor;
+
+    if (isLoading)
+        return <Loading />;
 
     return (
         <View style={{ flex: 1, backgroundColor: bgColor }}>

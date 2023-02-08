@@ -1,10 +1,11 @@
+import { useState } from "react";
 import { Image, Text, View } from "react-native"
 import { useNavigation } from "@react-navigation/native";
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signIn } from "@features/user";
-import { setIsLoading } from "@features/loading";
 import { AuthNavigatorRoutesProps } from "src/routes/Auth.routes";
+import useAppDispatch from "@hooks/useAppDispatch";
 import SignInTypeProps from "src/@types/auth/SignIn";
 import Icon from '@assets/images/Frame.png';
 import Button from "@components/Button";
@@ -12,12 +13,11 @@ import Input from "@components/Input";
 import theme from "@theme/index";
 import styles from "./styles";
 import schema from "./schema";
-import useAppDispatch from "@hooks/useAppDispatch";
-import api from "@services/api.";
 
 const SignIn: React.FC = () => {
-    const dispatch = useAppDispatch();
+    const [loading, setIsLoading] = useState<boolean>(true);
     const { navigate }: AuthNavigatorRoutesProps = useNavigation();
+    const dispatch = useAppDispatch();
 
     const { control, handleSubmit, formState: { errors } } = useForm<SignInTypeProps>({
         resolver: yupResolver(schema)
@@ -25,7 +25,7 @@ const SignIn: React.FC = () => {
 
     const handleSignIn: (data: SignInTypeProps) => Promise<void> = async (data) => {
         try {
-            dispatch(setIsLoading(true));
+            setIsLoading(true);
 
             await dispatch(signIn(data)).unwrap();
         }
@@ -33,7 +33,7 @@ const SignIn: React.FC = () => {
             console.log(error);
         }
         finally {
-            dispatch(setIsLoading(false));
+            setIsLoading(false);
         }
     };
 

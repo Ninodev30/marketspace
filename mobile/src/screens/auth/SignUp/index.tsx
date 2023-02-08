@@ -9,7 +9,6 @@ import { signUp } from "@features/user";
 import { AuthNavigatorRoutesProps } from "src/routes/Auth.routes";
 import { SignUpFormTypeProps, SignUpUserTypeProps } from "src/@types/auth/SignUp";
 import { handlePickPhoto, handleTakePhoto } from "@functions/handlePhoto";
-import { setIsLoading } from "@features/loading";
 import PhotoFileProps from "src/@types/photoFile";
 import useAppDispatch from "@hooks/useAppDispatch";
 import Icon from '@assets/images/Frame.png';
@@ -21,6 +20,7 @@ import styles from "./styles"
 import AssetToPhotoFile from "@functions/AssetToPhotoFile.";
 
 const SignUp: React.FC = () => {
+    const [loading, setIsLoading] = useState<boolean>(true);
     const [avatar, setAvatar] = useState<Asset>({} as Asset);
     const { navigate }: AuthNavigatorRoutesProps = useNavigation();
     const dispatch = useAppDispatch();
@@ -76,7 +76,7 @@ const SignUp: React.FC = () => {
             if (!avatar.uri)
                 return Alert.alert('Criar usuário', 'Selecione sua foto de perfil');
 
-            dispatch(setIsLoading(true));
+            setIsLoading(true);
 
             const photoFile: PhotoFileProps = AssetToPhotoFile(avatar, data.name);
 
@@ -91,7 +91,7 @@ const SignUp: React.FC = () => {
             console.log(error);
         }
         finally {
-            dispatch(setIsLoading(false));
+            setIsLoading(false);
         }
     };
 

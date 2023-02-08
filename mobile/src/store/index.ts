@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { isLoadingReducer } from "@features/loading";
+import { appIsLoadingReducer } from "@features/appLoading";
 import { counterReducer } from "@features/counter";
 import { filterReducer } from "@features/filter";
 import { userReducer } from "@features/user";
 
 const store = configureStore({
     reducer: {
-        isLoading: isLoadingReducer,
+        appIsLoading: appIsLoadingReducer,
         counter: counterReducer,
         filter: filterReducer,
         user: userReducer,
