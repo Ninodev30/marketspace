@@ -29,35 +29,28 @@ const auth = {
             try {
                 const { avatar, name, email, phone, password } = data;
 
-                console.log(avatar)
-                console.log(name, email, phone, password)
+                console.log(data)
 
-                const form = new FormData();
-                form.append('avatar', avatar)
-                form.append('name', name);
-                form.append('email', email);
-                form.append('tel', phone);
-                form.append('password', password);
+                const formData = new FormData();
+                formData.append('avatar', avatar)
+                formData.append('name', name);
+                formData.append('email', email);
+                formData.append('tel', phone);
+                formData.append('password', password);
 
-                console.log(form);
+                console.log(formData);
 
-                // await api.post('/users', form, {
-                //     headers: {
-                //         'Content-Type': 'multipart/form-data'
-                //     },
-                // });
+                const response = await api.post('/users', formData, {
+                    data: formData,
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    },
+                    transformRequest: (data, headers) => {
+                        return data
+                    }
+                });
 
-                fetch('http://10.1.1.110:3333/users',
-                    {
-                        method: 'POST',
-                        body: form,
-                    })
-                    .then(response => {
-                        console.log(JSON.stringify(response))
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    })
+                console.log(response)
 
                 const signInData: SignInTypeProps = {
                     email,

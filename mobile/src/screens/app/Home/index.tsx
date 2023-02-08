@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { MagnifyingGlass, Sliders } from 'phosphor-react-native';
 import { AppNavigatorRoutesProps } from 'src/routes/App.routes';
 import useAuth from '@hooks/useAuth';
@@ -11,6 +11,7 @@ import Input from '@components/Input';
 import Filter from '@components/Filter';
 import theme from '@theme/index';
 import styles, { iconTheme } from './styles';
+import api from '@services/api.';
 
 const Home: React.FC = () => {
     const [findAd, setFindAd] = useState<string>('');
@@ -22,6 +23,22 @@ const Home: React.FC = () => {
     const handleChooseFilters: () => void = () => {
         setIsShowFilter(true);
     };
+
+    const fetchUser = async () => {
+        try {
+            const { data } = await api.get('/users/me');
+            console.log(data)
+        }
+        catch (error) {
+            console.log(error);
+            console.log(JSON.stringify(error))
+        }
+    }
+
+    useFocusEffect(() => {
+        fetchUser();
+        console.log('testing')
+    });
 
     return (
         <View style={styles.container}>

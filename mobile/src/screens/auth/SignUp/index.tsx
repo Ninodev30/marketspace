@@ -11,7 +11,6 @@ import { SignUpFormTypeProps, SignUpUserTypeProps } from "src/@types/auth/SignUp
 import { handlePickPhoto, handleTakePhoto } from "@functions/handlePhoto";
 import { setIsLoading } from "@features/loading";
 import PhotoFileProps from "src/@types/photoFile";
-import UserDTO from "src/dtos/UserDTO";
 import useAppDispatch from "@hooks/useAppDispatch";
 import Icon from '@assets/images/Frame.png';
 import Button from "@components/Button";
@@ -20,12 +19,11 @@ import theme from "@theme/index";
 import schema from "./schema";
 import styles from "./styles"
 import AssetToPhotoFile from "@functions/AssetToPhotoFile.";
-import api from "@services/api.";
 
 const SignUp: React.FC = () => {
-    const dispatch = useAppDispatch();
     const [avatar, setAvatar] = useState<Asset>({} as Asset);
     const { navigate }: AuthNavigatorRoutesProps = useNavigation();
+    const dispatch = useAppDispatch();
 
     const { control, handleSubmit, formState: { errors } } = useForm<SignUpFormTypeProps>(({
         resolver: yupResolver(schema)
@@ -80,7 +78,7 @@ const SignUp: React.FC = () => {
 
             dispatch(setIsLoading(true));
 
-            const photoFile = AssetToPhotoFile(avatar, data.name);
+            const photoFile: PhotoFileProps = AssetToPhotoFile(avatar, data.name);
 
             const signUpData: SignUpUserTypeProps = {
                 avatar: photoFile,
@@ -91,7 +89,6 @@ const SignUp: React.FC = () => {
         }
         catch (error) {
             console.log(error);
-            console.log(JSON.stringify(error))
         }
         finally {
             dispatch(setIsLoading(false));
