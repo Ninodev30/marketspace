@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "@store/index";
 import { setAppIsLoading } from "@features/appLoading";
-import createAppAsyncThunk from "@functions/createAppAsyncThunk";
 import { SignUpUserTypeProps } from "src/@types/auth/SignUp";
 import SignInTypeProps from "src/@types/auth/SignIn";
+import createAppAsyncThunk from "@functions/createAppAsyncThunk";
 import UserDTO from "src/dtos/UserDTO";
 import api from "@services/api.";
 import storage from "@storage/index";
@@ -18,12 +17,17 @@ const initialState: AuthState = {} as AuthState;
 const auth = {
     login: {
         signIn: createAppAsyncThunk(
-            'user/auth/signIn',
+            'auth/login/signIn',
             async (signInData: SignInTypeProps, { getState, dispatch }) => {
                 try {
                     dispatch(setAppIsLoading(true));
 
                     const { data: { user, token } } = await api.post('/sessions', signInData);
+
+                    if (user && token) {
+                        await dispatch(userAndTokenData.save({ user, token }));
+                        dispatch(updateAuthState({ user, token }));
+                    };
 
                     const { auth } = getState();
 
@@ -38,7 +42,7 @@ const auth = {
             }
         ),
         signUp: createAppAsyncThunk(
-            'user/auth/signUp',
+            'auth/login/signUp',
             async (data: SignUpUserTypeProps, { dispatch, getState }) => {
                 try {
                     dispatch(setAppIsLoading(true));
@@ -85,7 +89,7 @@ const auth = {
             }
         ),
         signOut: createAppAsyncThunk(
-            'user/auth/signOut',
+            'auth/login/signOut',
             async (_, { dispatch }) => {
                 try {
                     dispatch(setAppIsLoading(true));
@@ -107,30 +111,52 @@ const auth = {
             }
         )
     },
-    storageUserAndTokenSave: createAppAsyncThunk(
-        'user/storageUserAndTokenSave',
-        async ({ user, token }: AuthState, { dispatch }) => {
-            try {
-                dispatch(setAppIsLoading(true));
+    userAndTokenData: {
+        load: createAppAsyncThunk(
+            'auth/userAndTokenData/load',
+            async (_, { dispatch }) => {
+                try {
+                    dispatch(setAppIsLoading(true));
 
-                await storage.user.save(user);
-                await storage.token.save(token);
+                    const user: UserDTO = await storage.user.get();
+                    const token: string = await storage.token.get();
+
+                    if (user && token)
+                        dispatch(updateAuthState({ user, token }));
+                }
+                catch (error) {
+                    throw error;
+                }
+                finally {
+                    dispatch(setAppIsLoading(false));
+                }
             }
-            catch (error) {
-                throw error;
+        ),
+        save: createAppAsyncThunk(
+            'auth/userAndTokenData/save',
+            async ({ user, token }: AuthState, { dispatch }) => {
+                try {
+                    dispatch(setAppIsLoading(true));
+
+                    await storage.user.save(user);
+                    await storage.token.save(token);
+                }
+                catch (error) {
+                    throw error;
+                }
+                finally {
+                    dispatch(setAppIsLoading(false));
+                }
             }
-            finally {
-                dispatch(setAppIsLoading(false));
-            }
-        }
-    )
+        ),
+    }
 };
 
 export const authSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        userAndTokenUpdate: (state, action: PayloadAction<AuthState>) => {
+        updateAuthState: (state, action: PayloadAction<AuthState>) => {
             const newToken: string = `Bearer ${action.payload.token}`;
             api.defaults.headers.common.Authorization = newToken;
 
@@ -138,6 +164,15 @@ export const authSlice = createSlice({
                 user: action.payload.user,
                 token: state.token
             };
+        },
+        refreshToken: (state, action: PayloadAction<string>) => {
+            state.token = action.payload;
+        },
+        subscribe: (state, action) => {
+            api.registerInterceptTokenManager({
+                signOut: signOut,
+                resfreshTokenUpdated: refreshToken
+            })
         }
     },
     extraReducers: ({ addCase }) => {
@@ -150,11 +185,12 @@ export const authSlice = createSlice({
         addCase(auth.login.signOut.fulfilled, (state, { payload }) => {
             state = payload;
         })
-        addCase(auth.storageUserAndTokenSave.fulfilled, state => state)
+        addCase(auth.userAndTokenData.load.fulfilled, state => state)
+        addCase(auth.userAndTokenData.save.fulfilled, state => state)
     }
 });
 
-export const { login: { signIn, signUp, signOut } } = auth;
-export const { userAndTokenUpdate } = authSlice.actions;
+export const { login: { signIn, signUp, signOut }, userAndTokenData } = auth;
+export const { updateAuthState, refreshToken, subscribe } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;
