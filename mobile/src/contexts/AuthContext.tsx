@@ -1,6 +1,4 @@
 import { createContext, ReactNode, useState } from 'react';
-import { Alert } from 'react-native';
-import { Asset, ImagePickerResponse, launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import AdTypeProps from 'src/@types/ad/index';
 import AdTradeTypeProps from 'src/@types/ad/trade';
 import ContextMethodsTypeProps from 'src/@types/contextMethods';

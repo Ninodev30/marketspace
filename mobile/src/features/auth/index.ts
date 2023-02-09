@@ -1,31 +1,33 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@store/index";
 import { setAppIsLoading } from "@features/appLoading";
+import createAppAsyncThunk from "@functions/createAppAsyncThunk";
 import { SignUpUserTypeProps } from "src/@types/auth/SignUp";
 import SignInTypeProps from "src/@types/auth/SignIn";
 import UserDTO from "src/dtos/UserDTO";
 import api from "@services/api.";
 import storage from "@storage/index";
 
-const initialState: UserDTO = {} as UserDTO;
-
-type LoginAuthProps = {
+type AuthState = {
     user: UserDTO;
     token: string;
-};
+}
+
+const initialState: AuthState = {} as AuthState;
 
 const auth = {
     login: {
-        signIn: createAsyncThunk(
+        signIn: createAppAsyncThunk(
             'user/auth/signIn',
-            async (signInData: SignInTypeProps, { dispatch }) => {
+            async (signInData: SignInTypeProps, { getState, dispatch }) => {
                 try {
                     dispatch(setAppIsLoading(true));
 
                     const { data: { user, token } } = await api.post('/sessions', signInData);
 
-                    console.log(user)
-                    return user;
+                    const { auth } = getState();
+
+                    return auth;
                 }
                 catch (error) {
                     throw error;
@@ -35,7 +37,7 @@ const auth = {
                 }
             }
         ),
-        signUp: createAsyncThunk(
+        signUp: createAppAsyncThunk(
             'user/auth/signUp',
             async (data: SignUpUserTypeProps, { dispatch, getState }) => {
                 try {
@@ -58,9 +60,6 @@ const auth = {
                         data: formData,
                         headers: {
                             'Content-Type': 'multipart/form-data'
-                        },
-                        transformRequest: (data, headers) => {
-                            return data
                         }
                     });
 
@@ -73,9 +72,9 @@ const auth = {
 
                     await dispatch(signIn(signInData));
 
-                    const { user } = getState() as RootState;
+                    const { auth } = getState()
 
-                    return user;
+                    return auth;
                 }
                 catch (error) {
                     throw error;
@@ -85,17 +84,19 @@ const auth = {
                 }
             }
         ),
-        signOut: createAsyncThunk(
+        signOut: createAppAsyncThunk(
             'user/auth/signOut',
             async (_, { dispatch }) => {
                 try {
                     dispatch(setAppIsLoading(true));
 
                     const user = {} as UserDTO;
+                    const token: string = '';
+
                     await storage.user.delete();
                     await storage.token.delete();
 
-                    return user;
+                    return { user, token };
                 }
                 catch (error) {
                     throw error;
@@ -106,9 +107,9 @@ const auth = {
             }
         )
     },
-    storageUserAndTokenSave: createAsyncThunk(
+    storageUserAndTokenSave: createAppAsyncThunk(
         'user/storageUserAndTokenSave',
-        async ({ user, token }: LoginAuthProps, { dispatch }) => {
+        async ({ user, token }: AuthState, { dispatch }) => {
             try {
                 dispatch(setAppIsLoading(true));
 
@@ -125,34 +126,35 @@ const auth = {
     )
 };
 
-export const userSlice = createSlice({
+export const authSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        userAndTokenUpdate: (state, action: PayloadAction<LoginAuthProps>) => {
+        userAndTokenUpdate: (state, action: PayloadAction<AuthState>) => {
             const newToken: string = `Bearer ${action.payload.token}`;
             api.defaults.headers.common.Authorization = newToken;
 
-            state = action.payload.user;
+            state = {
+                user: action.payload.user,
+                token: state.token
+            };
         }
     },
     extraReducers: ({ addCase }) => {
-        addCase(auth.login.signIn.fulfilled, (state, action) => {
-            return action.payload;
+        addCase(auth.login.signIn.fulfilled, (state, { payload }) => {
+            state = payload;
         })
-        addCase(auth.login.signUp.fulfilled, (state, action) => {
-            return action.payload;
+        addCase(auth.login.signUp.fulfilled, (state, { payload }) => {
+            state = payload;
         })
-        addCase(auth.login.signOut.fulfilled, (state, action) => {
-            return action.payload;
+        addCase(auth.login.signOut.fulfilled, (state, { payload }) => {
+            state = payload;
         })
-        addCase(auth.storageUserAndTokenSave.fulfilled, (state) => {
-            return state
-        })
+        addCase(auth.storageUserAndTokenSave.fulfilled, state => state)
     }
 });
 
 export const { login: { signIn, signUp, signOut } } = auth;
-export const { userAndTokenUpdate } = userSlice.actions;
+export const { userAndTokenUpdate } = authSlice.actions;
 
-export const userReducer = userSlice.reducer;
+export const authReducer = authSlice.reducer;
