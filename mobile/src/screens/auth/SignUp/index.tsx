@@ -5,7 +5,7 @@ import { Asset } from "react-native-image-picker";
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { User as UserIcon, PencilSimpleLine } from 'phosphor-react-native';
-import { signUp } from "@features/user";
+import { signUp } from "@features/auth";
 import { AuthNavigatorRoutesProps } from "src/routes/Auth.routes";
 import { SignUpFormTypeProps, SignUpUserTypeProps } from "src/@types/auth/SignUp";
 import { handlePickPhoto, handleTakePhoto } from "@functions/handlePhoto";

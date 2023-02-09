@@ -22,7 +22,7 @@ type ProcessQueueParams = ({
 });
 
 const api = axios.create({
-    baseURL: 'http://10.1.1.110:3333'
+    baseURL: 'http://192.168.0.106:3333'
 }) as APIIstanceProps;
 
 let isRefreshing: boolean = false;

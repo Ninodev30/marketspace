@@ -14,7 +14,7 @@ type Props = {
 }
 
 const HomeHeader: React.FC<Props> = () => {
-    const { name, avatar } = useAppSelector(state => state.user);
+    const { name, avatar } = useAppSelector(state => state.auth.user);
     const { navigate } = useNavigation<AppNavigatorRoutesProps>();
 
     const avataar: string = 'file:///data/user/0/com.mobile/cache/rn_image_picker_lib_temp_1edc1f4f-74b4-4719-86a7-e900e9ffb234.jpg'

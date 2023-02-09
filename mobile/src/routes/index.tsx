@@ -7,10 +7,10 @@ import AuthRoutes from './Auth.routes';
 import AppRoutes from './App.routes';
 
 const Routes: React.FC = () => {
-    const app = useAppSelector(state => state);
+    const { appIsLoading, auth } = useAppSelector(state => state);
 
-    const isLoading: boolean = app.appIsLoading.value;
-    const isLoggedUser: boolean = !!app.user.id;
+    const isLoading: boolean = appIsLoading.value;
+    const isLoggedUser: boolean = !!auth.user?.id;
 
     const bgColor: string = theme.COLORS.BASE.GRAY_600;
     DefaultTheme.colors.background = bgColor;

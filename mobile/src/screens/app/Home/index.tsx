@@ -3,6 +3,7 @@ import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { MagnifyingGlass, Sliders } from 'phosphor-react-native';
 import { AppNavigatorRoutesProps } from 'src/routes/App.routes';
+import api from '@services/api.';
 import useAuth from '@hooks/useAuth';
 import Ad from '@components/Ad';
 import HomeHeader from '@components/HomeHeader';
@@ -11,7 +12,6 @@ import Input from '@components/Input';
 import Filter from '@components/Filter';
 import theme from '@theme/index';
 import styles, { iconTheme } from './styles';
-import api from '@services/api.';
 
 const Home: React.FC = () => {
     const [findAd, setFindAd] = useState<string>('');

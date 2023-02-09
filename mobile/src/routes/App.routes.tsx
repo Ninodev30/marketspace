@@ -1,6 +1,9 @@
 import { Platform, TouchableOpacity } from "react-native";
 import { createBottomTabNavigator, BottomTabNavigationProp } from "@react-navigation/bottom-tabs"
 import { House, Tag, SignOut } from 'phosphor-react-native';
+import { signOut } from "@features/auth";
+import useAppDispatch from "@hooks/useAppDispatch";
+import AdTypeProps from "src/@types/ad";
 import Home from "@screens/app/Home";
 import MyAds from "@screens/app/MyAds";
 import CreateAd from "@screens/app/CreateAd";
@@ -9,9 +12,6 @@ import AdDetails from "@screens/app/AdDetails";
 import MyAdDetails from "@screens/app/MyAdDetails";
 import MyAdPreview from "@screens/app/MyAdPreview";
 import theme from "@theme/index";
-import AdTypeProps from "src/@types/ad";
-import useAppDispatch from "@hooks/useAppDispatch";
-import { signOut } from "@features/user";
 
 type AppRoutes = {
     home: undefined;

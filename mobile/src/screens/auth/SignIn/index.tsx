@@ -3,7 +3,7 @@ import { Image, Text, View } from "react-native"
 import { useNavigation } from "@react-navigation/native";
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signIn } from "@features/user";
+import { signIn } from "@features/auth";
 import { AuthNavigatorRoutesProps } from "src/routes/Auth.routes";
 import useAppDispatch from "@hooks/useAppDispatch";
 import SignInTypeProps from "src/@types/auth/SignIn";
@@ -26,7 +26,6 @@ const SignIn: React.FC = () => {
     const handleSignIn: (data: SignInTypeProps) => Promise<void> = async (data) => {
         try {
             setIsLoading(true);
-
             await dispatch(signIn(data)).unwrap();
         }
         catch (error) {

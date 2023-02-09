@@ -18,7 +18,7 @@ const auth = {
     login: {
         signIn: createAppAsyncThunk(
             'auth/login/signIn',
-            async (signInData: SignInTypeProps, { getState, dispatch }) => {
+            async (signInData: SignInTypeProps, { dispatch }) => {
                 try {
                     dispatch(setAppIsLoading(true));
 
@@ -29,9 +29,7 @@ const auth = {
                         dispatch(updateAuthState({ user, token }));
                     };
 
-                    const { auth } = getState();
-
-                    return auth;
+                    return { user, token };
                 }
                 catch (error) {
                     throw error;
@@ -176,14 +174,14 @@ export const authSlice = createSlice({
         }
     },
     extraReducers: ({ addCase }) => {
-        addCase(auth.login.signIn.fulfilled, (state, { payload }) => {
-            state = payload;
+        addCase(auth.login.signIn.fulfilled, (_, { payload }) => {
+            return payload
         })
-        addCase(auth.login.signUp.fulfilled, (state, { payload }) => {
-            state = payload;
+        addCase(auth.login.signUp.fulfilled, (_, { payload }) => {
+            return payload;
         })
-        addCase(auth.login.signOut.fulfilled, (state, { payload }) => {
-            state = payload;
+        addCase(auth.login.signOut.fulfilled, (_, { payload }) => {
+            return payload;
         })
         addCase(auth.userAndTokenData.load.fulfilled, state => state)
         addCase(auth.userAndTokenData.save.fulfilled, state => state)
