@@ -200,12 +200,14 @@ const AdComponent: React.FC<Props> = ({ title, state }) => {
             </ScrollView>
             <Footer style={styles.footer}>
                 <Button
+                    style={{ flex: 1 }}
                     bgColor={theme.COLORS.BASE.GRAY_500}
                     title='Cancelar'
                     type='DARK'
                     onPress={goBack}
                 />
                 <Button
+                    style={{ flex: 1 }}
                     bgColor={theme.COLORS.BASE.GRAY_100}
                     title='Avançar'
                     type='LIGHT'

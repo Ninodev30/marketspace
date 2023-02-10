@@ -1,10 +1,8 @@
+import { useState } from "react";
 import { ScrollView, Text, View, Image } from "react-native"
-import { useDispatch } from "react-redux";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { increment, incrementAmount } from "@features/counter";
 import { Tag, ArrowLeft } from "phosphor-react-native";
 import { AppNavigatorRoutesProps } from "src/routes/App.routes";
-import useAppSelector from "@hooks/useAppSelector";
 import AdTypeProps from "src/@types/ad";
 import AdInfo from "@components/AdInfo";
 import Footer from "@components/Footer";
@@ -18,22 +16,27 @@ type RouteParams = {
 };
 
 const MyAdPreview: React.FC = () => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const { params } = useRoute();
     const { ad, state } = params as RouteParams;
     const { navigate } = useNavigation<AppNavigatorRoutesProps>();
 
-    const test = useAppSelector(state => state.counter.value);
-    const dispatch = useDispatch();
-
     const adPhoto: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlVh6Nwt0h_u8O-PydwbJNfAy868gDtcycKw&usqp=CAU';
 
-    const handleOnClick = () => {
-        dispatch(increment());
-    };
+    const handlePostAd = async () => {
+        try {
+            setIsLoading(true);
 
-    const handleAmount = (amount: number) => {
-        dispatch(incrementAmount(amount));
-    };
+            // navigate('myAds')
+        }
+        catch (error) {
+            console.log(error);
+        }
+        finally {
+            setIsLoading(false);
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -59,6 +62,7 @@ const MyAdPreview: React.FC = () => {
             </ScrollView>
             <Footer style={styles.footer}>
                 <Button
+                    style={{ flex: 1 }}
                     bgColor={theme.COLORS.BASE.GRAY_500}
                     title='Voltar e editar'
                     type='DARK'
@@ -70,10 +74,11 @@ const MyAdPreview: React.FC = () => {
                     />
                 </Button>
                 <Button
+                    style={{ flex: 1 }}
                     bgColor={theme.COLORS.PRODUCT.BLUE_LIGHT}
                     title='Publicar'
                     type='LIGHT'
-                    onPress={() => navigate('myAds')}
+                    onPress={handlePostAd}
                 >
                     <Tag
                         size={iconsTheme.size}

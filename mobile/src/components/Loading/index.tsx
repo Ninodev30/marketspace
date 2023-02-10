@@ -6,10 +6,11 @@ const Loading: React.FC = () => {
     return (
         <View style={styles.container}>
             <ActivityIndicator
+                size={30}
                 color={theme.COLORS.BASE.GRAY_100}
             />
         </View>
     )
-}
+};
 
 export default Loading;

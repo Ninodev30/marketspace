@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { MagnifyingGlass, Sliders } from 'phosphor-react-native';
@@ -12,38 +12,74 @@ import Input from '@components/Input';
 import Filter from '@components/Filter';
 import theme from '@theme/index';
 import styles, { iconTheme } from './styles';
+import useAppDispatch from '@hooks/useAppDispatch';
+import { updateAuthState } from '@features/auth';
+import useAppSelector from '@hooks/useAppSelector';
+import { setAppIsLoading } from '@features/appLoading';
+
+type User = {
+    avatar: string,
+    email: string,
+    id: string,
+    name: string,
+    tel: string
+};
 
 const Home: React.FC = () => {
+    const [user, setUser] = useState<User>({} as User);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [findAd, setFindAd] = useState<string>('');
     const [adList, setAdList] = useState<string[]>(['Tênis vermelho', 'Tênis vermelho', 'Bicicleta', 'Sofá', 'Bunda', 'Dinheiro', 'Gaveta', 'Tênis vermelho, Bicicleta', 'Sofá', 'Bunda', 'Dinheiro', 'Gaveta', 'Tênis vermelho', 'Bicicleta', 'Sofá', 'Bunda', 'Dinheiro', 'Gaveta'])
 
     const { filter: { isShowFilter, setIsShowFilter } } = useAuth();
+
+    const dispatch = useAppDispatch();
+    // const { auth: { user } } = useAppSelector(state => state)
     const { navigate } = useNavigation<AppNavigatorRoutesProps>();
 
     const handleChooseFilters: () => void = () => {
         setIsShowFilter(true);
     };
 
-    const fetchUser = async () => {
-        try {
-            const { data } = await api.get('/users/me');
-            console.log(data)
-        }
-        catch (error) {
-            console.log(error);
-            console.log(JSON.stringify(error))
-        }
-    }
 
-    useFocusEffect(() => {
-        fetchUser();
-        console.log('testing')
-    });
+    const fetch = {
+        user: async () => {
+            try {
+                const { data } = await api.get('/users/me');
+                setUser(data);
+            }
+            catch (error) {
+                console.log(error);
+            }
+        },
+        products: async () => {
+            try {
+                setIsLoading(true);
+
+                const response = await api.get('/users/products');
+                console.log(response);
+            }
+            catch (error) {
+                console.log(error);
+                console.log(JSON.stringify(error))
+            }
+            finally {
+                setIsLoading(false);
+            }
+        }
+    };
+
+    useFocusEffect(
+        useCallback(() => {
+            fetch.user();
+            fetch.products();
+        }, [])
+    );
 
     return (
         <View style={styles.container}>
             <HomeHeader
-                userName='Enzo'
+                userName={user.name}
                 userPhoto='https://github.com/Ninodev30.png'
             />
             {isShowFilter ?

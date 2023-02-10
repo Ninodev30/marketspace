@@ -74,7 +74,7 @@ const auth = {
 
                     await dispatch(signIn(signInData));
 
-                    const { auth } = getState()
+                    const { auth } = getState();
 
                     return auth;
                 }
@@ -112,7 +112,7 @@ const auth = {
     userAndTokenData: {
         load: createAppAsyncThunk(
             'auth/userAndTokenData/load',
-            async (_, { dispatch }) => {
+            async (_, { getState, dispatch }) => {
                 try {
                     dispatch(setAppIsLoading(true));
 
@@ -121,6 +121,10 @@ const auth = {
 
                     if (user && token)
                         dispatch(updateAuthState({ user, token }));
+
+                    const { auth } = getState();
+
+                    return auth;
                 }
                 catch (error) {
                     throw error;
@@ -132,12 +136,16 @@ const auth = {
         ),
         save: createAppAsyncThunk(
             'auth/userAndTokenData/save',
-            async ({ user, token }: AuthState, { dispatch }) => {
+            async ({ user, token }: AuthState, { getState, dispatch }) => {
                 try {
                     dispatch(setAppIsLoading(true));
 
                     await storage.user.save(user);
                     await storage.token.save(token);
+
+                    const { auth } = getState();
+
+                    return auth;
                 }
                 catch (error) {
                     throw error;
@@ -158,7 +166,7 @@ export const authSlice = createSlice({
             const newToken: string = `Bearer ${action.payload.token}`;
             api.defaults.headers.common.Authorization = newToken;
 
-            state = {
+            return {
                 user: action.payload.user,
                 token: state.token
             };
@@ -183,8 +191,12 @@ export const authSlice = createSlice({
         addCase(auth.login.signOut.fulfilled, (_, { payload }) => {
             return payload;
         })
-        addCase(auth.userAndTokenData.load.fulfilled, state => state)
-        addCase(auth.userAndTokenData.save.fulfilled, state => state)
+        addCase(auth.userAndTokenData.load.fulfilled, (_, { payload }) => {
+            return payload;
+        })
+        addCase(auth.userAndTokenData.save.fulfilled, (_, { payload }) => {
+            return payload;
+        })
     }
 });
 
