@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { ScrollView, Text, View, Image } from "react-native"
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { RouteProp, useRoute } from "@react-navigation/native";
 import { Tag, ArrowLeft } from "phosphor-react-native";
-import { AppNavigatorRoutesProps } from "src/routes/App.routes";
+import { AppRoutes } from "src/routes/App.routes";
+import useAppNavigation from "@hooks/useAppNavigation";
 import AdTypeProps from "src/@types/ad";
 import AdInfo from "@components/AdInfo";
 import Footer from "@components/Footer";
@@ -15,12 +16,17 @@ type RouteParams = {
     state: 'CREATE' | 'EDIT';
 };
 
+type RootRouteProps<RouteName extends keyof AppRoutes> = RouteProp<
+    AppRoutes,
+    RouteName
+>;
+
 const MyAdPreview: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const { params } = useRoute();
-    const { ad, state } = params as RouteParams;
-    const { navigate } = useNavigation<AppNavigatorRoutesProps>();
+    const { params } = useRoute<RootRouteProps<'myAdPreview'>>();
+    const { ad, state } = params;
+    const { navigate } = useAppNavigation();
 
     const adPhoto: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlVh6Nwt0h_u8O-PydwbJNfAy868gDtcycKw&usqp=CAU';
 
@@ -28,7 +34,7 @@ const MyAdPreview: React.FC = () => {
         try {
             setIsLoading(true);
 
-            // navigate('myAds')
+            // navigate('myAds');
         }
         catch (error) {
             console.log(error);

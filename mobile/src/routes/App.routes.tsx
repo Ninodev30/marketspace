@@ -13,7 +13,7 @@ import MyAdDetails from "@screens/app/MyAdDetails";
 import MyAdPreview from "@screens/app/MyAdPreview";
 import theme from "@theme/index";
 
-type AppRoutes = {
+export type AppRoutes = {
     home: undefined;
     myAds: undefined;
     logout: undefined;
